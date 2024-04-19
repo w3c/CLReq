@@ -1,0 +1,1334 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Chinese Layout Requirements (Draft)</title>
+  <script src="https://www.w3.org/Tools/respec/respec-w3c" class="remove" defer>
+</script>
+  <script class="remove">
+  var respecConfig = {
+      // specification status (e.g. WD, LCWD, WG-NOTE, etc.). If in doubt use ED.
+      specStatus:           "ED",
+      //publishDate:  		"2024-04-11",
+      //previousPublishDate:  "2014-12-16",
+      //previousMaturity:  "FPWD",
+
+      noRecTrack:           true,
+      shortName:            "hani-lreq",
+      copyrightStart:       "2019",
+      edDraftURI:           "https://w3c.github.io/clreq/hani/",
+
+      // if this is a LCWD, uncomment and set the end of its review period
+      // lcEnd: "2009-08-05",
+
+      // editors, add as many as you like
+      // only "name" is required
+      editors:  [
+        { name: "Richard Ishida", company: "W3C", w3cid: 3439 }
+      ],
+
+      group: "i18n",
+
+ 	  github:	"w3c/clreq",
+    };
+  </script>
+  <link rel="stylesheet" href="local.css">
+</head>
+
+<body>
+  <div id="abstract">
+    <p>This document describes or points to requirements for the layout and presentation of text in languages that use the Chinese script. The target audience is developers of Web standards and technologies, such as HTML, CSS, Mobile Web, Digital Publications, and Unicode, as well as implementers of web browsers, ebook readers, and other applications that need to render Chinese text.</p>
+  </div>
+
+  <div id="sotd">
+    <p>This document describes the basic requirements for Chinese script layout and text support on the Web and in eBooks. These requirements provide information for Web technologies such as CSS, HTML and digital publications about how to support users of Chinese scripts. Currently the document focuses on Chinese as used for the Chinese language. The information here is developed in conjunction with a <a href="https://www.w3.org/TR/clreq-gap/">document that summarises gaps</a> in support on the Web for Chinese.</p>
+    
+	<p>The editor's draft of this document is being developed by the <a href="https://github.com/w3c/clreq/">Chinese Layout Task Force</a>, part of the W3C <a href="https://www.w3.org/International/i18n-activity/i18n-ig/">Internationalization Interest Group</a>. It is published by the <a href="https://www.w3.org/International/i18n-activity/i18n-wg/">Internationalization Working Group</a>. The end target for this document is a Working Group Note.</p>
+	</div>
+
+
+
+
+
+
+
+
+
+  
+  
+<section id="h_introduction">
+<h2>Introduction</h2>
+
+
+
+
+<section id="h_acknowledgements">
+<h3>Contributors</h3>
+
+<p>The initial information in this document was provided by Richard Ishida, drawing on the structure and information in <a href="https://r12a.github.io/scripts/hani/lo"><cite>Chinese Orthography Notes</cite></a>.</p>
+<p>Information and clarifications were provided by Anousak Anthony Souphavanh, Arthit Suriyawongkul, Ben Mitchell, James Clarke, John Durdin, Martin Hosken, and Norbert Lindenberg  as members of the W3C's <a href="https://w3c.github.io/clreq/home">Southeast Asia Language Enablement</a> community.</p>
+
+<p data-lang="en">See also the <a href="https://github.com/w3c/clreq/graphs/contributors">GitHub contributors list</a> for the Southeast Asia Language Enablement project, and the <a href="https://github.com/w3c/clreq/issues?q=is%3Aissue++label%3As%3Alao">discussions related to Chinese</a>.</p>
+</section>
+
+  
+  
+  
+  
+  
+  
+  
+
+<section id="h_about_this_document">
+<h3>About this document</h3>
+
+<p>The aim of this document is to describe the basic requirements for Chinese script layout and text support on the Web and in eBooks. These requirements provide information for Web technologies such as CSS, HTML and digital publications, and for application developers, about how to support users of the Chinese script. The document currently focuses on texts using the Chinese language.</p>
+
+<p>The document focuses on typographic layout issues.  For a deeper understanding of the Chinese script itself and how it works see <cite>Chinese Orthography Notes</cite>, which includes topics such as: <a href="https://r12a.github.io/scripts/hani/lo.html#phonology">Phonology</a>, <a href="https://r12a.github.io/scripts/hani/lo.html#vowels">Vowels</a>, <a href="https://r12a.github.io/scripts/hani/lo.html#vocalics">Vocalics</a>, <a href="https://r12a.github.io/scripts/hani/lo.html#consonants">Consonants</a>, <a href="https://r12a.github.io/scripts/hani/lo.html#encoding">Encoding choices</a>, and <a href="https://r12a.github.io/scripts/hani/lo.html#numbers">Numbers</a>.</p>
+</section>
+
+
+
+
+<section id="h_gap_analysis">
+<h3>Gap analysis</h3>
+
+<p>This document is pointed to by a separate document, <a href="https://www.w3.org/TR/clreq-gap/"><cite>Chinese Gap Analysis</cite></a>, which describes gaps in support for Chinese on the Web, and prioritises and describes the impact of those gaps on the user.</p>
+
+<p>Wherever an unsupported feature is indentified through the gap analysis process, the requirements for that feature need to be documented. The gap reports will typically point back to this document for more information.</p>
+
+<p>As gaps in support for Chinese are captured, the gaps can be brought to the attention of the relevant spec developer or the browser implementator community. The progress of such work is tracked in the <a href="https://github.com/w3c/i18n-activity/projects/3?card_filter_query=label%3Ax%3Alao">Gap Analysis Pipeline</a>.</p>
+
+<p>This document should contain no reference to a particular technology. For example, it should not say &quot;CSS does/doesn't do such and such&quot;, and it should not describe how a technology, such as CSS, should implement the requirements. It is technology agnostic, so that it will be evergreen, and it simply describes how the script works. The gap analysis document is the appropriate place for all kinds of technology-specific information.</p>
+</section>
+
+
+<section id="h_info_requests">
+<h3>Other related resources</h3>
+
+<p>To complement any  content authored specifically for this document, the sections in the document also point to related, external information, tests, GitHub discussions, etc.</p>
+
+<p>The <a href="https://w3c.github.io/typography/"><cite>Language enablement index</cite></a> points to this document and others, and provides a central location for developers and implementers to find information related to various scripts.</p>
+
+<p>The W3C also has a repository with discussion threads related to the Chinese script, including requests from developers to the user community for information about how scripts/languages work, and a notification system that tracks issues in W3C working groups related to Chinese scripts. See a list of <a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+is%3Aopen+label%3A問題/question+">unresolved questions</a> for Chinese experts. Each section below points to related discussions. See also the <a href="https://w3c.github.io/clreq/home">repository home page</a>.</p>
+</section>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section id="h_script_overview">
+<h2>Chinese Script Overview</h2>
+
+
+<p>The Chinese orthography is an <a class="termref" href="https://r12a.github.io/scripts/glossary/index.html#alphabet">alphabet</a>. This means that both consonants and vowels are indicated.</p>
+
+
+
+
+<p>Chinese text runs left to right in horizontal lines. Spaces separate phrases, rather than words. There is no case distinction.</p>
+
+<p>Each <a class="termref" href="https://r12a.github.io/scripts/glossary/index.html#onset">onset</a> consonant is associated with a high, mid, or low class related to tone. Tone is indicated by a combination of the consonant class, the syllable type (live/dead), plus any tone mark.</p> 
+
+<p>No conjuncts are used for consonant clusters, except for one subjoined consonant, used in combination only with HA.</p>
+
+<p>Syllable-initial clusters and syllable-final consonant sounds are all written with ordinary consonant letters. However, because all vowels are written, it is not difficult to algorithmically detect syllable boundaries.</p>
+
+<p>Unlike its close relative, Thai, the Chinese orthography is an alphabet and has no <a class="termref" href="https://r12a.github.io/scripts/glossary/index.html#inherentvowel">inherent vowel</a>, but it still represents vowels using vowel signs (including combining marks, dedicated vowel letters, and a couple of repurposed consonants).</p>
+
+<p>Vowels in Chinese are written with a mixture of combining characters and ordinary spacing characters. Chinese uses <em>visual placement</em>: only the vowel components that appear above or below the consonant are combining marks; the others are ordinary spacing characters that are typed <em>in the order seen</em>. There are <a class="termref" href="https://r12a.github.io/scripts/glossary/index.html#prebase">pre-base vowel glyphs</a>. In principle, there are no single-character <a class="termref" href="https://r12a.github.io/scripts/glossary/index.html#circumgraph">circumgraphs</a> in Chinese text, but a single vowel or diphthong is frequently made up of multiple components.</p>
+
+<p>There are no <a class="termref" href="https://r12a.github.io/scripts/glossary/index.html#independentvowel">independent vowels</a>, and <a class="termref" href="https://r12a.github.io/scripts/glossary/index.html#standalonevowel">standalone vowel sounds</a> are written using  vowel signs applied to <span class="codepoint noindex" translate="no"><span lang="th">ອ</span> <span class="uname">U+0EAD LETTER O</span></span>.</p>
+
+<p>Chinese has a large number of <a class="termref" href="https://r12a.github.io/scripts/glossary/index.html#compositevowel">multipart vowels</a> (including diphthongs) made from  dedicated vowel characters and from consonants. Composite vowels can involve up to 4 glyphs (plus a tone mark), and glyphs can surround the base consonant(s) on up to 3 sides.</p>
+
+<p>Vowels are often written differently when they appear in a closed vs. open syllable.</p>
+
+<p>Chinese has native digits, and they are commonly used.</p>
+</section>
+
+
+
+
+
+
+
+
+
+
+<section>
+<h2 id="h_text_direction">Text direction</h2>
+
+
+<section id="h_vertical_text">
+<h3>Vertical text</h3>
+
+
+<dl class="reslinks">
+<dt>Requirements</dt>
+<dd>
+<ul>
+<li><cite>Requirements for Chinese Text Layout</cite>: <a target="_blank" href="https://www.w3.org/International/clreq/#writing_modes">Writing Modes</a> • <a target="_blank" href="https://www.w3.org/TR/clreq/#major_differences_between_horizontal_and_vertical_writing_modes">Major Differences Between Horizontal and Vertical Writing Modes</a></li>
+</ul>
+</dd>
+
+<dt>GitHub discussions</dt>
+<dd>
+<ul>
+<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aopen+is%3Aissue+label%3A問題/question+label%3Ai%3Avertical_text">Open requests for information</a></li>
+
+<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+label%3Ai%3Avertical_text">All Chinese issues on this topic in the clreq repo</a></li>
+
+<li><a target="_blank" href="https://github.com/w3c/i18n-activity/issues?q=+is%3Aissue+label%3Aspec-type-issue+label%3Aclreq+label%3Ai%3Avertical-text">Chinese issues in W3C specs</a></li>
+</ul>
+</dd>
+
+
+<dt>Tests</dt>
+<dd>
+<ul>
+<li><a target="_blank" href="https://www.w3.org/International/i18n-tests/results/int-vertical-text.html#chinese">Exploratory/interactive test results</a></li>
+
+<li><a target="_blank" href="https://github.com/w3c/text_direction_tests/issues?q=is%3Aissue++label%3Ah2%3AChinese+label%3Adoc%3AVertical_text">Exploratory/interactive test repo</a></li>
+</ul>
+</dd>
+
+
+<dt>Gap analysis</dt>
+<dd>
+<ul class="linkList">
+<li><a target="_blank" href="https://www.w3.org/TR/clreq-gap/#vertical_text">Vertical text</a></li>
+</ul>
+</dd>
+
+
+<dt>LE Index</dt>
+<dd class="le_index">
+<ul class="linkList">
+<li><a target="_blank" href="https://www.w3.org/TR/typography/#vertical_text">Vertical text</a></li>
+</ul>
+</dd>
+</dl>
+</section>
+</section>
+
+
+
+
+
+
+
+
+
+<section id="h_shaping">
+<h2>Glyph shaping &amp; positioning</h2>
+
+
+<section id="h_writing_styles">
+<h3>Fonts &amp; font styles</h3>
+
+<aside class="prompts">How are fonts grouped into recognisable writing styles? How is each writing style used? Are OpenType features needed? What other font-related requirements and issue exist?</aside>
+
+
+<dl class="reslinks">
+<dt>Requirements</dt>
+<dd>
+<ul>
+<li><cite>Requirements for Chinese Text Layout</cite>: <a target="_blank" href="https://www.w3.org/TR/clreq/#commonly_used_chinese_typefaces">Typefaces for Chinese Characters</a></li>
+</ul>
+</dd>
+
+<dt>GitHub discussions</dt>
+<dd>
+<ul>
+<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+is%3Aopen+label%3Ai%3Afonts+label%3A問題/question+">Open requests for information</a></li>
+
+<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+label%3Ai%3Afonts">All Chinese issues on this topic in the clreq repo</a></li>
+
+<li><a target="_blank" href="https://github.com/w3c/i18n-activity/issues?q=+label%3Aclreq+label%3Aspec-type-issue+label%3Ai%3Afonts">Chinese issues in W3C specs</a></li>
+</ul>
+</dd>
+
+<dt>Tests</dt>
+<dd>
+<ul>
+<li><a target="_blank" href="https://www.w3.org/International/i18n-tests/results/int-fonts.html#chinese">Exploratory/interactive test results</a></li>
+
+<li><a target="_blank" href="https://github.com/w3c/glyph_character_tests/issues?q=is%3Aissue+label%3Ah2%3AChinese+label%3Adoc%3AFonts">Exploratory/interactive test repo</a></li>
+
+<li><a target="_blank" href="https://w3c.github.io/i18n-tests/results/default-font">Exploratory: Language-specific default fonts</a></li>
+</ul>
+
+</dd><dt>Gap analysis</dt>
+<dd>
+<ul class="linkList">
+<li><a target="_blank" href="https://www.w3.org/TR/clreq-gap/#fonts">Fonts</a></li>
+</ul>
+</dd>
+
+<dt>LE Index</dt>
+<dd class="le_index">
+<ul class="linkList">
+<li><a target="_blank" href="https://www.w3.org/TR/typography/#fonts">Fonts &amp; font styles</a></li>
+</ul>
+</dd>
+</dl>
+
+
+</section>
+
+
+
+
+
+
+
+
+<section class="h_context">
+<h3>Context-based shaping &amp; positioning</h3>
+
+<aside class="prompts">Are special glyph forms needed, depending on the context in which a character is used? Do glyphs interact in some circumstances? Are there requirements to position diacritics or other items specially, depending on context? Does the script have multiple diacritics competing for the same location relative to the base?</aside>
+
+
+
+<dl class="reslinks">
+<dt>Requirements</dt>
+<dd>
+<ul>
+<li>tbd</li>
+</ul>
+</dd>
+
+<dt>GitHub discussions</dt>
+<dd>
+<ul>
+<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+is%3Aopen+label%3Ai%3Aglyphs+label%3A問題/question+">Open requests for information</a></li>
+
+<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+label%3Ai%3Aglyphs">All Chinese issues on this topic in the clreq repo</a></li>
+
+<li><a target="_blank" href="https://github.com/w3c/i18n-activity/issues?q=+label%3Aclreq+label%3Aspec-type-issue+label%3Ai%3Aglyphs">Chinese issues on this topic in W3C specs</a></li>
+</ul>
+</dd>
+
+<dt>Tests</dt>
+<dd>
+<ul>
+<li>Exploratory/interactive test results (tbc)</li>
+
+<li>Exploratory/interactive test repo (tbc)</li>
+</ul>
+</dd>
+
+
+<dt>Gap analysis</dt>
+<dd>
+<ul class="linkList">
+<li><a target="_blank" href="https://www.w3.org/TR/clreq-gap/#glyphs">Glyph shaping and positioning</a></li>
+</ul>
+</dd>
+
+<dt>LE Index</dt>
+<dd class="le_index">
+<ul class="linkList">
+<li><a target="_blank" href="https://www.w3.org/TR/typography/#glyphs">Glyph shaping &amp; positioning</a></li>
+</ul>
+</dd>
+</dl>
+</section>
+
+
+
+
+
+
+
+
+<!--section class="h_cursive">
+<h3>Cursive text ****NA****</h3>
+
+</section-->
+
+
+
+
+
+
+
+
+<section class="h_fontstyle">
+<h3>Letterform slopes, weights, &amp; italics</h3>
+
+<aside class="prompts">Are italicisation, bolding, oblique, etc relevant? Do italic fonts lean in the right direction? Is synthesised italicisation problematic? Are there other problems relating to bolding or italicisation - perhaps relating to generalised assumptions of applicability?</aside>
+
+<dl class="reslinks">
+<dt>Requirements</dt>
+<dd>
+<ul>
+<li>tbd</li>
+</ul>
+</dd>
+
+<dt>GitHub discussions</dt>
+<dd>
+<ul>
+<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+is%3Aopen+label%3Ai%3Aletterforms+label%3A問題/question+">Open requests for information</a></li>
+
+<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+label%3Ai%3Aletterforms">All Chinese issues on this topic in the clreq repo</a></li>
+
+<li><a target="_blank" href="https://github.com/w3c/i18n-activity/issues?q=label%3Aclreq+label%3Aspec-type-issue+label%3Ai%3Afont-style+">Chinese issues on this topic in W3C specs</a></li>
+</ul>
+</dd>
+
+<dt>Tests</dt>
+<dd>
+<ul>
+<li><a target="_blank" href="https://www.w3.org/International/i18n-tests/results/int-letterforms.html#chinese">Exploratory/interactive test results</a></li>
+
+<li><a target="_blank" href="https://github.com/w3c/character_phrase_tests/issues?q=is%3Aissue+label%3Ah2%3AChinese+label%3Adoc%3ALetterforms">Exploratory/interactive test repo</a></li>
+</ul>
+
+</dd><dt>Gap analysis</dt>
+<dd>
+<ul class="linkList">
+<li><a target="_blank" href="https://www.w3.org/TR/clreq-gap/#font_style">Font styles, weight, etc</a></li>
+</ul>
+</dd>
+
+<dt>LE Index</dt>
+<dd class="le_index">
+<ul class="linkList">
+<li><a target="_blank" href="https://www.w3.org/TR/typography/#font_style">Letterform slopes, weights, &amp; italics</a></li>
+</ul>
+</dd>
+</dl>
+</section>
+
+
+
+
+
+
+
+
+<!--section class="h_transforms">
+<h3>Character transforms ****NA****</h3>
+
+</section-->
+</section>
+
+
+
+
+
+
+
+
+
+
+
+<section class="h_graphemes">
+<h2>Typographic units</h2>
+
+
+
+
+<section class="h_transforms">
+<h3>Characters &amp; encoding</h3>
+
+
+<aside class="prompts">Most languages are now supported by Unicode, but there are still occasional issues. In particular, there may be issues related to ordering of characters, or competing encodings (as in Myanmar), or standardisation of variation selectors or the encoding model (as in Mongolian).</aside>
+
+
+<dl class="reslinks">
+<dt>Requirements</dt>
+<dd>
+<ul>
+<li><cite>Requirements for Chinese Text Layout</cite>: <a target="_blank" href="https://www.w3.org/TR/clreq/#characters_and_the_principles_of_setting_them_for_chinese_composition">Characters and Principles for Setting them in Chinese Composition</a></li>
+</ul>
+</dd>
+
+<dt>GitHub discussions</dt>
+<dd>
+<ul>
+<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+label%3Ai%3Aencoding+label%3Aquestion">Open requests for information</a></li>
+
+<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+label%3Ai%3Aencoding">All Chinese issues on this topic in the clreq repo</a></li>
+
+<li><a target="_blank" href="https://github.com/w3c/i18n-activity/issues?q=label%3Aclreq+label%3Aspec-type-issue+label%3Ai%3Acharset">Chinese issues on this topic in W3C specs</a></li>
+</ul>
+</dd>
+
+<dt>Tests</dt>
+<dd>
+<ul>
+<li>Exploratory/interactive test results (tbc)</li>
+
+<li>Exploratory/interactive test repo (tbc)</li>
+</ul>
+
+</dd><dt>Gap analysis</dt>
+<dd>
+<ul class="linkList">
+<li><a target="_blank" href="https://www.w3.org/TR/clreq-gap/#charset">Characters &amp; encoding</a></li>
+</ul>
+</dd>
+
+<dt>LE Index</dt>
+<dd class="le_index">
+<ul class="linkList">
+<li><a target="_blank" href="https://www.w3.org/TR/typography/#charset">Characters &amp; encoding</a></li>
+</ul>
+</dd>
+</dl>
+</section>
+
+
+
+
+
+
+
+
+<section class="h_segmentation">
+<h3>Grapheme/word segmentation &amp; selection</h3>
+
+<aside class="prompts">Do Unicode grapheme clusters appropriately segment character units for the script? Are there special requirements for the following operations: forwards/backwards deletion, cursor movement &amp; selection, character counts, searching &amp; matching, text insertion, line-breaking, justification, case conversions, sorting? Are words separated by spaces, or other characters? Are there special requirements when double-clicking on the text? Are words hyphenated?</aside>
+
+
+
+
+<dl class="reslinks">
+<dt>Requirements</dt>
+<dd>
+<ul>
+<li>tbd</li>
+</ul>
+</dd>
+
+<dt>GitHub discussions</dt>
+<dd>
+<ul>
+<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+is%3Aopen+label%3Ai%3Asegmentation+label%3A問題/question+">Open requests for information</a></li>
+
+<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+label%3Ai%3Asegmentation">All Chinese issues on this topic in the clreq repo</a></li>
+
+<li><a target="_blank" href="https://github.com/w3c/i18n-activity/issues?q=label%3Aclreq+label%3Aspec-type-issue+label%3Ai%3Asegmentation">Chinese issues on this topic in W3C specs</a></li>
+</ul>
+</dd>
+
+<dt>Tests</dt>
+<dd>
+<ul>
+<li><a target="_blank" href="https://www.w3.org/International/i18n-tests/results/int-grapheme-word-segmentation.html#chinese">Exploratory/interactive test results</a></li>
+
+<li><a target="_blank" href="https://github.com/w3c/glyph_character_tests/issues?q=is%3Aissue+label%3Ah2%3AChinese+label%3Adoc%3AGrapheme_word">Exploratory/interactive test repo</a></li>
+</ul>
+
+</dd><dt>Gap analysis</dt>
+<dd>
+<ul class="linkList">
+<li><a target="_blank" href="https://www.w3.org/TR/clreq-gap/#segmentation">Grapheme/word segmentation &amp; selection</a></li>
+</ul>
+</dd>
+
+<dt>LE Index</dt>
+<dd class="le_index">
+<ul class="linkList">
+<li><a target="_blank" href="https://www.w3.org/TR/typography/#segmentation">Grapheme/word segmentation &amp; selection</a></li>
+</ul>
+</dd>
+</dl>
+</section>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section id="h_characters_and_phrases">
+<h2>Punctuation &amp; inline features</h2>
+
+<aside class="prompts">This section describes typographic features related to word boundaries, phrase &amp; section boundaries, bracketed text, quotations &amp; citations, emphasis, abbreviation, ellipsis &amp; repetition, inline notes &amp; annotations, other punctuation, and other inline text decoration.</aside>
+
+
+
+
+
+
+
+
+
+<section id="h_phrase">
+<h3>Phrase &amp; section boundaries</h3>
+
+
+<aside class="prompts">What characters are used to indicate the boundaries of phrases, sentences, and sections? What about other punctuation, such as dashes, connectors, separators, etc?</aside>
+
+
+
+<dl class="reslinks">
+<dt>Requirements</dt>
+<dd>
+<ul>
+<li><cite>Chinese Orthography Notes:</cite>  <a target="_blank" href="https://www.w3.org/TR/clreq/#categories_and_usage_of_punctuation_marks">Categories and Usage of Punctuation Marks</a><span class="dot"> • </span><a target="_blank" href="https://www.w3.org/TR/clreq/#glyphs_sizes_and_positions_in_character_faces_of_punctuation_marks">Sizes and positions of Punctuation Marks</a><span class="dot"> • </span><a target="_blank" href="https://www.w3.org/TR/clreq/#atypical_punctuation_marks_and_their_arrangements">Atypical punctuation marks and their composition</a><span class="dot"> • </span><a target="_blank" href="https://www.w3.org/TR/clreq/#tables_of_chinese_punctuation_marks">Punctuation marks in Chinese</a><span class="dot"> • </span><a target="_blank" href="https://www.w3.org/TR/clreq/#line_composition_rules_for_punctuation_marks">Line Composition Rules for Punctuation Marks</a><span class="dot"> • </span><a target="_blank" href="https://www.w3.org/TR/clreq/#h-unbreakable_marks_punctuation">Prohibition Rules for Unbreakable Marks</a></li>
+</ul>
+</dd>
+
+<dt>GitHub discussions</dt>
+<dd>
+<ul>
+<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+is%3Aopen+label%3Ai%3Apunctuation_etc+label%3A問題/question+">Open requests for information</a></li>
+
+<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+label%3Ai%3Apunctuation_etc">All Chinese issues on this topic in the clreq repo</a></li>
+
+<li><a target="_blank" href="https://github.com/w3c/i18n-activity/issues?q=label%3Aclreq+label%3Aspec-type-issue+label%3Ai%3Apunctuation-etc">Chinese issues on this topic in W3C specs</a></li>
+</ul>
+</dd>
+
+<dt>Tests</dt>
+<dd>
+<ul>
+<li>Exploratory/interactive test results (tbc)</li>
+
+<li>Exploratory/interactive test repo (tbc)</li>
+</ul>
+
+</dd><dt>Gap analysis</dt>
+<dd>
+<ul class="linkList">
+<li><a target="_blank" href="https://www.w3.org/TR/clreq-gap/#punctuation_etc">Inline features &amp; punctuation</a></li>
+</ul>
+</dd>
+
+<dt>LE Index</dt>
+<dd class="le_index">
+<ul class="linkList">
+<li><a target="_blank" href="https://www.w3.org/TR/typography/#punctuation_etc">Phrase &amp; section boundaries</a></li>
+</ul>
+</dd>
+</dl>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+<section id="h_quotations">
+<h3>Quotations &amp; citations</h3>
+
+
+<aside class="prompts">What characters are used to indicate quotations? Do quotations within quotations use different characters? What characters are used to indicate dialogue? Are the same mechanisms used to cite words, or for scare quotes, etc? What about citing book or article names?</aside>
+
+
+
+<dl class="reslinks">
+<dt>Requirements</dt>
+<dd>
+<ul>
+<li><cite>Chinese Orthography Notes</cite>: <a  target="_blank" href="https://www.w3.org/TR/clreq/#indication_punctuation_marks" class="external">Indicator Punctuation Marks</a></li>
+
+<li><cite>Wikipedia</cite>: <a  target="_blank" href="https://en.wikipedia.org/wiki/Quotation_mark" class="external">Quotation mark</a></li>
+</ul>
+</dd>
+
+<dt>GitHub discussions</dt>
+<dd>
+<ul>
+<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+is%3Aopen+label%3Ai%3Aquotations+label%3A問題/question+">Open requests for information</a></li>
+
+<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+label%3Ai%3Aquotations">All Chinese issues on this topic in the clreq repo</a></li>
+
+<li><a target="_blank" href="https://github.com/w3c/i18n-activity/issues?q=label%3Aclreq+label%3Aspec-type-issue+label%3Ai%3Aquotations">Chinese issues on this topic in W3C specs</a></li>
+</ul>
+</dd>
+
+<dt>Tests</dt>
+<dd>
+<ul>
+<li><a target="_blank" href="https://www.w3.org/International/i18n-tests/results/int-quotations.html#chinese">Exploratory/interactive test results</a>
+
+<li><a target="_blank" href="https://github.com/w3c/character_phrase_tests/issues?q=is%3Aissue+label%3Ah2%3AChinese+label%3Adoc%3AQuotations">Exploratory/interactive test repo</a></li>
+</li>
+</ul>
+
+</dd><dt>Gap analysis</dt>
+<dd>
+<ul class="linkList">
+<li><a target="_blank" href="https://www.w3.org/TR/clreq-gap/#quotations">Quotations</a></li>
+</ul>
+</dd>
+
+<dt>LE Index</dt>
+<dd class="le_index">
+<ul class="linkList">
+<li><a target="_blank" href="https://www.w3.org/TR/typography/#quotations">Quotations &amp; citations</a></li>
+</ul>
+</dd>
+</dl>
+</section>
+
+
+
+
+
+
+
+<section id="h_emphasis">
+<h3>Emphasis &amp; highlighting</h3>
+
+
+<aside class="prompts">How are emphasis and highlighting achieved? If lines or marks are drawn alongside, over or through the text, do they need to be a special distance from the text itself? Is it important to skip characters when underlining, etc? How do things change for vertically set text?</aside>
+
+
+
+<dl class="reslinks">
+<dt>Requirements</dt>
+<dd>
+<ul>
+<li><cite>Chinese Orthography Notes</cite>: <a target="_blank" href="https://www.w3.org/TR/clreq/#indication_punctuation_marks">Indicator Punctuation Marks &gt; Emphasis Dots</a><span class="dot"> • </span><a target="_blank" href="https://www.w3.org/TR/clreq/#handling_interlinear_punctuation">Handling Interlinear Punctuation</a></li>
+</ul>
+</dd>
+
+<dt>GitHub discussions</dt>
+<dd>
+<ul>
+<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+is%3Aopen+label%3Ai%3Aemphasis+label%3A問題/question+">Open requests for information</a></li>
+
+<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+label%3Ai%3Aemphasis">All Chinese issues on this topic in the clreq repo</a></li>
+
+<li><a target="_blank" href="https://github.com/w3c/i18n-activity/issues?q=label%3Aclreq+label%3Aspec-type-issue+label%3Ai%3Aemphasis">Chinese issues on this topic in W3C specs</a></li>
+</ul>
+</dd>
+
+<dt>Tests</dt>
+<dd>
+<ul>
+<li><a target="_blank" href="https://www.w3.org/International/i18n-tests/results/int-emphasis.html#chinese">Exploratory/interactive test results</a></li>
+
+<li><a target="_blank" href="https://github.com/w3c/character_phrase_tests/issues?q=is%3Aissue+label%3Ah2%3AChinese+label%3Adoc%3AEmphasis">Exploratory/interactive test repo</a></li>
+</ul>
+
+</dd><dt>Gap analysis</dt>
+<dd>
+<ul class="linkList">
+<li><a target="_blank" href="https://www.w3.org/TR/clreq-gap/#punctuation_etc">Inline features &amp; punctuation</a></li>
+</ul>
+</dd>
+
+<dt>LE Index</dt>
+<dd class="le_index">
+<ul class="linkList">
+<li><a target="_blank" href="https://www.w3.org/TR/typography/#emphasis">Emphasis &amp; highlighting</a></li>
+</ul>
+</dd>
+</dl>
+</section>
+
+
+
+
+
+
+
+<section id="h_abbrev">
+<h3>Abbreviation, ellipsis &amp; repetition</h3>
+
+
+<aside class="prompts">What characters or other methods are used to indicate abbreviation, ellipsis &amp; repetition?</aside>
+
+
+
+<dl class="reslinks">
+<dt>Requirements</dt>
+<dd>
+<ul>
+<li>tbd</li>
+</ul>
+</dd>
+
+<dt>GitHub discussions</dt>
+<dd>
+<ul>
+<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+is%3Aopen+label%3Ai%3Aabbrev+label%3A問題/question+">Open requests for information</a></li>
+
+<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+label%3Ai%3Aabbrev">All Chinese issues on this topic in the clreq repo</a></li>
+
+<li><a target="_blank" href="https://github.com/w3c/i18n-activity/issues?q=label%3Aclreq+label%3Aspec-type-issue+label%3Ai%3Aabbrev">Chinese issues on this topic in W3C specs</a></li>
+</ul>
+</dd>
+
+<dt>Tests</dt>
+<dd>
+<ul>
+<li>Exploratory/interactive test results (tbc)</li>
+
+<li>Exploratory/interactive test repo (tbc)</li>
+</ul>
+
+</dd><dt>Gap analysis</dt>
+<dd>
+<ul class="linkList">
+<li>tbd</li>
+</ul>
+</dd>
+
+<dt>LE Index</dt>
+<dd class="le_index">
+<ul class="linkList">
+<li>tbd</li>
+</ul>
+</dd>
+</dl>
+</section>
+
+
+
+
+
+
+
+<section id="h_inlinenotes">
+<h3>Inline notes &amp; annotations</h3>
+
+
+<aside class="prompts">What mechanisms, if any, are used to create *inline* notes and annotations? (For referent-type notes such as footnotes, see further down.)</aside>
+
+
+
+<dl class="reslinks">
+<dt>Requirements</dt>
+<dd>
+<ul>
+<li><cite>Chinese Orthography Notes</cite>: <a target="_blank" href="https://www.w3.org/TR/clreq/#interlinear_annotations">Interlinear annotations</a></li>
+
+<li><a target="_blank" href="https://r12a.github.io/scripts/bopomofo/ontheweb">Bopomofo on the Web</a></li>
+
+<li><cite>The Manual of the Phonetic Symbols of the Mandarin Script</cite>: <a target="_blank" href="http://language.moe.gov.tw/001/Upload/files/site_content/M0001/juyin/html_en/index.html">english</a><span class="dot">•</span><a target="_blank" href="http://language.moe.gov.tw/001/Upload/files/site_content/M0001/juyin/html_ch/index.html">chinese</a></li>
+
+<li><cite><a target="_blank" href="https://www.w3.org/TR/ruby-use-cases/">Use Cases &amp; Exploratory Approaches for Ruby Markup</a></cite> </li>
+</ul>
+</dd>
+
+<dt>GitHub discussions</dt>
+<dd>
+<ul>
+<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+is%3Aopen+label%3Ai%3Ainline_notes+label%3A問題/question+">Open requests for information</a></li>
+
+<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+label%3Ai%3Ainline_notes">All Chinese issues on this topic in the clreq repo</a></li>
+
+<li><a target="_blank" href="https://github.com/w3c/i18n-activity/issues?q=label%3Aclreq+label%3Aspec-type-issue+label%3Ai%3Ainline_notes">Chinese issues on this topic in W3C specs</a></li>
+</ul>
+</dd>
+
+<dt>Tests</dt>
+<dd>
+<ul>
+<li><a target="_blank" href="https://www.w3.org/International/i18n-tests/results/int-inline-notes-annotations.html#chinese">Exploratory/interactive test results</a></li>
+
+<li><a target="_blank" href="https://github.com/w3c/character_phrase_tests/issues?q=is%3Aissue+label%3Ah2%3AChinese+label%3Adoc%3AInline_notes_annotations">Exploratory/interactive test repo</a></li>
+
+<li><a target="_blank" href="https://w3c.github.io/i18n-tests/results/ruby-html">HTML5: The ruby element and its children</a></li>
+
+<li><a target="_blank" href="https://w3c.github.io/i18n-tests/results/css-ruby">CSS Ruby</a></li>
+</ul>
+
+</dd><dt>Gap analysis</dt>
+<dd>
+<ul class="linkList">
+<li><a target="_blank" href="https://www.w3.org/TR/clreq-gap/#inline_notes">Inline notes &amp; annotations</a></li>
+</ul>
+</dd>
+
+<dt>LE Index</dt>
+<dd class="le_index">
+<ul class="linkList">
+<li><a target="_blank" href="https://www.w3.org/TR/typography/#inline_notes">Inline notes &amp; annotations</a></li>
+</ul>
+</dd>
+</dl>
+</section>
+
+
+
+
+
+
+
+<section id="h_otherinline">
+<h3>Other inline features</h3>
+
+
+<aside class="prompts">Any other form of highlighting or marking of text, such as underlining, numeric overbars, etc. What characters or methods (eg. text decoration) are used to convey information about a range of text? If lines are drawn alongside, over or through the text, do they need to be a special distance from the text itself? Is it important to skip characters when underlining, etc? How do things change for vertically set text?  Are there other punctuation marks that were not covered in preceding sections?</aside>
+
+
+
+
+<dl class="reslinks">
+<dt>Requirements</dt>
+<dd>
+<ul>
+<li><cite>Chinese Orthography Notes</cite>: <a target="_blank" href="https://www.w3.org/TR/clreq/#indication_punctuation_marks">Indicator Punctuation Marks &gt; Fullwidth low line</a><span class="dot"> • </span><a target="_blank" href="https://www.w3.org/TR/clreq/#handling_interlinear_punctuation">Handling Interlinear Punctuation</a></li>
+
+<li><cite>Wikipedia</cite>: <a target="_blank" href="https://en.wikipedia.org/wiki/Underscore#Underlines_in_Chinese">Underlines in Chinese</a></li>
+</ul>
+</dd>
+
+<dt>GitHub discussions</dt>
+<dd>
+<ul>
+<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+is%3Aopen+label%3Ai%3Atext_decoration+label%3A問題/question+">Open requests for information</a></li>
+
+<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+label%3Ai%3Atext_decoration">All Chinese issues on this topic in the clreq repo</a></li>
+
+<li><a target="_blank" href="https://github.com/w3c/i18n-activity/issues?q=label%3Aclreq+label%3Aspec-type-issue+label%3Ai%3Atext-decoration">Chinese issues on this topic in W3C specs</a></li>
+</ul>
+</dd>
+
+<dt>Tests</dt>
+<dd>
+<ul>
+<li><a target="_blank" href="https://www.w3.org/International/i18n-tests/results/int-text-decoration.html#chinese">Exploratory/interactive test results</a></li>
+
+<li><a target="_blank" href="https://github.com/w3c/character_phrase_tests/issues?q=is%3Aissue+is%3Aopen+label%3Ah2%3AChinese+label%3Adoc%3AText_decoration">Exploratory/interactive test repo</a></li>
+
+<li><a target="_blank" href="https://w3c.github.io/i18n-tests/results/line-decoration">CSS3 Text decoration, Line decoration</a></li>
+</ul>
+
+</dd><dt>Gap analysis</dt>
+<dd>
+<ul class="linkList">
+<li><a target="_blank" href="https://www.w3.org/TR/clreq-gap/#punctuation_etc">Inline features &amp; punctuation</a></li>
+</ul>
+</dd>
+
+<dt>LE Index</dt>
+<dd class="le_index">
+<ul class="linkList">
+<li><a target="_blank" href="https://www.w3.org/TR/typography/#text_decoration">Other inline features</a></li>
+</ul>
+</dd>
+</dl>
+</section>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section id="h_lines_and_paragraphs">
+<h2>Line &amp; paragraph layout</h2>
+
+
+<aside class="prompts">This section describes typographic features related to line breaking &amp; hyphenation, text alignment &amp; justification, text spacing, baselines, line height, counters, lists, and styling initials.</aside>
+
+<section id="h_line_breaking">
+<h3>Line breaking &amp; hyphenation</h3>
+
+<aside class="prompts">Are there special rules about the way text wraps when it hits the end of a line? Does line-breaking wrap whole 'words' at a time, or characters, or something else (such as syllables in Tibetan and Javanese)? What characters should not appear at the end or start of a line, and what should be done to prevent that? Is hyphenation used, or something else? What rules are used? What difficulties exist?</aside>
+
+
+<dl class="reslinks">
+<dt>Requirements</dt>
+<dd class="reqs">
+<ul>
+<li><cite> Chinese Orthography Notes</cite>: <a target="_blank" href="https://www.w3.org/TR/clreq/#prohibition_rules_for_line_start_end">Prohibition Rules for Line Start and Line End</a><span class="dot"> • </span><a target="_blank" href="https://www.w3.org/TR/clreq/#prohibition_rules_for_unbreakable_marks">Prohibition Rules for Unbreakable Marks</a><span class="dot"> • </span><a target="_blank" href="https://www.w3.org/TR/clreq/#hanging_punctuation_marks_at_line_end">Hanging Punctuation at Line End</a></li>
+
+<li><a target="_blank" href="https://www.w3.org/International/articles/typography/linebreak">Approaches to line-breaking</a></li>
+</ul>
+</dd>
+
+<dt>GitHub discussions</dt>
+<dd class="gh_discussions">
+<ul>
+<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+is%3Aopen+label%3A問題/question+label%3Ai%3Aline_breaking+">Open requests for information</a></li>
+
+<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+label%3Ai%3Aline_breaking">All Chinese issues on this topic in the clreq repo</a></li>
+
+<li><a target="_blank" href="https://github.com/w3c/i18n-activity/issues?q=+label%3Aclreq+label%3Aspec-type-issue+label%3Ai%3Aline-breaking">Chinese issues on this topic in W3C specs</a></li>
+</ul>
+</dd>
+
+<dt>Tests</dt>
+<dd class="tests">
+<ul>
+<li><a target="_blank" href="https://www.w3.org/International/i18n-tests/results/int-line-breaking.html#chinese">Exploratory/interactive test results</a></li>
+
+<li><a target="_blank" href="https://github.com/w3c/line_paragraph_tests/issues?q=is%3Aissue++label%3Ah2%3AChinese+label%3Adoc%3ALine_breaking">Exploratory/interactive test repo</a></li>
+
+<li><a target="_blank" href="https://w3c.github.io/i18n-tests/results/line-breaks-jazh">CSS Text: Japanese &amp; Chinese line breaks</a></li>
+</ul>
+</dd>
+
+<dt>Gap analysis</dt>
+<dd class="gap_analysis">
+<ul class="linkList">
+<li><a target="_blank" href="https://www.w3.org/TR/clreq-gap/#line_breaking"> Line breaking</a></li>
+</ul>
+</dd>
+
+<dt>LE Index</dt>
+<dd class="le_index">
+<ul class="linkList">
+<li><a target="_blank" href="https://www.w3.org/TR/typography/#line_breaking">Line breaking</a> • <a target="_blank" href="https://www.w3.org/TR/typography/#hyphenation">Hyphenation</a></li>
+</ul>
+</dd>
+</dl>
+</section>
+
+
+
+
+
+
+<section id="h_alignment">
+<h3>Text alignment &amp; justification</h3>
+
+<aside class="prompts">Does text in a paragraph needs to have flush lines down both sides? Does the script allow punctuation to hang outside the text box at the start or end of a line? Where adjustments are need to make a line flush, how is that done? Does the script shrink/stretch space between words and/or letters? Are word baselines stretched, as in Arabic? What about paragraph indents?</aside>
+
+
+<dl class="reslinks">
+<dt>Requirements</dt>
+<dd>
+<ul>
+<li><cite>Chinese Orthography Notes</cite>: <a target="_blank" href="https://www.w3.org/TR/clreq/#composition_of_chinese_and_western_mixed_text">Composition of Chinese and Western Mixed Texts</a><span class="dot"> • </span><a target="_blank" href="https://www.w3.org/TR/clreq/#paragraph_adjustment_rules">Paragraph Adjustment Rules</a><span class="dot"> • </span><a target="_blank" href="https://www.w3.org/TR/clreq/#punctuation_width_adjustment">Punctuation Width Adjustment</a><span class="dot"> • </span><a target="_blank" href="https://www.w3.org/TR/clreq/#line_adjustment">Line Adjustment</a></li>
+
+<li><a target="_blank" href="https://www.w3.org/International/articles/typography/justification">Approaches to full justification</a></li>
+</ul>
+</dd>
+
+<dt>GitHub discussions</dt>
+<dd>
+<ul>
+<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+is%3Aopen+label%3A問題/question+label%3Ai%3Ajustification+">Open requests for information</a></li>
+
+<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue++label%3Ai%3Ajustification">All Chinese issues on this topic in the clreq repo</a></li>
+
+<li><a target="_blank" href="https://github.com/w3c/i18n-activity/issues?q=+label%3Aclreq+label%3Aspec-type-issue+label%3Ai%3Ajustification">Chinese issues on this topic in W3C specs</a></li>
+</ul>
+</dd>
+
+<dt>Tests</dt>
+<dd>
+<ul>
+<li><a target="_blank" href="https://www.w3.org/International/i18n-tests/results/int-text-alignment-justification.html#chinese">Exploratory/interactive test results</a></li>
+
+<li><a target="_blank" href="https://github.com/w3c/line_paragraph_tests/issues?q=is%3Aissue++label%3Ah2%3AChinese+label%3Adoc%3AText_alignment_justification">Exploratory/interactive test repo</a></li>
+</ul>
+</dd><dt>Gap analysis</dt>
+<dd>
+<ul class="linkList">
+<li><a target="_blank" href="https://www.w3.org/TR/clreq-gap/#justification"> Text alignment &amp; justification</a></li>
+</ul>
+</dd>
+
+<dt>LE Index</dt>
+<dd class="le_index">
+<ul class="linkList">
+<li><a target="_blank" href="https://www.w3.org/TR/typography/#justification">Text alignment &amp; justification</a></li>
+</ul>
+</dd>
+</dl>
+</section>
+
+
+
+
+
+
+
+<section id="h_spacing">
+<h3>Text spacing</h3>
+
+<aside class="prompts">This section looks at ways in which spacing is applied between characters over and above that which is introduced during justification. For example, does the orthography create emphasis or other effects by spacing out the words, letters or syllables in a word? (For justification related spacing, see Text alignment &amp; justification, above).</aside>
+
+<dl class="reslinks">
+<dt>Requirements</dt>
+<dd>
+<ul>
+<li><cite>Chinese Orthography Notes</cite>: <a target="_blank" href="https://www.w3.org/TR/clreq/#principles_of_arrangement_of_han_characters">Principles for Arranging Characters during Chinese Composition</a><span class="dot"> • </span><a target="_blank" href="https://www.w3.org/TR/clreq/#punctuation_width_adjustment">Punctuation Width Adjustment</a><span class="dot"> • </span><a target="_blank" href="https://www.w3.org/TR/clreq/#mixed_text_composition_in_horizontal_writing_mode">Mixed Text Composition in Horizontal Writing Mode</a><span class="dot"> • </span><a target="_blank" href="https://www.w3.org/TR/clreq/#mixed_text_composition_in_vertical_writing_mode">Mixed Text Composition in Vertical Writing Mode</a></li>
+</ul>
+</dd>
+
+<dt>GitHub discussions</dt>
+<dd>
+<ul>
+<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue++label%3A問題/question+label%3Ai%3Aspacing">Open requests for information</a></li>
+
+<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue++label%3Ai%3Aspacing">All Chinese issues on this topic in the clreq repo</a></li>
+
+<li><a target="_blank" href="https://github.com/w3c/i18n-activity/issues?q=+label%3Aclreq+label%3Aspec-type-issue+label%3Ai%3Aspacing">Chinese issues on this topic in W3C specs</a></li>
+</ul>
+</dd>
+
+<dt>Tests</dt>
+<dd>
+<ul>
+<li><a target="_blank" href="https://www.w3.org/International/i18n-tests/results/int-letter-spacing.html#chinese">Exploratory/interactive test results</a></li>
+
+<li><a target="_blank" href="https://github.com/w3c/line_paragraph_tests/issues?q=is%3Aissue+label%3Ah2%3AChinese+label%3Adoc%3AText_spacing">Exploratory/interactive test repo</a></li>
+</ul>
+</dd><dt>Gap analysis</dt>
+<dd>
+<ul class="linkList">
+<li><a target="_blank" href="https://www.w3.org/TR/clreq-gap/#spacing">Letter spacing</a></li>
+</ul>
+</dd>
+
+<dt>LE Index</dt>
+<dd class="le_index">
+<ul class="linkList">
+<li><a target="_blank" href="https://www.w3.org/TR/typography/#spacing">Text spacing</a></li>
+</ul>
+</dd>
+</dl>
+
+
+
+</section>
+
+
+
+
+
+
+
+<section id="h_baselines">
+<h3>Baselines, line height, etc.</h3>
+
+<aside class="prompts">Does the script have special requirements for baseline alignment between mixed scripts and in general? Is line height special for this script? Are there other aspects that affect line spacing, or positioning of items vertically within a line?</aside>
+
+
+
+<dl class="reslinks">
+<dt>Requirements</dt>
+<dd>
+<ul>
+<li><cite> Chinese Orthography Notes</cite>: <a target="_blank" href="https://www.w3.org/TR/clreq/#considerations_in_designing_type_area">Considerations when Designing the Type Area</a></li>
+</ul>
+</dd>
+
+<dt>GitHub discussions</dt>
+<dd>
+<ul>
+<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+is%3Aopen+label%3Ai%3Abaselines+label%3A問題/question+">Open requests for information</a></li>
+
+<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+label%3Ai%3Abaselines">All Chinese issues on this topic in the clreq repo</a></li>
+
+<li><a target="_blank" href="https://github.com/w3c/i18n-activity/issues?q=+label%3Aclreq+label%3Aspec-type-issue+label%3Ai%3Abaselines">Chinese issues on this topic in W3C specs</a></li>
+</ul>
+</dd>
+
+<dt>Tests</dt>
+<dd>
+<ul>
+<li>Exploratory/interactive test results (tbc)</li>
+
+<li>Exploratory/interactive test repo (tbc)</li>
+</ul>
+</dd><dt>Gap analysis</dt>
+<dd>
+<ul class="linkList">
+<li><a target="_blank" href="https://www.w3.org/TR/clreq-gap/#baselines"> Baselines, line-height, etc</a></li>
+</ul>
+</dd>
+
+<dt>LE Index</dt>
+<dd class="le_index">
+<ul class="linkList">
+<li><a target="_blank" href="https://www.w3.org/TR/typography/#baselines">Baselines, line-height, etc</a></li>
+</ul>
+</dd>
+</dl>
+</section>
+
+
+
+
+
+
+
+<section id="h_counters">
+<h3>Lists, counters, etc.</h3>
+
+<aside class="prompts">Are there list or other counter styles in use? If so, what is the format used? Do counters need to be upright in vertical text? Are there other aspects related to counters and lists that need to be addressed?</aside>
+
+
+
+<dl class="reslinks">
+<dt>Requirements</dt>
+<dd>
+<ul>
+<li><cite> Chinese (Han) Orthography Notes</cite>: <a target="_blank" href="https://r12a.github.io/scripts/hani/zh.html#lists">Counters, lists, etc</a></li>
+<li><cite> Ready-made Counter Styles</cite>: <a target="_blank" href="https://www.w3.org/TR/predefined-counter-styles/#chinese-styles">Chinese</a></li>
+</ul>
+</dd>
+
+<dt>GitHub discussions</dt>
+<dd>
+<ul>
+<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+is%3Aopen+label%3A問題/question+label%3Ai%3Alists">Open requests for information</a></li>
+
+<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue++label%3Ai%3Alists">All Chinese issues on this topic in the clreq repo</a></li>
+
+<li><a target="_blank" href="https://github.com/w3c/i18n-activity/issues?q=+label%3Aclreq+label%3Aspec-type-issue+label%3Ai%3Alists">Chinese issues on this topic in W3C specs</a></li>
+</ul>
+</dd>
+
+<dt>Tests</dt>
+<dd>
+<ul>
+<li><a target="_blank" href="https://www.w3.org/International/i18n-tests/results/int-lists-counters-etc.html#chinese">Exploratory/interactive test results</a></li>
+
+<li><a target="_blank" href="https://github.com/w3c/line_paragraph_tests/issues?q=is%3Aissue++label%3Ah2%3AChinese+label%3Adoc%3ALists_counters_etc">Exploratory/interactive test repo</a></li>
+
+<li><a target="_blank" href="https://w3c.github.io/i18n-tests/results/predefined-counter-styles#complexlimited">I18n test suite: CSS3 Counter Styles, predefined styles</a></li>
+
+<li><a target="_blank" href="https://w3c.github.io/i18n-tests/results/custom-counter-styles#chinese">I18n test suite: Custom counter styles</a></li>
+</ul>
+
+
+</dd><dt>Gap analysis</dt>
+<dd>
+<ul class="linkList">
+<li><a target="_blank" href="https://www.w3.org/TR/clreq-gap/#lists"> Lists, counters, etc</a></li>
+</ul>
+</dd>
+
+<dt>LE Index</dt>
+<dd class="le_index">
+<ul class="linkList">
+<li><a target="_blank" href="https://www.w3.org/TR/typography/#lists">Lists, counters, etc</a></li>
+</ul>
+</dd>
+</dl>
+</section>
+
+
+
+
+
+
+
+<section id="h_initials">
+<h3>Styling initials</h3>
+
+<aside class="prompts">Does the script use special styling of the initial letter of a line or paragraph, such as for drop caps or similar? How about the size relationship between the large letter and the lines alongide? where does the large letter anchor relative to the lines alongside? is it normal to include initial quote marks in the large letter? is the large letter really a syllable? Are dropped, sunken, and raised types found? etc.</aside>
+
+
+
+<dl class="reslinks">
+<dt>Requirements</dt>
+<dd>
+<ul>
+<li>tbd</li>
+</ul>
+</dd>
+
+<dt>GitHub discussions</dt>
+<dd>
+<ul>
+<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+is%3Aopen+label%3A問題/question+label%3Ai%3Ainitials">Open requests for information</a></li>
+<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+label%3Ai%3Ainitials">All Chinese issues on this topic in the clreq repo</a></li><li><a target="_blank" href="https://github.com/w3c/i18n-activity/issues?q=+label%3Aclreq+label%3Aspec-type-issue+label%3Ai%3Ainitials">Chinese issues on this topic in W3C specs</a></li>
+</ul>
+</dd>
+
+
+<dt>Tests</dt>
+<dd>
+<ul>
+<li><a target="_blank" href="https://www.w3.org/International/i18n-tests/results/int-styling-initials#hani">Exploratory/interactive test results</a></li>
+
+<li><a target="_blank" href="https://github.com/w3c/line_paragraph_tests/issues?q=is%3Aissue+label%3Ah2%3AChinese+label%3Adoc%3AStyling_initials">Exploratory/interactive test repo</a></li>
+</ul>
+
+
+</dd><dt>Gap analysis</dt>
+<dd>
+<ul class="linkList">
+<li><a target="_blank" href="https://www.w3.org/TR/clreq-gap/#initials">Styling initials</a></li>
+</ul>
+</dd>
+
+
+<dt>LE Index</dt>
+<dd class="le_index">
+<ul class="linkList">
+<li><a target="_blank" href="https://www.w3.org/TR/typography/#initials">Styling initials</a></li>
+</ul>
+</dd>
+</dl>
+</section>
+</section>
+
+
+
+
+
+
+
+
+
+<section id="h_page">
+<h2>Page &amp; book layout</h2>
+
+<p>tbd</p>
+</section>
+
+
+
+
+
+
+
+
+
+<section id="a_changes" class="appendix">
+<h2>Change log</h2>
+
+<ul>
+<li>Moved Acknowledgements section to top of introduction and renamed 'Contributors'.</li>
+<li>Updated information and links in the introduction.</li>
+<li>Rewrote the script overview section.</li>
+<li>Added links to all sections where additional information is available.</li>
+<li>Removed text that is just a copy of content at r12a.github.io</li>
+</ul>
+</section>
+</body>
+</html>
