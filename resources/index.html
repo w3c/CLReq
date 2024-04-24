@@ -39,14 +39,14 @@
 
 <body>
   <div id="abstract">
-    <p>This document describes or points to requirements for the layout and presentation of text in languages that use the Chinese script. The target audience is developers of Web standards and technologies, such as HTML, CSS, Mobile Web, Digital Publications, and Unicode, as well as implementers of web browsers, ebook readers, and other applications that need to render Chinese text.</p>
+    <p>This document describes or points to requirements for the layout and presentation of text in  the Chinese script. The target audience is developers of Web standards and technologies, such as HTML, CSS, Mobile Web, Digital Publications, and Unicode, as well as implementers of web browsers, ebook readers, and other applications that need to render Chinese text.</p>
   </div>
 
   <div id="sotd">
-    <p>This document describes the basic requirements for Chinese script layout and text support on the Web and in eBooks. These requirements provide information for Web technologies such as CSS, HTML and digital publications about how to support users of Chinese scripts. Currently the document focuses on Chinese as used for the Chinese language. The information here is developed in conjunction with a <a href="https://www.w3.org/TR/clreq-gap/">document that summarises gaps</a> in support on the Web for Chinese.</p>
+    <p>This document points to the basic requirements for Chinese script layout and text support on the Web and in eBooks. It is a companion document to <a href="https://www.w3.org/TR/clreq/"><cite>Requirements for Chinese Layout</cite></a>. The requirements provide information for Web technologies such as CSS, HTML and digital publications about how to support users of Chinese scripts. The document is relevant for both Simplified and Traditional Chinese. The information here is developed in conjunction with a <a href="https://www.w3.org/TR/clreq-gap/">document that summarises gaps</a> in support on the Web for Chinese.</p>
     
 	<p>The editor's draft of this document is being developed by the <a href="https://github.com/w3c/clreq/">Chinese Layout Task Force</a>, part of the W3C <a href="https://www.w3.org/International/i18n-activity/i18n-ig/">Internationalization Interest Group</a>. It is published by the <a href="https://www.w3.org/International/i18n-activity/i18n-wg/">Internationalization Working Group</a>. The end target for this document is a Working Group Note.</p>
-	</div>
+</div>
 
 
 
@@ -67,10 +67,8 @@
 <section id="h_acknowledgements">
 <h3>Contributors</h3>
 
-<p>The initial information in this document was provided by Richard Ishida, drawing on the structure and information in <a href="https://r12a.github.io/scripts/hani/lo"><cite>Chinese Orthography Notes</cite></a>.</p>
-<p>Information and clarifications were provided by Anousak Anthony Souphavanh, Arthit Suriyawongkul, Ben Mitchell, James Clarke, John Durdin, Martin Hosken, and Norbert Lindenberg  as members of the W3C's <a href="https://w3c.github.io/clreq/home">Southeast Asia Language Enablement</a> community.</p>
-
-<p data-lang="en">See also the <a href="https://github.com/w3c/clreq/graphs/contributors">GitHub contributors list</a> for the Southeast Asia Language Enablement project, and the <a href="https://github.com/w3c/clreq/issues?q=is%3Aissue++label%3As%3Alao">discussions related to Chinese</a>.</p>
+<p>This document was prepared by Richard Ishida.</p>
+<p data-lang="en">See also the <a href="https://github.com/w3c/clreq/graphs/contributors">GitHub contributors list</a> for the Chinese Language Enablement project, and the <a href="https://github.com/w3c/clreq/issues?q=is%3Aopen+is%3Aissue">discussions related to Chinese</a>.</p>
 </section>
 
   
@@ -84,14 +82,15 @@
 <section id="h_about_this_document">
 <h3>About this document</h3>
 
-<p>The aim of this document is to describe the basic requirements for Chinese script layout and text support on the Web and in eBooks. These requirements provide information for Web technologies such as CSS, HTML and digital publications, and for application developers, about how to support users of the Chinese script. The document currently focuses on texts using the Chinese language.</p>
+<p>The aim of this document is to point to the basic requirements for Chinese script layout and text support on the Web and in eBooks. It is a companion document to <a href="https://www.w3.org/TR/clreq/"><cite>Requirements for Chinese Layout</cite></a>. These requirements provide information for Web technologies such as CSS, HTML and digital publications, and for application developers, about how to support users of the Chinese script.</p>
 
-<p>The document focuses on typographic layout issues.  For a deeper understanding of the Chinese script itself and how it works see <cite>Chinese Orthography Notes</cite>, which includes topics such as: <a href="https://r12a.github.io/scripts/hani/lo.html#phonology">Phonology</a>, <a href="https://r12a.github.io/scripts/hani/lo.html#vowels">Vowels</a>, <a href="https://r12a.github.io/scripts/hani/lo.html#vocalics">Vocalics</a>, <a href="https://r12a.github.io/scripts/hani/lo.html#consonants">Consonants</a>, <a href="https://r12a.github.io/scripts/hani/lo.html#encoding">Encoding choices</a>, and <a href="https://r12a.github.io/scripts/hani/lo.html#numbers">Numbers</a>.</p>
+<p>The sections in the document also point to related external information, to tests, to GitHub discussions, etc.</p>
 </section>
 
 
 
 
+<section id="h_gap_analysis"> </section>
 <section id="h_gap_analysis">
 <h3>Gap analysis</h3>
 
@@ -105,10 +104,12 @@
 </section>
 
 
+
+
+
+
 <section id="h_info_requests">
 <h3>Other related resources</h3>
-
-<p>To complement any  content authored specifically for this document, the sections in the document also point to related, external information, tests, GitHub discussions, etc.</p>
 
 <p>The <a href="https://w3c.github.io/typography/"><cite>Language enablement index</cite></a> points to this document and others, and provides a central location for developers and implementers to find information related to various scripts.</p>
 
@@ -134,30 +135,21 @@
 <h2>Chinese Script Overview</h2>
 
 
-<p>The Chinese orthography is an <a class="termref" href="https://r12a.github.io/scripts/glossary/index.html#alphabet">alphabet</a>. This means that both consonants and vowels are indicated.</p>
+<p>The Han script is an <a class="termref" href="https://r12a.github.io/scripts/glossary/index.html#ideograph">ideographic</a> script. Letters typically represent a spoken syllable with its tone.</p>
 
+<p>The Simplified Chinese orthography  has a smaller repertoire and simpler shapes than the Traditional version. </p>
 
+<p>The Chinese script is used as a common writing system by people who may speak a wide variety of Chinese languages, and who may pronounce the written text very differently. This is possible because the characters represent concepts rather than phonetics.</p>
 
+<p>Text can be written in one of 2 directions: horizontally, left to right, or vertically with lines progressing from right to left. Vertically set text is more common in Traditional Chinese than Simplified Chinese areas. It was possible until recently to find Chinese text written horiztonally, right to left, but this doesn't normally occur in contemporary texts.</p>
 
-<p>Chinese text runs left to right in horizontal lines. Spaces separate phrases, rather than words. There is no case distinction.</p>
+<p>Words are not separated by spaces or any other character. There is no case distinction. The visual forms of characters don't interact.</p>
 
-<p>Each <a class="termref" href="https://r12a.github.io/scripts/glossary/index.html#onset">onset</a> consonant is associated with a high, mid, or low class related to tone. Tone is indicated by a combination of the consonant class, the syllable type (live/dead), plus any tone mark.</p> 
+<p>In its 'main' category, CLDR lists 2,210 characters for the Simplified Chinese orthography, and 2,180 for Traditional Chinese. Combined, this includes 3,026 unique characters, and an overlap of 1,064 characters. A working set of characters for modern Chinese may include 3 times this number, and the Unicode Standard includes approaching 100,000 Han characters, many of which are archaic or esoteric.</p>
 
-<p>No conjuncts are used for consonant clusters, except for one subjoined consonant, used in combination only with HA.</p>
+<p>The language is tonal, but the tones are not written explicitly.</p>
 
-<p>Syllable-initial clusters and syllable-final consonant sounds are all written with ordinary consonant letters. However, because all vowels are written, it is not difficult to algorithmically detect syllable boundaries.</p>
-
-<p>Unlike its close relative, Thai, the Chinese orthography is an alphabet and has no <a class="termref" href="https://r12a.github.io/scripts/glossary/index.html#inherentvowel">inherent vowel</a>, but it still represents vowels using vowel signs (including combining marks, dedicated vowel letters, and a couple of repurposed consonants).</p>
-
-<p>Vowels in Chinese are written with a mixture of combining characters and ordinary spacing characters. Chinese uses <em>visual placement</em>: only the vowel components that appear above or below the consonant are combining marks; the others are ordinary spacing characters that are typed <em>in the order seen</em>. There are <a class="termref" href="https://r12a.github.io/scripts/glossary/index.html#prebase">pre-base vowel glyphs</a>. In principle, there are no single-character <a class="termref" href="https://r12a.github.io/scripts/glossary/index.html#circumgraph">circumgraphs</a> in Chinese text, but a single vowel or diphthong is frequently made up of multiple components.</p>
-
-<p>There are no <a class="termref" href="https://r12a.github.io/scripts/glossary/index.html#independentvowel">independent vowels</a>, and <a class="termref" href="https://r12a.github.io/scripts/glossary/index.html#standalonevowel">standalone vowel sounds</a> are written using  vowel signs applied to <span class="codepoint noindex" translate="no"><span lang="th">ອ</span> <span class="uname">U+0EAD LETTER O</span></span>.</p>
-
-<p>Chinese has a large number of <a class="termref" href="https://r12a.github.io/scripts/glossary/index.html#compositevowel">multipart vowels</a> (including diphthongs) made from  dedicated vowel characters and from consonants. Composite vowels can involve up to 4 glyphs (plus a tone mark), and glyphs can surround the base consonant(s) on up to 3 sides.</p>
-
-<p>Vowels are often written differently when they appear in a closed vs. open syllable.</p>
-
-<p>Chinese has native digits, and they are commonly used.</p>
+<p>Chinese has no combining marks, but has many punctuation marks. It also has a relatively complex set of typographic rules.</p>
 </section>
 
 
@@ -1374,7 +1366,7 @@
 
 
 
-<section id="a_changes" class="appendix">
+<!--section id="a_changes" class="appendix">
 <h2>Change log</h2>
 
 <ul>
@@ -1384,6 +1376,6 @@
 <li>Added links to all sections where additional information is available.</li>
 <li>Removed text that is just a copy of content at r12a.github.io</li>
 </ul>
-</section>
+</section-->
 </body>
 </html>
