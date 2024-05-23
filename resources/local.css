@@ -119,3 +119,26 @@ dl.reslinks {
 
 
 
+
+
+
+#linkWarning {
+    position:fixed;
+    bottom:0;
+    margin-inline: 2.5%;
+    background-color: antiquewhite;
+    border-top-left-radius: 1em;
+    border-top-right-radius: 1em;
+    font-size: 90%;
+    padding: .5em;
+    z-index: 2000;
+    }
+#closeLinkWarning {
+    float:right;
+    font-size:120%;
+    margin-inline:1em;
+    cursor:pointer;
+    color: #999;
+    }
+
+
