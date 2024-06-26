@@ -22,7 +22,7 @@ Topics for discussion are suggested by [the gap-analysis template](https://www.w
 ---
 
 ### Key links 关键链接
-[GitHub repo](https://github.com/w3c/clreq) • [Discussion threads](https://github.com/w3c/clreq/issues) • [Issue tracker](https://www.w3.org/International/i18n-activity/textlayout/?filter=clreq) (with clreq filter) • [Charter 章程](https://www.w3.org/International/clreq/charter/)
+[GitHub repo](https://github.com/w3c/clreq) • [Discussion threads](https://github.com/w3c/clreq/issues) • [Charter 章程](https://www.w3.org/International/clreq/charter/)
 
 
 ### Documents 文档
