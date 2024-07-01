@@ -50,6 +50,7 @@ const L10N = {
       'Former editors:': '原編輯：',
       'Participate:': '協助參與：',
       'Feedback:': '反饋：',
+      'Contributors:': '貢獻者：',
     },
 
     dd: {
@@ -82,6 +83,7 @@ const L10N = {
       'Former editors:': '原编辑：',
       'Participate:': '协助参与：',
       'Feedback:': '反馈：',
+      'Contributors:': '贡献者：',
     },
 
     dd: {

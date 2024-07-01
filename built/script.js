@@ -41,7 +41,8 @@
           "Editors:": "\u7DE8\u8F2F\uFF1A",
           "Former editors:": "\u539F\u7DE8\u8F2F\uFF1A",
           "Participate:": "\u5354\u52A9\u53C3\u8207\uFF1A",
-          "Feedback:": "\u53CD\u994B\uFF1A"
+          "Feedback:": "\u53CD\u994B\uFF1A",
+          "Contributors:": "\u8CA2\u737B\u8005\uFF1A"
         },
         dd: {
           "Bug tracker:": '<a href="https://github.com/w3c/clreq/issues">\u53CD\u994B\u932F\u8AA4</a>\uFF08<a href="https://github.com/w3c/clreq/issues">\u4FEE\u6B63\u4E2D\u7684\u932F\u8AA4</a>\uFF09'
@@ -68,7 +69,8 @@
           "Editors:": "\u7F16\u8F91\uFF1A",
           "Former editors:": "\u539F\u7F16\u8F91\uFF1A",
           "Participate:": "\u534F\u52A9\u53C2\u4E0E\uFF1A",
-          "Feedback:": "\u53CD\u9988\uFF1A"
+          "Feedback:": "\u53CD\u9988\uFF1A",
+          "Contributors:": "\u8D21\u732E\u8005\uFF1A"
         },
         dd: {
           "Bug tracker:": '<a href="https://github.com/w3c/clreq/issues">\u53CD\u9988\u9519\u8BEF</a>\uFF08<a href="https://github.com/w3c/clreq/issues">\u4FEE\u6B63\u4E2D\u7684\u9519\u8BEF</a>\uFF09'
