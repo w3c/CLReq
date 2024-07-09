@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
 
-  <title>Chinese Layout Requirements Links (Draft)</title>
+  <title>Chinese Script Resources</title>
   <script src="https://www.w3.org/Tools/respec/respec-w3c" class="remove" defer>
 </script>
   <script class="remove">
@@ -12,16 +12,11 @@
       // specification status (e.g. WD, LCWD, WG-NOTE, etc.). If in doubt use ED.
       specStatus:           "ED",
       //publishDate:  		"2024-04-11",
-      //previousPublishDate:  "2014-12-16",
-      //previousMaturity:  "FPWD",
 
       noRecTrack:           true,
       shortName:            "hani-lreq",
       copyrightStart:       "2024",
       edDraftURI:           "https://www.w3.org/International/clreq/resources/",
-
-      // if this is a LCWD, uncomment and set the end of its review period
-      // lcEnd: "2009-08-05",
 
       // editors, add as many as you like
       // only "name" is required
@@ -29,27 +24,49 @@
         { name: "Richard Ishida", company: "W3C", w3cid: 3439 }
       ],
 
-      group: "i18n",
-
+      group:    "i18n",
  	  github:	"w3c/clreq",
-    };
+
+
+    postProcess: [
+            async function importStyleSheet() { 
+                const elems = document.querySelectorAll(`link[rel='stylesheet'][data-import]`)
+                await Promise.all(
+                    [...elems].map(async link => {
+                        const text = await fetch(link.href).then(r => r.text())
+                        const style = document.createElement("style")
+                        style.textContent = text
+                        link.replaceWith(style)
+                        })
+                    )
+                }
+            ],
+        };
   </script>
-  <link rel="stylesheet" href="local.css">
+
+<link rel="stylesheet" data-import href="https://w3c.github.io/i18n-drafts/style/respec_2022.css">
+<!--<link rel="stylesheet" href="local.css">-->
 </head>
 
 <body>
-  <div id="abstract">
-    <p>This document describes or points to requirements for the layout and presentation of text in  the Chinese script. The target audience is developers of Web standards and technologies, such as HTML, CSS, Mobile Web, Digital Publications, and Unicode, as well as implementers of web browsers, ebook readers, and other applications that need to render Chinese text.</p>
-  </div>
+<div id="abstract">
+<p>This document  points to resources for the layout and presentation of text in languages that use the Chinese script. The target audience includes developers of Web standards and technologies, such as HTML, CSS, Mobile Web, Digital Publications, and Unicode, as well as implementers of web browsers, ebook readers, and other applications that need to render Chinese text.</p>
+</div>
 
-  <div id="sotd">
-    <p>This document points to the basic requirements for Chinese script layout and text support on the Web and in eBooks. It is a companion document to <a href="https://www.w3.org/TR/clreq/"><cite>Requirements for Chinese Layout</cite></a>. The requirements provide information for Web technologies such as CSS, HTML and digital publications about how to support users of Chinese scripts. The document is relevant for both Simplified and Traditional Chinese. The information here is developed in conjunction with a <a href="https://www.w3.org/TR/clreq-gap/">document that summarises gaps</a> in support on the Web for Chinese.</p>
-    
-	<p>The editor's draft of this document is being developed by the <a href="https://github.com/w3c/clreq/">Chinese Layout Task Force</a>, part of the W3C <a href="https://www.w3.org/International/i18n-activity/i18n-ig/">Internationalization Interest Group</a>. It is published by the <a href="https://www.w3.org/International/i18n-activity/i18n-wg/">Internationalization Working Group</a>. The end target for this document is a Working Group Note.</p>
+<div id="sotd">
+<p>This document  points to resources for Chinese script layout and text support on the Web and in eBooks. These requirements provide information for Web technologies such as CSS, HTML and digital publications about how to support languages written using the Chinese script. The information here is developed in conjunction with a <a href="https://www.w3.org/TR/clreq-gap/">document that summarises gaps</a> where the Web fails to adequately support the Chinese script.</p>
+
+<p>The editor's draft of this document is being developed in the GitHub repository <a href="https://w3c.github.io/clreq/">Chinese Language Enablement (clreq)</a>, with contributors from the <abbr title="World Wide Web Consortium">W3C</abbr> <a href="https://www.w3.org/International/i18n-activity/i18n-ig/">Internationalization Interest Group</a>. It is published by the <a href="https://www.w3.org/International/i18n-activity/i18n-wg/">Internationalization Working Group</a>. The end target for this document is a Working Group Note.</p>
+
+<p>To make it easier to track comments, please raise separate issues or emails for each comment, and point to the section you are commenting on using a URL.</p>
 </div>
 
 
-<div id="linkWarning"><span id="closeLinkWarning" onClick="this.parentNode.style.display='none'">X</span> Some links on this page point to repositories or pages to which information will be added over time. Initially, the link may produce no results, but as issues, tests, etc. are created they will show up.</div>
+<div id="linkWarning">
+<p>Some links on this page point to repositories or pages to which information will be added over time. Initially, the link may produce no results, but as issues, tests, etc. are created they will show up.</p>
+
+<p>Links that have a gray color led to no content the last time this document was updated.  They are still live, however, since relevant content could be added at any time. When the document is updated, links that now point to results will have their live colour restored.</p>
+</div>
 
 
 
@@ -59,36 +76,44 @@
 
 
 
-  
-  
+
+
 <section id="h_introduction">
 <h2>Introduction</h2>
-
 
 
 
 <section id="h_acknowledgements">
 <h3>Contributors</h3>
 
-<p>This document was prepared by Richard Ishida.</p>
-<p data-lang="en">See also the <a href="https://github.com/w3c/clreq/graphs/contributors">GitHub contributors list</a> for the Chinese Language Enablement project, and the <a href="https://github.com/w3c/clreq/issues?q=is%3Aopen+is%3Aissue">discussions related to Chinese</a>.</p>
+<p>The initial version of this document was prepared by  Richard Ishida.</p>
+
+<!--<p>Thanks to the following people who contributed information that is used in this document (contributors' names listed in in alphabetic order): XXXX.</p>
+-->
+<p data-lang="en">See also the <a href="https://github.com/w3c/clreq/graphs/contributors">GitHub contributors list</a> for the Chinese Language Enablement project, and the <a href="https://github.com/w3c/clreq/issues?q=is%3Aopen+is%3Aissue">discussions related to Chinese script</a>.</p>
 </section>
 
-  
-  
-  
-  
-  
-  
-  
+
+
+
+
 
 <section id="h_about_this_document">
 <h3>About this document</h3>
 
-<p>The aim of this document is to point to the basic requirements for Chinese script layout and text support on the Web and in eBooks. It is a companion document to <a href="https://www.w3.org/TR/clreq/"><cite>Requirements for Chinese Layout</cite></a>. These requirements provide information for Web technologies such as CSS, HTML and digital publications, and for application developers, about how to support users of the Chinese script.</p>
+<p>This document points to resources for Chinese script layout and text support on the Web and in eBooks. These resources provide information for developers of Web technologies such as CSS, HTML and digital publications, and for application developers, about how to support languages written using the Chinese script. They include requirements, tests, GitHub discussions, type samples, and more,</p>
 
-<p>The sections in the document also point to related external information, to tests, to GitHub discussions, etc.</p>
+<p>The document focuses on typographic layout issues.  For a deeper understanding of the Chinese script and how it works see <cite>Chinese (Han) Orthography Notes</cite>, which includes topics such as: 
+<a href="https://r12a.github.io/scripts/hani/zh.html#phonology">Phonology</a>, and
+<a href="https://r12a.github.io/scripts/hani/zh.html#characters">Characters</a>.
+<!--<a href="https://r12a.github.io/scripts/hani/zh.html#consonants">Consonants</a>, 
+<a href="https://r12a.github.io/scripts/hani/zh.html#encoding">Encoding choices</a>,
+and 
+<a href="https://r12a.github.io/scripts/hani/zh.html#numbers">Numbers</a>-->
+</p>
 </section>
+
+
 
 
 
@@ -96,14 +121,11 @@
 <section id="h_gap_analysis">
 <h3>Gap analysis</h3>
 
-<p>This document is pointed to by a separate document, <a href="https://www.w3.org/TR/clreq-gap/"><cite>Chinese Gap Analysis</cite></a>, which describes gaps in support for Chinese on the Web, and prioritises and describes the impact of those gaps on the user.</p>
+<p>This document should be used alongside a separate document, <a href="https://www.w3.org/TR/clreq-gap/"><cite>Chinese Gap Analysis</cite></a>, which describes gaps in language support for users of the Chinese script, and prioritises and describes the impact of those gaps on the user.</p>
 
-<p>Wherever an unsupported feature is identified through the gap analysis process, the requirements for that feature need to be documented. The gap reports will typically point back to this document for more information.</p>
-
-<p>As gaps in support for Chinese are captured, the gaps can be brought to the attention of the relevant spec developer or the browser implementer community. The progress of such work is tracked in the <a href="https://github.com/orgs/w3c/projects/95/views/1">Gap Analysis Pipeline</a>.</p>
-
-<p>This document should contain no reference to a particular technology. For example, it should not say &quot;CSS does/doesn't do such and such&quot;, and it should not describe how a technology, such as CSS, should implement the requirements. It is technology agnostic, so that it will be evergreen, and it simply describes how the script works. The gap analysis document is the appropriate place for all kinds of technology-specific information.</p>
+<p>Gap reports are brought to the attention of spec and browser implementers, and are tracked via the <a href="https://github.com/orgs/w3c/projects/95" target="_blank">Gap Analysis Pipeline</a>. (<a href="https://github.com/orgs/w3c/projects/95/views/1?filterQuery=label%3A%22s%3Ahani%22" target="_blank">Filter for Chinese script items</a>)</p>
 </section>
+
 
 
 
@@ -113,11 +135,16 @@
 <section id="h_info_requests">
 <h3>Other related resources</h3>
 
-<p>The <a href="https://w3c.github.io/typography/"><cite>Language enablement index</cite></a> points to this document and others, and provides a central location for developers and implementers to find information related to various scripts.</p>
+<p>The document <a href="https://www.w3.org/TR/typography/"><cite>Language enablement index</cite></a> points to this document and others, and provides a central location for developers and implementers to find information related to various scripts.</p>
 
-<p>The W3C also has a repository with discussion threads related to the Chinese script, including requests from developers to the user community for information about how scripts/languages work, and a notification system that tracks issues in W3C working groups related to Chinese scripts. See a list of <a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+is%3Aopen+label%3A問題/question+">unresolved questions</a> for Chinese experts. Each section below points to related discussions. See also the <a href="https://w3c.github.io/clreq/home">repository home page</a>.</p>
+<p>The <abbr title="World Wide Web Consortium">W3C</abbr> also has a repository with discussion threads related to the Chinese script, including requests from developers to the user community for information about how scripts/languages work, and a notification system that tracks issues in <abbr title="World Wide Web Consortium">W3C</abbr> working groups related to the Chinese script. See a list of <a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+is%3Aopen+label%3A問題/question">unresolved questions</a> for Chinese experts. Each section below points to related discussions. See also the <a href="https://w3c.github.io/clreq/home">repository home page</a>.</p>
 </section>
 </section>
+
+
+
+
+
 
 
 
@@ -169,7 +196,7 @@
 <h2 id="h_all_topics">All topics</h2>
 
 
-<aside class="prompts">Links reveal results regardless of topic, for issues, tests, and samples. </aside>
+<aside class="prompts">Links reveal all results, regardless of topic, for issues, tests, and samples. </aside>
 
 
 
@@ -200,7 +227,7 @@
 <dt>Tests</dt>
 <dd>
 <ul>
-<li><a target="_blank" href="https://github.com/w3c/text_direction_tests/issues?q=is%3Aissue+label%3Ah2%3AChinese">Text direction</a> • <a target="_blank" href="https://github.com/w3c/glyph_character_tests/issues?q=is%3Aissue+label%3Ah2%3AChinese">Glyphs &amp; characters</a> • <a target="_blank" href="https://github.com/w3c/character_phrase_tests/issues?q=is%3Aissue+label%3Ah2%3AChinese">Punctuation &amp; inline</a> • <a target="_blank" href="https://github.com/w3c/line_paragraph_tests/issues?q=is%3Aissue+label%3Ah2%3AChinese">Lines &amp; paragraphs</a></li>
+<li><a target="_blank" href="https://github.com/w3c/text_direction_tests/issues?q=is%3Aissue+label%3As%3Ahani">Text direction</a> • <a target="_blank" href="https://github.com/w3c/glyph_character_tests/issues?q=is%3Aissue+label%3As%3Ahani">Glyphs &amp; characters</a> • <a target="_blank" href="https://github.com/w3c/character_phrase_tests/issues?q=is%3Aissue+label%3As%3Ahani">Punctuation &amp; inline</a> • <a target="_blank" href="https://github.com/w3c/line_paragraph_tests/issues?q=is%3Aissue+label%3As%3Ahani">Lines &amp; paragraphs</a></li>
 </ul>
 
 </dd><dt>Gap analysis</dt>
@@ -243,11 +270,11 @@
 <dt>GitHub discussions</dt>
 <dd>
 <ul>
-<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aopen+is%3Aissue+label%3A問題/question+label%3Ai%3Avertical_text">Open requests for information</a></li>
+<li><a class="variable" target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aopen+is%3Aissue+label%3A問題/question+label%3Ai%3Avertical_text">Open requests for information</a></li>
 
-<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+label%3Ai%3Avertical_text">All Chinese issues on this topic in the clreq repo</a></li>
+<li><a class="variable" target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+label%3Ai%3Avertical_text">All Chinese issues on this topic in the clreq repo</a></li>
 
-<li><a target="_blank" href="https://github.com/w3c/i18n-activity/issues?q=+is%3Aissue+label%3Aspec-type-issue+label%3Aclreq+label%3Ai%3Avertical-text">Chinese issues in W3C specs</a></li>
+<li><a class="variable" target="_blank" href="https://github.com/w3c/i18n-activity/issues?q=+is%3Aissue+label%3Aclreq+label%3Ai%3Avertical_text">Chinese issues in W3C specs</a></li>
 </ul>
 </dd>
 
@@ -255,9 +282,9 @@
 <dt>Type samples</dt>
 <dd>
 <ul>
-<li><a target="_blank" href="https://github.com/w3c/type-samples/issues?q=is%3Aissue+is%3Aopen+label%3As%3Ahani+label%3Ai%3Abidi_text">W3C type samples</a></li>
+<li><a class="variable" target="_blank" href="https://github.com/w3c/type-samples/issues?q=is%3Aissue+is%3Aopen+label%3As%3Ahani+label%3Ai%3Abidi_text">W3C type samples</a></li>
 
-<li><a target="_blank" href="https://github.com/r12a/typesamples/issues?q=is%3Aopen+label%3As.hani+label%3Ah.direction">r12a type samples</a></li>
+<li><a class="variable" target="_blank" href="https://github.com/r12a/typesamples/issues?q=is%3Aopen+label%3As.hani+label%3Ah.direction">r12a type samples</a></li>
 </ul>
 </dd>
 
@@ -265,9 +292,9 @@
 <dt>Tests</dt>
 <dd>
 <ul>
-<li><a target="_blank" href="https://www.w3.org/International/i18n-tests/results/int-vertical-text.html#chinese">Exploratory/interactive test results</a></li>
+<li><a class="variable" target="_blank" href="https://www.w3.org/International/i18n-tests/results/int-vertical-text.html#chinese">Exploratory/interactive test results</a></li>
 
-<li><a target="_blank" href="https://github.com/w3c/text_direction_tests/issues?q=is%3Aissue++label%3Ah2%3AChinese+label%3Adoc%3AVertical_text">Exploratory/interactive test repo</a></li>
+<li><a class="variable" target="_blank" href="https://github.com/w3c/text_direction_tests/issues?q=is%3Aissue++label%3As%3Ahani+label%3Ai%3Avertical_text">Exploratory/interactive test repo</a></li>
 </ul>
 </dd>
 
@@ -323,33 +350,31 @@
 <dt>GitHub discussions</dt>
 <dd>
 <ul>
-<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+is%3Aopen+label%3Ai%3Afonts+label%3A問題/question+">Open requests for information</a></li>
+<li><a class="variable" target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+is%3Aopen+label%3Ai%3Afonts+label%3A問題/question+">Open requests for information</a></li>
 
-<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+label%3Ai%3Afonts">All Chinese issues on this topic in the clreq repo</a></li>
+<li><a class="variable" target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+label%3Ai%3Afonts">All Chinese issues on this topic in the clreq repo</a></li>
 
-<li><a target="_blank" href="https://github.com/w3c/i18n-activity/issues?q=+label%3Aclreq+label%3Aspec-type-issue+label%3Ai%3Afonts">Chinese issues in W3C specs</a></li>
+<li><a class="variable" target="_blank" href="https://github.com/w3c/i18n-activity/issues?q=+label%3Aclreq+label%3Ai%3Afonts">Chinese issues in W3C specs</a></li>
 </ul>
 </dd>
 
-<!--
 <dt>Type samples</dt>
 <dd>
 <ul>
-<li><a target="_blank" href="https://github.com/w3c/type-samples/issues?q=is%3Aissue+is%3Aopen+label%3As%3Ahani+label%3Ai%3Afonts">W3C type samples</a></li>
+<li><a class="variable empty" target="_blank" href="https://github.com/w3c/type-samples/issues?q=is%3Aissue+is%3Aopen+label%3As%3Ahani+label%3Ai%3Afonts">W3C type samples</a></li>
 
-<li><a target="_blank" href="https://github.com/r12a/typesamples/issues?q=is%3Aopen+label%3As.hani+label%3Ah.writingstyles">r12a type samples</a></li>
+<li><a class="variable empty" target="_blank" href="https://github.com/r12a/typesamples/issues?q=is%3Aopen+label%3As.hani+label%3Ah.writingstyles">r12a type samples</a></li>
 </ul>
 </dd>
--->
 
 <dt>Tests</dt>
 <dd>
 <ul>
-<li><a target="_blank" href="https://www.w3.org/International/i18n-tests/results/int-fonts.html#chinese">Exploratory/interactive test results</a></li>
+<li><a class="variable" target="_blank" href="https://www.w3.org/International/i18n-tests/results/int-fonts.html#chinese">Exploratory/interactive test results</a></li>
 
-<li><a target="_blank" href="https://github.com/w3c/glyph_character_tests/issues?q=is%3Aissue+label%3Ah2%3AChinese+label%3Adoc%3AFonts">Exploratory/interactive test repo</a></li>
+<li><a class="variable" target="_blank" href="https://github.com/w3c/glyph_character_tests/issues?q=is%3Aissue+label%3As%3Ahani+label%3Ai%3AFonts">Exploratory/interactive test repo</a></li>
 
-<li><a target="_blank" href="https://w3c.github.io/i18n-tests/results/default-font">Exploratory: Language-specific default fonts</a></li>
+<li><a class="variable" target="_blank" href="https://w3c.github.io/i18n-tests/results/default-font">Exploratory: Language-specific default fonts</a></li>
 </ul>
 
 </dd><dt>Gap analysis</dt>
@@ -388,31 +413,29 @@
 <dt>Requirements</dt>
 <dd>
 <ul>
-<li>tbd</li>
+<li><cite>Chinese (Han) Orthography Notes</cite>: <a target="_blank" href="https://r12a.github.io/scripts/hani/zh.html#shaping">Glyph shaping &amp; positioning</a></li>
 </ul>
 </dd>
 
 <dt>GitHub discussions</dt>
 <dd>
 <ul>
-<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+is%3Aopen+label%3Ai%3Aglyphs+label%3A問題/question+">Open requests for information</a></li>
+<li><a class="variable empty" target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+is%3Aopen+label%3Ai%3Aglyphs+label%3A問題/question+">Open requests for information</a></li>
 
-<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+label%3Ai%3Aglyphs">All Chinese issues on this topic in the clreq repo</a></li>
+<li><a class="variable empty" target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+label%3Ai%3Aglyphs">All Chinese issues on this topic in the clreq repo</a></li>
 
-<li><a target="_blank" href="https://github.com/w3c/i18n-activity/issues?q=+label%3Aclreq+label%3Aspec-type-issue+label%3Ai%3Aglyphs">Chinese issues on this topic in W3C specs</a></li>
+<li><a class="variable empty" target="_blank" href="https://github.com/w3c/i18n-activity/issues?q=+label%3Aclreq+label%3Ai%3Aglyphs">Chinese issues on this topic in W3C specs</a></li>
 </ul>
 </dd>
 
-<!--
 <dt>Type samples</dt>
 <dd>
 <ul>
-<li><a target="_blank" href="https://github.com/w3c/type-samples/issues?q=is%3Aissue+is%3Aopen+label%3As%3Ahani+label%3Ai%3Aglyphs">W3C type samples</a></li>
+<li><a class="variable empty" target="_blank" href="https://github.com/w3c/type-samples/issues?q=is%3Aissue+is%3Aopen+label%3As%3Ahani+label%3Ai%3Aglyphs">W3C type samples</a></li>
 
-<li><a target="_blank" href="https://github.com/r12a/typesamples/issues?q=is%3Aopen+label%3As.hani+label%3Ah.context">r12a type samples</a></li>
+<li><a class="variable empty" target="_blank" href="https://github.com/r12a/typesamples/issues?q=is%3Aopen+label%3As.hani+label%3Ah.context">r12a type samples</a></li>
 </ul>
 </dd>
--->
 
 <dt>Tests</dt>
 <dd>
@@ -427,14 +450,14 @@
 <dt>Gap analysis</dt>
 <dd>
 <ul class="linkList">
-<li><a target="_blank" href="https://www.w3.org/TR/clreq-gap/#glyphs">Glyph shaping and positioning</a></li>
+<li><a target="_blank" href="https://www.w3.org/TR/clreq-gap/#glyphs">Context-based shaping and positioning</a></li>
 </ul>
 </dd>
 
 <dt>LE Index</dt>
 <dd class="le_index">
 <ul class="linkList">
-<li><a target="_blank" href="https://www.w3.org/TR/typography/#glyphs">Glyph shaping &amp; positioning</a></li>
+<li><a target="_blank" href="https://www.w3.org/TR/typography/#glyphs">Context-based shaping and positioning</a></li>
 </ul>
 </dd>
 </dl>
@@ -475,11 +498,11 @@
 <dt>GitHub discussions</dt>
 <dd>
 <ul>
-<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+is%3Aopen+label%3Ai%3Aletterforms+label%3A問題/question+">Open requests for information</a></li>
+<li><a class="variable empty" target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+is%3Aopen+label%3Ai%3Aletterforms+label%3A問題/question">Open requests for information</a></li>
 
-<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+label%3Ai%3Aletterforms">All Chinese issues on this topic in the clreq repo</a></li>
+<li><a class="variable empty" target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+label%3Ai%3Aletterforms">All Chinese issues on this topic in the clreq repo</a></li>
 
-<li><a target="_blank" href="https://github.com/w3c/i18n-activity/issues?q=label%3Aclreq+label%3Aspec-type-issue+label%3Ai%3Afont-style+">Chinese issues on this topic in W3C specs</a></li>
+<li><a class="variable empty" target="_blank" href="https://github.com/w3c/i18n-activity/issues?q=label%3Aclreq+label%3Ai%3Aletterforms">Chinese issues on this topic in W3C specs</a></li>
 </ul>
 </dd>
 
@@ -487,9 +510,9 @@
 <dt>Type samples</dt>
 <dd>
 <ul>
-<!--<li><a target="_blank" href="https://github.com/w3c/type-samples/issues?q=is%3Aissue+is%3Aopen+label%3As%3Ahani+label%3Ai%3Aletterforms">W3C type samples</a></li>
--->
-<li><a target="_blank" href="https://github.com/r12a/typesamples/issues?q=is%3Aopen+label%3As.hani+label%3Ah.letterforms">r12a type samples</a></li>
+<li><a class="variable empty" target="_blank" href="https://github.com/w3c/type-samples/issues?q=is%3Aissue+is%3Aopen+label%3As%3Ahani+label%3Ai%3Aletterforms">W3C type samples</a></li>
+
+<li><a class="variable" target="_blank" href="https://github.com/r12a/typesamples/issues?q=is%3Aopen+label%3As.hani+label%3Ah.letterforms">r12a type samples</a></li>
 </ul>
 </dd>
 
@@ -497,22 +520,22 @@
 <dt>Tests</dt>
 <dd>
 <ul>
-<li><a target="_blank" href="https://www.w3.org/International/i18n-tests/results/int-letterforms.html#chinese">Exploratory/interactive test results</a></li>
+<li><a class="variable empty" target="_blank" href="https://www.w3.org/International/i18n-tests/results/int-letterforms.html#chinese">Exploratory/interactive test results</a></li>
 
-<li><a target="_blank" href="https://github.com/w3c/character_phrase_tests/issues?q=is%3Aissue+label%3Ah2%3AChinese+label%3Adoc%3ALetterforms">Exploratory/interactive test repo</a></li>
+<li><a class="variable empty" target="_blank" href="https://github.com/w3c/character_phrase_tests/issues?q=is%3Aissue+label%3As%3Ahani+label%3Ai%3Aletterforms">Exploratory/interactive test repo</a></li>
 </ul>
 
 </dd><dt>Gap analysis</dt>
 <dd>
 <ul class="linkList">
-<li><a target="_blank" href="https://www.w3.org/TR/clreq-gap/#font_style">Font styles, weight, etc</a></li>
+<li><a target="_blank" href="https://www.w3.org/TR/clreq-gap/#letterforms">Font styles, weight, etc</a></li>
 </ul>
 </dd>
 
 <dt>LE Index</dt>
 <dd class="le_index">
 <ul class="linkList">
-<li><a target="_blank" href="https://www.w3.org/TR/typography/#font_style">Letterform slopes, weights, &amp; italics</a></li>
+<li><a target="_blank" href="https://www.w3.org/TR/typography/#letterforms">Letterform slopes, weights, &amp; italics</a></li>
 </ul>
 </dd>
 </dl>
@@ -565,24 +588,23 @@
 <dt>GitHub discussions</dt>
 <dd>
 <ul>
-<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+label%3Ai%3Aencoding+label%3Aquestion">Open requests for information</a></li>
+<li><a class="variable empty" target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+label%3Ai%3Aencoding+label%3Aquestion">Open requests for information</a></li>
 
-<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+label%3Ai%3Aencoding">All Chinese issues on this topic in the clreq repo</a></li>
+<li><a class="variable" target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+label%3Ai%3Aencoding">All Chinese issues on this topic in the clreq repo</a></li>
 
-<li><a target="_blank" href="https://github.com/w3c/i18n-activity/issues?q=label%3Aclreq+label%3Aspec-type-issue+label%3Ai%3Acharset">Chinese issues on this topic in W3C specs</a></li>
+<li><a class="variable" target="_blank" href="https://github.com/w3c/i18n-activity/issues?q=label%3Aclreq+label%3Ai%3Aencoding">Chinese issues on this topic in W3C specs</a></li>
 </ul>
 </dd>
 
-<!--
 <dt>Type samples</dt>
 <dd>
 <ul>
-<li><a target="_blank" href="https://github.com/w3c/type-samples/issues?q=is%3Aissue+is%3Aopen+label%3As%3Ahani+label%3Ai%3Aencoding">W3C type samples</a></li>
+<li><a class="variable empty" target="_blank" href="https://github.com/w3c/type-samples/issues?q=is%3Aissue+is%3Aopen+label%3As%3Ahani+label%3Ai%3Aencoding">W3C type samples</a></li>
 
-<li><cite>r12a type samples</cite>: <a target="_blank" href="https://github.com/r12a/typesamples/issues?q=is%3Aopen+label%3As.hani+label%3Ah.consonants">consonants</a> • <a target="_blank" href="https://github.com/r12a/typesamples/issues?q=is%3Aopen+label%3As.hani+label%3Ah.vowels">vowels</a></li>
+<li><cite>r12a type samples</cite>: <a class="variable empty" target="_blank" href="https://github.com/r12a/typesamples/issues?q=is%3Aopen+label%3As.hani+label%3Ah.consonants">consonants</a> •
+<a class="variable empty" target="_blank" href="https://github.com/r12a/typesamples/issues?q=is%3Aopen+label%3As.hani+label%3Ah.vowels">vowels</a></li>
 </ul>
 </dd>
--->
 
 <dt>Tests</dt>
 <dd>
@@ -595,14 +617,14 @@
 </dd><dt>Gap analysis</dt>
 <dd>
 <ul class="linkList">
-<li><a target="_blank" href="https://www.w3.org/TR/clreq-gap/#charset">Characters &amp; encoding</a></li>
+<li><a target="_blank" href="https://www.w3.org/TR/clreq-gap/#encoding">Characters &amp; encoding</a></li>
 </ul>
 </dd>
 
 <dt>LE Index</dt>
 <dd class="le_index">
 <ul class="linkList">
-<li><a target="_blank" href="https://www.w3.org/TR/typography/#charset">Characters &amp; encoding</a></li>
+<li><a target="_blank" href="https://www.w3.org/TR/typography/#encoding">Characters &amp; encoding</a></li>
 </ul>
 </dd>
 </dl>
@@ -627,38 +649,38 @@
 <dt>Requirements</dt>
 <dd>
 <ul>
-<li>tbd</li>
+<li><cite>Chinese (Han) Orthography Notes</cite>: <a target="_blank" href="https://r12a.github.io/scripts/hani/zh.html#word">Word boundaries</a> •
+<a target="_blank" href="https://r12a.github.io/scripts/hani/zh.html#graphemes">Graphemes</a></li>
 </ul>
 </dd>
 
 <dt>GitHub discussions</dt>
 <dd>
 <ul>
-<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+is%3Aopen+label%3Ai%3Asegmentation+label%3A問題/question+">Open requests for information</a></li>
+<li><a class="variable" target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+is%3Aopen+label%3Ai%3Asegmentation+label%3A問題/question">Open requests for information</a></li>
 
-<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+label%3Ai%3Asegmentation">All Chinese issues on this topic in the clreq repo</a></li>
+<li><a class="variable" target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+label%3Ai%3Asegmentation">All Chinese issues on this topic in the clreq repo</a></li>
 
-<li><a target="_blank" href="https://github.com/w3c/i18n-activity/issues?q=label%3Aclreq+label%3Aspec-type-issue+label%3Ai%3Asegmentation">Chinese issues on this topic in W3C specs</a></li>
+<li><a class="variable" target="_blank" href="https://github.com/w3c/i18n-activity/issues?q=label%3Aclreq+label%3Ai%3Asegmentation">Chinese issues on this topic in W3C specs</a></li>
 </ul>
 </dd>
 
-<!--
+
 <dt>Type samples</dt>
 <dd>
 <ul>
-<li><a target="_blank" href="https://github.com/w3c/type-samples/issues?q=is%3Aissue+is%3Aopen+label%3As%3Ahani+label%3Ai%3Asegmentation">W3C type samples</a></li>
+<li><a class="variable empty" target="_blank" href="https://github.com/w3c/type-samples/issues?q=is%3Aissue+is%3Aopen+label%3As%3Ahani+label%3Ai%3Asegmentation">W3C type samples</a></li>
 
-<li><a target="_blank" href="https://github.com/r12a/typesamples/issues?q=is%3Aopen+label%3As.hani+label%3Ah.word">r12a type samples</a></li>
+<li><a class="variable empty" target="_blank" href="https://github.com/r12a/typesamples/issues?q=is%3Aopen+label%3As.hani+label%3Ah.segmentation">r12a type samples</a></li>
 </ul>
 </dd>
--->
 
 <dt>Tests</dt>
 <dd>
 <ul>
-<li><a target="_blank" href="https://www.w3.org/International/i18n-tests/results/int-grapheme-word-segmentation.html#chinese">Exploratory/interactive test results</a></li>
+<li><a class="variable" target="_blank" href="https://www.w3.org/International/i18n-tests/results/int-grapheme-word-segmentation.html#chinese">Exploratory/interactive test results</a></li>
 
-<li><a target="_blank" href="https://github.com/w3c/glyph_character_tests/issues?q=is%3Aissue+label%3Ah2%3AChinese+label%3Adoc%3AGrapheme_word">Exploratory/interactive test repo</a></li>
+<li><a class="variable" target="_blank" href="https://github.com/w3c/glyph_character_tests/issues?q=is%3Aissue+label%3As%3Ahani+label%3Ai%3Asegmentation">Exploratory/interactive test repo</a></li>
 </ul>
 
 </dd><dt>Gap analysis</dt>
@@ -693,14 +715,6 @@
 <section id="h_characters_and_phrases">
 <h2>Punctuation &amp; inline features</h2>
 
-<aside class="prompts">This section describes typographic features related to word boundaries, phrase &amp; section boundaries, bracketed text, quotations &amp; citations, emphasis, abbreviation, ellipsis &amp; repetition, inline notes &amp; annotations, other punctuation, and other inline text decoration.</aside>
-
-
-
-
-
-
-
 
 
 <section id="h_phrase">
@@ -716,30 +730,31 @@
 <dd>
 <ul>
 <li><cite>Requirements for Chinese Text Layout:</cite>  <a target="_blank" href="https://www.w3.org/TR/clreq/#categories_and_usage_of_punctuation_marks">Categories and Usage of Punctuation Marks</a><span class="dot"> • </span><a target="_blank" href="https://www.w3.org/TR/clreq/#glyphs_sizes_and_positions_in_character_faces_of_punctuation_marks">Sizes and positions of Punctuation Marks</a><span class="dot"> • </span><a target="_blank" href="https://www.w3.org/TR/clreq/#atypical_punctuation_marks_and_their_arrangements">Atypical punctuation marks and their composition</a><span class="dot"> • </span><a target="_blank" href="https://www.w3.org/TR/clreq/#tables_of_chinese_punctuation_marks">Punctuation marks in Chinese</a><span class="dot"> • </span><a target="_blank" href="https://www.w3.org/TR/clreq/#line_composition_rules_for_punctuation_marks">Line Composition Rules for Punctuation Marks</a><span class="dot"> • </span><a target="_blank" href="https://www.w3.org/TR/clreq/#h-unbreakable_marks_punctuation">Prohibition Rules for Unbreakable Marks</a></li>
+
+<li><cite>Chinese (Han) Orthography Notes</cite>: <a target="_blank" href="https://r12a.github.io/scripts/hani/zh.html#phrase">Phrase &amp; section boundaries</a></li>
 </ul>
 </dd>
 
 <dt>GitHub discussions</dt>
 <dd>
 <ul>
-<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+is%3Aopen+label%3Ai%3Apunctuation_etc+label%3A問題/question+">Open requests for information</a></li>
+<li><a class="variable" target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+is%3Aopen+label%3Ai%3Apunctuation_etc+label%3A問題/question+">Open requests for information</a></li>
 
-<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+label%3Ai%3Apunctuation_etc">All Chinese issues on this topic in the clreq repo</a></li>
+<li><a class="variable" target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+label%3Ai%3Apunctuation_etc">All Chinese issues on this topic in the clreq repo</a></li>
 
-<li><a target="_blank" href="https://github.com/w3c/i18n-activity/issues?q=label%3Aclreq+label%3Aspec-type-issue+label%3Ai%3Apunctuation-etc">Chinese issues on this topic in W3C specs</a></li>
+<li><a class="variable empty" target="_blank" href="https://github.com/w3c/i18n-activity/issues?q=label%3Aclreq+label%3Ai%3Apunctuation_etc">Chinese issues on this topic in W3C specs</a></li>
 </ul>
 </dd>
 
-<!--
 <dt>Type samples</dt>
 <dd>
 <ul>
-<li><a target="_blank" href="https://github.com/w3c/type-samples/issues?q=is%3Aissue+is%3Aopen+label%3As%3Ahani+label%3Ai%3Apunctuation_etc">W3C type samples</a></li>
+<li><a class="variable empty" target="_blank" href="https://github.com/w3c/type-samples/issues?q=is%3Aissue+is%3Aopen+label%3As%3Ahani+label%3Ai%3Apunctuation_etc">W3C type samples</a></li>
 
-<li><cite>r12a type samples</cite>: <a target="_blank" href="https://github.com/r12a/typesamples/issues?q=is%3Aopen+label%3As.hani+label%3Ah.phrase">phrases</a> • <a target="_blank" href="https://github.com/r12a/typesamples/issues?q=is%3Aopen+label%3As.hani+label%3Ah.bracketing">bracketing</a></li>
+<li><cite>r12a type samples</cite>: <a class="variable empty" target="_blank" href="https://github.com/r12a/typesamples/issues?q=is%3Aopen+label%3As.hani+label%3Ah.phrase">phrases</a> •
+<a class="variable empty" target="_blank" href="https://github.com/r12a/typesamples/issues?q=is%3Aopen+label%3As.hani+label%3Ah.bracketing">bracketing</a></li>
 </ul>
 </dd>
--->
 
 <dt>Tests</dt>
 <dd>
@@ -752,7 +767,7 @@
 </dd><dt>Gap analysis</dt>
 <dd>
 <ul class="linkList">
-<li><a target="_blank" href="https://www.w3.org/TR/clreq-gap/#punctuation_etc">Inline features &amp; punctuation</a></li>
+<li><a target="_blank" href="https://www.w3.org/TR/clreq-gap/#punctuation_etc">Phrase &amp; section boundaries</a></li>
 </ul>
 </dd>
 
@@ -790,6 +805,8 @@
 <ul>
 <li><cite>Requirements for Chinese Text Layout</cite>: <a  target="_blank" href="https://www.w3.org/TR/clreq/#indication_punctuation_marks" class="external">Indicator Punctuation Marks</a></li>
 
+<li><cite>Chinese (Han) Orthography Notes</cite>: <a target="_blank" href="https://r12a.github.io/scripts/hani/zh.html#quotations">Quotations &amp; citations</a></li>
+
 <li><cite>Wikipedia</cite>: <a  target="_blank" href="https://en.wikipedia.org/wiki/Quotation_mark" class="external">Quotation mark</a></li>
 </ul>
 </dd>
@@ -797,11 +814,11 @@
 <dt>GitHub discussions</dt>
 <dd>
 <ul>
-<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+is%3Aopen+label%3Ai%3Aquotations+label%3A問題/question+">Open requests for information</a></li>
+<li><a class="variable empty" target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+is%3Aopen+label%3Ai%3Aquotations+label%3A問題/question+">Open requests for information</a></li>
 
-<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+label%3Ai%3Aquotations">All Chinese issues on this topic in the clreq repo</a></li>
+<li><a class="variable" target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+label%3Ai%3Aquotations">All Chinese issues on this topic in the clreq repo</a></li>
 
-<li><a target="_blank" href="https://github.com/w3c/i18n-activity/issues?q=label%3Aclreq+label%3Aspec-type-issue+label%3Ai%3Aquotations">Chinese issues on this topic in W3C specs</a></li>
+<li><a class="variable" target="_blank" href="https://github.com/w3c/i18n-activity/issues?q=label%3Aclreq+label%3Ai%3Aquotations">Chinese issues on this topic in W3C specs</a></li>
 </ul>
 </dd>
 
@@ -809,9 +826,9 @@
 <dt>Type samples</dt>
 <dd>
 <ul>
-<!--<li><a target="_blank" href="https://github.com/w3c/type-samples/issues?q=is%3Aissue+is%3Aopen+label%3As%3Ahani+label%3Ai%3Aquotations">W3C type samples</a></li>
--->
-<li><a target="_blank" href="https://github.com/r12a/typesamples/issues?q=is%3Aopen+label%3As.hani+label%3Ah.quotations">r12a type samples</a></li>
+<li><a class="variable empty" target="_blank" href="https://github.com/w3c/type-samples/issues?q=is%3Aissue+is%3Aopen+label%3As%3Ahani+label%3Ai%3Aquotations">W3C type samples</a></li>
+
+<li><a class="variable" target="_blank" href="https://github.com/r12a/typesamples/issues?q=is%3Aopen+label%3As.hani+label%3Ah.quotations">r12a type samples</a></li>
 </ul>
 </dd>
 
@@ -819,16 +836,16 @@
 <dt>Tests</dt>
 <dd>
 <ul>
-<li><a target="_blank" href="https://www.w3.org/International/i18n-tests/results/int-quotations.html#chinese">Exploratory/interactive test results</a>
+<li><a class="variable" target="_blank" href="https://www.w3.org/International/i18n-tests/results/int-quotations.html#chinese">Exploratory/interactive test results</a>
 
-<li><a target="_blank" href="https://github.com/w3c/character_phrase_tests/issues?q=is%3Aissue+label%3Ah2%3AChinese+label%3Adoc%3AQuotations">Exploratory/interactive test repo</a></li>
+<li><a class="variable" target="_blank" href="https://github.com/w3c/character_phrase_tests/issues?q=is%3Aissue+label%3As%3Ahani+label%3Ai%3AQuotations">Exploratory/interactive test repo</a></li>
 </li>
 </ul>
 
 </dd><dt>Gap analysis</dt>
 <dd>
 <ul class="linkList">
-<li><a target="_blank" href="https://www.w3.org/TR/clreq-gap/#quotations">Quotations</a></li>
+<li><a target="_blank" href="https://www.w3.org/TR/clreq-gap/#quotations">Quotations &amp; citations</a></li>
 </ul>
 </dd>
 
@@ -860,43 +877,43 @@
 <dd>
 <ul>
 <li><cite>Requirements for Chinese Text Layout</cite>: <a target="_blank" href="https://www.w3.org/TR/clreq/#indication_punctuation_marks">Indicator Punctuation Marks &gt; Emphasis Dots</a><span class="dot"> • </span><a target="_blank" href="https://www.w3.org/TR/clreq/#handling_interlinear_punctuation">Handling Interlinear Punctuation</a></li>
+
+<li><cite>Chinese (Han) Orthography Notes</cite>: <a target="_blank" href="https://r12a.github.io/scripts/hani/zh.html#emphasis">Emphasis &amp; highlighting</a></li>
 </ul>
 </dd>
 
 <dt>GitHub discussions</dt>
 <dd>
 <ul>
-<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+is%3Aopen+label%3Ai%3Aemphasis+label%3A問題/question+">Open requests for information</a></li>
+<li><a class="variable" target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+is%3Aopen+label%3Ai%3Aemphasis+label%3A問題/question+">Open requests for information</a></li>
 
-<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+label%3Ai%3Aemphasis">All Chinese issues on this topic in the clreq repo</a></li>
+<li><a class="variable" target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+label%3Ai%3Aemphasis">All Chinese issues on this topic in the clreq repo</a></li>
 
-<li><a target="_blank" href="https://github.com/w3c/i18n-activity/issues?q=label%3Aclreq+label%3Aspec-type-issue+label%3Ai%3Aemphasis">Chinese issues on this topic in W3C specs</a></li>
+<li><a class="variable" target="_blank" href="https://github.com/w3c/i18n-activity/issues?q=label%3Aclreq+label%3Ai%3Aemphasis">Chinese issues on this topic in W3C specs</a></li>
 </ul>
 </dd>
 
-<!--
 <dt>Type samples</dt>
 <dd>
 <ul>
-<li><a target="_blank" href="https://github.com/w3c/type-samples/issues?q=is%3Aissue+is%3Aopen+label%3As%3Ahani+label%3Ai%3Aemphasis">W3C type samples</a></li>
+<li><a class="variable empty" target="_blank" href="https://github.com/w3c/type-samples/issues?q=is%3Aissue+is%3Aopen+label%3As%3Ahani+label%3Ai%3Aemphasis">W3C type samples</a></li>
 
-<li><a target="_blank" href="https://github.com/r12a/typesamples/issues?q=is%3Aopen+label%3As.hani+label%3Ah.emphasis">r12a type samples</a></li>
+<li><a class="variable empty" target="_blank" href="https://github.com/r12a/typesamples/issues?q=is%3Aopen+label%3As.hani+label%3Ah.emphasis">r12a type samples</a></li>
 </ul>
 </dd>
--->
 
 <dt>Tests</dt>
 <dd>
 <ul>
-<li><a target="_blank" href="https://www.w3.org/International/i18n-tests/results/int-emphasis.html#chinese">Exploratory/interactive test results</a></li>
+<li><a class="variable" target="_blank" href="https://www.w3.org/International/i18n-tests/results/int-emphasis.html#chinese">Exploratory/interactive test results</a></li>
 
-<li><a target="_blank" href="https://github.com/w3c/character_phrase_tests/issues?q=is%3Aissue+label%3Ah2%3AChinese+label%3Adoc%3AEmphasis">Exploratory/interactive test repo</a></li>
+<li><a class="variable" target="_blank" href="https://github.com/w3c/character_phrase_tests/issues?q=is%3Aissue+label%3As%3Ahani+label%3Ai%3Aemphasis">Exploratory/interactive test repo</a></li>
 </ul>
 
 </dd><dt>Gap analysis</dt>
 <dd>
 <ul class="linkList">
-<li><a target="_blank" href="https://www.w3.org/TR/clreq-gap/#punctuation_etc">Inline features &amp; punctuation</a></li>
+<li><a target="_blank" href="https://www.w3.org/TR/clreq-gap/#emphasis">Emphasis &amp; highlighting</a></li>
 </ul>
 </dd>
 
@@ -927,31 +944,30 @@
 <dt>Requirements</dt>
 <dd>
 <ul>
-<li>tbd</li>
+<li><cite>Chinese (Han) Orthography Notes</cite>: <a target="_blank" href="https://r12a.github.io/scripts/hani/zh.html#abbrev">Abbreviation, ellipsis &amp; repetition</a></li>
 </ul>
 </dd>
 
 <dt>GitHub discussions</dt>
 <dd>
 <ul>
-<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+is%3Aopen+label%3Ai%3Aabbrev+label%3A問題/question+">Open requests for information</a></li>
+<li><a class="variable empty" target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+is%3Aopen+label%3Ai%3Aabbrev+label%3A問題/question+">Open requests for information</a></li>
 
-<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+label%3Ai%3Aabbrev">All Chinese issues on this topic in the clreq repo</a></li>
+<li><a class="variable empty" target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+label%3Ai%3Aabbrev">All Chinese issues on this topic in the clreq repo</a></li>
 
-<li><a target="_blank" href="https://github.com/w3c/i18n-activity/issues?q=label%3Aclreq+label%3Aspec-type-issue+label%3Ai%3Aabbrev">Chinese issues on this topic in W3C specs</a></li>
+<li><a class="variable empty" target="_blank" href="https://github.com/w3c/i18n-activity/issues?q=label%3Aclreq+label%3Ai%3Aabbrev">Chinese issues on this topic in W3C specs</a></li>
 </ul>
 </dd>
 
-<!--
+
 <dt>Type samples</dt>
 <dd>
 <ul>
-<li><a target="_blank" href="https://github.com/w3c/type-samples/issues?q=is%3Aissue+is%3Aopen+label%3As%3Ahani+label%3Ai%3Aabbrev">W3C type samples</a></li>
+<li><a class="variable empty" target="_blank" href="https://github.com/w3c/type-samples/issues?q=is%3Aissue+is%3Aopen+label%3As%3Ahani+label%3Ai%3Aabbrev">W3C type samples</a></li>
 
-<li><a target="_blank" href="https://github.com/r12a/typesamples/issues?q=is%3Aopen+label%3As.hani+label%3Ah.abbrev">r12a type samples</a></li>
+<li><a class="variable empty" target="_blank" href="https://github.com/r12a/typesamples/issues?q=is%3Aopen+label%3As.hani+label%3Ah.abbrev">r12a type samples</a></li>
 </ul>
 </dd>
--->
 
 <dt>Tests</dt>
 <dd>
@@ -964,14 +980,14 @@
 </dd><dt>Gap analysis</dt>
 <dd>
 <ul class="linkList">
-<li>tbd</li>
+<li><a target="_blank" href="https://www.w3.org/TR/clreq-gap/#abbrev">Abbreviation, ellipsis &amp; repetition</a></li>
 </ul>
 </dd>
 
 <dt>LE Index</dt>
 <dd class="le_index">
 <ul class="linkList">
-<li>tbd</li>
+<li><a target="_blank" href="https://www.w3.org/TR/typography/#abbrev">Abbreviation, ellipsis &amp; repetition</a></li>
 </ul>
 </dd>
 </dl>
@@ -997,6 +1013,8 @@
 <ul>
 <li><cite>Requirements for Chinese Text Layout</cite>: <a target="_blank" href="https://www.w3.org/TR/clreq/#interlinear_annotations">Interlinear annotations</a></li>
 
+<li><cite>Chinese (Han) Orthography Notes</cite>: <a target="_blank" href="https://r12a.github.io/scripts/hani/zh.html#inlinenotes">Inline notes &amp; annotations</a></li>
+
 <li><a target="_blank" href="https://r12a.github.io/scripts/bopomofo/ontheweb">Bopomofo on the Web</a></li>
 
 <li><cite>The Manual of the Phonetic Symbols of the Mandarin Script</cite>: <a target="_blank" href="http://language.moe.gov.tw/001/Upload/files/site_content/M0001/juyin/html_en/index.html">english</a><span class="dot">•</span><a target="_blank" href="http://language.moe.gov.tw/001/Upload/files/site_content/M0001/juyin/html_ch/index.html">chinese</a></li>
@@ -1008,11 +1026,11 @@
 <dt>GitHub discussions</dt>
 <dd>
 <ul>
-<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+is%3Aopen+label%3Ai%3Ainline_notes+label%3A問題/question+">Open requests for information</a></li>
+<li><a class="variable" target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+is%3Aopen+label%3Ai%3Ainline_notes+label%3A問題/question+">Open requests for information</a></li>
 
-<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+label%3Ai%3Ainline_notes">All Chinese issues on this topic in the clreq repo</a></li>
+<li><a class="variable" target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+label%3Ai%3Ainline_notes">All Chinese issues on this topic in the clreq repo</a></li>
 
-<li><a target="_blank" href="https://github.com/w3c/i18n-activity/issues?q=label%3Aclreq+label%3Aspec-type-issue+label%3Ai%3Ainline_notes">Chinese issues on this topic in W3C specs</a></li>
+<li><a class="variable" target="_blank" href="https://github.com/w3c/i18n-activity/issues?q=label%3Aclreq+label%3Ai%3Ainline_notes">Chinese issues on this topic in W3C specs</a></li>
 </ul>
 </dd>
 
@@ -1020,19 +1038,19 @@
 <dt>Type samples</dt>
 <dd>
 <ul>
-<li><a target="_blank" href="https://github.com/w3c/type-samples/issues?q=is%3Aissue+is%3Aopen+label%3As%3Ahani+label%3Ai%3Ainline_notes">W3C type samples</a></li>
+<li><a class="variable" target="_blank" href="https://github.com/w3c/type-samples/issues?q=is%3Aissue+is%3Aopen+label%3As%3Ahani+label%3Ai%3Ainline_notes">W3C type samples</a></li>
 
-<!--<li><a target="_blank" href="https://github.com/r12a/typesamples/issues?q=is%3Aopen+label%3As.hani+label%3Ah.inlinenotes">r12a type samples</a></li>
---></ul>
+<li><a class="variable empty" target="_blank" href="https://github.com/r12a/typesamples/issues?q=is%3Aopen+label%3As.hani+label%3Ah.inlinenotes">r12a type samples</a></li>
+</ul>
 </dd>
 
 
 <dt>Tests</dt>
 <dd>
 <ul>
-<li><a target="_blank" href="https://www.w3.org/International/i18n-tests/results/int-inline-notes-annotations.html#chinese">Exploratory/interactive test results</a></li>
+<li><a class="variable" target="_blank" href="https://www.w3.org/International/i18n-tests/results/int-inline-notes-annotations.html#chinese">Exploratory/interactive test results</a></li>
 
-<li><a target="_blank" href="https://github.com/w3c/character_phrase_tests/issues?q=is%3Aissue+label%3Ah2%3AChinese+label%3Adoc%3AInline_notes_annotations">Exploratory/interactive test repo</a></li>
+<li><a class="variable" target="_blank" href="https://github.com/w3c/character_phrase_tests/issues?q=is%3Aissue+label%3As%3Ahani+label%3Ai%3AInline_notes">Exploratory/interactive test repo</a></li>
 
 <li><a target="_blank" href="https://w3c.github.io/i18n-tests/results/ruby-html">HTML5: The ruby element and its children</a></li>
 
@@ -1062,7 +1080,7 @@
 
 
 <section id="h_otherinline">
-<h3>Other inline features</h3>
+<h3>Text decoration &amp; other inline features</h3>
 
 
 <aside class="prompts">Any other form of highlighting or marking of text, such as underlining, numeric overbars, etc. What characters or methods (eg. text decoration) are used to convey information about a range of text? If lines are drawn alongside, over or through the text, do they need to be a special distance from the text itself? Is it important to skip characters when underlining, etc? How do things change for vertically set text?  Are there other punctuation marks that were not covered in preceding sections?</aside>
@@ -1076,6 +1094,8 @@
 <ul>
 <li><cite>Requirements for Chinese Text Layout</cite>: <a target="_blank" href="https://www.w3.org/TR/clreq/#indication_punctuation_marks">Indicator Punctuation Marks &gt; Fullwidth low line</a><span class="dot"> • </span><a target="_blank" href="https://www.w3.org/TR/clreq/#handling_interlinear_punctuation">Handling Interlinear Punctuation</a></li>
 
+<li><cite>Chinese (Han) Orthography Notes</cite>: <a target="_blank" href="https://r12a.github.io/scripts/hani/zh.html#inlinenotes">Inline notes &amp; annotations</a></li>
+
 <li><cite>Wikipedia</cite>: <a target="_blank" href="https://en.wikipedia.org/wiki/Underscore#Underlines_in_Chinese">Underlines in Chinese</a></li>
 </ul>
 </dd>
@@ -1083,11 +1103,11 @@
 <dt>GitHub discussions</dt>
 <dd>
 <ul>
-<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+is%3Aopen+label%3Ai%3Atext_decoration+label%3A問題/question+">Open requests for information</a></li>
+<li><a class="variable" target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+is%3Aopen+label%3Ai%3Atext_decoration+label%3A問題/question+">Open requests for information</a></li>
 
-<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+label%3Ai%3Atext_decoration">All Chinese issues on this topic in the clreq repo</a></li>
+<li><a class="variable" target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+label%3Ai%3Atext_decoration">All Chinese issues on this topic in the clreq repo</a></li>
 
-<li><a target="_blank" href="https://github.com/w3c/i18n-activity/issues?q=label%3Aclreq+label%3Aspec-type-issue+label%3Ai%3Atext-decoration">Chinese issues on this topic in W3C specs</a></li>
+<li><a class="variable" target="_blank" href="https://github.com/w3c/i18n-activity/issues?q=label%3Aclreq+label%3Ai%3Atext_decoration">Chinese issues on this topic in W3C specs</a></li>
 </ul>
 </dd>
 
@@ -1095,19 +1115,19 @@
 <dt>Type samples</dt>
 <dd>
 <ul>
-<li><a target="_blank" href="https://github.com/w3c/type-samples/issues?q=is%3Aissue+is%3Aopen+label%3As%3Ahani+label%3Ai%3Atext_decoration">W3C type samples</a></li>
+<li><a class="variable" target="_blank" href="https://github.com/w3c/type-samples/issues?q=is%3Aissue+is%3Aopen+label%3As%3Ahani+label%3Ai%3Atext_decoration">W3C type samples</a></li>
 
-<!--<li><a target="_blank" href="https://github.com/r12a/typesamples/issues?q=is%3Aopen+label%3As.hani+label%3Ah.otherinline">r12a type samples</a></li>
---></ul>
+<li><a class="variable empty" target="_blank" href="https://github.com/r12a/typesamples/issues?q=is%3Aopen+label%3As.hani+label%3Ah.otherinline">r12a type samples</a></li>
+</ul>
 </dd>
 
 
 <dt>Tests</dt>
 <dd>
 <ul>
-<li><a target="_blank" href="https://www.w3.org/International/i18n-tests/results/int-text-decoration.html#chinese">Exploratory/interactive test results</a></li>
+<li><a class="variable" target="_blank" href="https://www.w3.org/International/i18n-tests/results/int-text-decoration.html#chinese">Exploratory/interactive test results</a></li>
 
-<li><a target="_blank" href="https://github.com/w3c/character_phrase_tests/issues?q=is%3Aissue+is%3Aopen+label%3Ah2%3AChinese+label%3Adoc%3AText_decoration">Exploratory/interactive test repo</a></li>
+<li><a class="variable" target="_blank" href="https://github.com/w3c/character_phrase_tests/issues?q=is%3Aissue+is%3Aopen+label%3As%3Ahani+label%3Ai%3AText_decoration">Exploratory/interactive test repo</a></li>
 
 <li><a target="_blank" href="https://w3c.github.io/i18n-tests/results/line-decoration">CSS3 Text decoration, Line decoration</a></li>
 </ul>
@@ -1115,14 +1135,14 @@
 </dd><dt>Gap analysis</dt>
 <dd>
 <ul class="linkList">
-<li><a target="_blank" href="https://www.w3.org/TR/clreq-gap/#punctuation_etc">Inline features &amp; punctuation</a></li>
+<li><a target="_blank" href="https://www.w3.org/TR/clreq-gap/#text_decoration">Text decoration &amp; other inline features</a></li>
 </ul>
 </dd>
 
 <dt>LE Index</dt>
 <dd class="le_index">
 <ul class="linkList">
-<li><a target="_blank" href="https://www.w3.org/TR/typography/#text_decoration">Other inline features</a></li>
+<li><a target="_blank" href="https://www.w3.org/TR/typography/#text_decoration">Text decoration &amp; other inline features</a></li>
 </ul>
 </dd>
 </dl>
@@ -1146,7 +1166,6 @@
 <h2>Line &amp; paragraph layout</h2>
 
 
-<aside class="prompts">This section describes typographic features related to line breaking &amp; hyphenation, text alignment &amp; justification, text spacing, baselines, line height, counters, lists, and styling initials.</aside>
 
 <section id="h_line_breaking">
 <h3>Line breaking &amp; hyphenation</h3>
@@ -1160,6 +1179,8 @@
 <ul>
 <li><cite> Requirements for Chinese Text Layout</cite>: <a target="_blank" href="https://www.w3.org/TR/clreq/#prohibition_rules_for_line_start_end">Prohibition Rules for Line Start and Line End</a><span class="dot"> • </span><a target="_blank" href="https://www.w3.org/TR/clreq/#prohibition_rules_for_unbreakable_marks">Prohibition Rules for Unbreakable Marks</a><span class="dot"> • </span><a target="_blank" href="https://www.w3.org/TR/clreq/#hanging_punctuation_marks_at_line_end">Hanging Punctuation at Line End</a></li>
 
+<li><cite>Chinese (Han) Orthography Notes</cite>: <a target="_blank" href="https://r12a.github.io/scripts/hani/zh.html#linebreak">Line breaking &amp; word wrap</a></li>
+
 <li><a target="_blank" href="https://www.w3.org/International/articles/typography/linebreak">Approaches to line-breaking</a></li>
 </ul>
 </dd>
@@ -1167,31 +1188,29 @@
 <dt>GitHub discussions</dt>
 <dd class="gh_discussions">
 <ul>
-<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+is%3Aopen+label%3A問題/question+label%3Ai%3Aline_breaking+">Open requests for information</a></li>
+<li><a class="variable" target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+is%3Aopen+label%3A問題/question+label%3Ai%3Aline_breaking+">Open requests for information</a></li>
 
-<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+label%3Ai%3Aline_breaking">All Chinese issues on this topic in the clreq repo</a></li>
+<li><a class="variable" target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+label%3Ai%3Aline_breaking">All Chinese issues on this topic in the clreq repo</a></li>
 
-<li><a target="_blank" href="https://github.com/w3c/i18n-activity/issues?q=+label%3Aclreq+label%3Aspec-type-issue+label%3Ai%3Aline-breaking">Chinese issues on this topic in W3C specs</a></li>
+<li><a class="variable" target="_blank" href="https://github.com/w3c/i18n-activity/issues?q=+label%3Aclreq+label%3Ai%3Aline_breaking">Chinese issues on this topic in W3C specs</a></li>
 </ul>
 </dd>
 
-<!--
 <dt>Type samples</dt>
 <dd>
 <ul>
-<li><a target="_blank" href="https://github.com/w3c/type-samples/issues?q=is%3Aissue+is%3Aopen+label%3As%3Ahani+label%3Ai%3Aline_breaking">W3C type samples</a></li>
+<li><a class="variable empty" target="_blank" href="https://github.com/w3c/type-samples/issues?q=is%3Aissue+is%3Aopen+label%3As%3Ahani+label%3Ai%3Aline_breaking">W3C type samples</a></li>
 
-<li><a target="_blank" href="https://github.com/r12a/typesamples/issues?q=is%3Aopen+label%3As.hani+label%3Ah.linebreak">r12a type samples</a></li>
+<li><a class="variable empty" target="_blank" href="https://github.com/r12a/typesamples/issues?q=is%3Aopen+label%3As.hani+label%3Ah.linebreak">r12a type samples</a></li>
 </ul>
 </dd>
--->
 
 <dt>Tests</dt>
 <dd class="tests">
 <ul>
-<li><a target="_blank" href="https://www.w3.org/International/i18n-tests/results/int-line-breaking.html#chinese">Exploratory/interactive test results</a></li>
+<li><a class="variable" target="_blank" href="https://www.w3.org/International/i18n-tests/results/int-line-breaking.html#chinese">Exploratory/interactive test results</a></li>
 
-<li><a target="_blank" href="https://github.com/w3c/line_paragraph_tests/issues?q=is%3Aissue++label%3Ah2%3AChinese+label%3Adoc%3ALine_breaking">Exploratory/interactive test repo</a></li>
+<li><a class="variable" target="_blank" href="https://github.com/w3c/line_paragraph_tests/issues?q=is%3Aissue++label%3As%3Ahani+label%3Ai%3Aline_breaking">Exploratory/interactive test repo</a></li>
 
 <li><a target="_blank" href="https://w3c.github.io/i18n-tests/results/line-breaks-jazh">CSS Text: Japanese &amp; Chinese line breaks</a></li>
 </ul>
@@ -1200,7 +1219,7 @@
 <dt>Gap analysis</dt>
 <dd class="gap_analysis">
 <ul class="linkList">
-<li><a target="_blank" href="https://www.w3.org/TR/clreq-gap/#line_breaking"> Line breaking</a></li>
+<li><a target="_blank" href="https://www.w3.org/TR/clreq-gap/#line_breaking"> Line breaking &amp; hyphenation</a></li>
 </ul>
 </dd>
 
@@ -1237,33 +1256,34 @@
 <dt>GitHub discussions</dt>
 <dd>
 <ul>
-<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+is%3Aopen+label%3A問題/question+label%3Ai%3Ajustification+">Open requests for information</a></li>
+<li><a class="variable empty" target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+is%3Aopen+label%3A問題/question+label%3Ai%3Ajustification+">Open requests for information</a></li>
 
-<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue++label%3Ai%3Ajustification">All Chinese issues on this topic in the clreq repo</a></li>
+<li><a class="variable" target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue++label%3Ai%3Ajustification">All Chinese issues on this topic in the clreq repo</a></li>
 
-<li><a target="_blank" href="https://github.com/w3c/i18n-activity/issues?q=+label%3Aclreq+label%3Aspec-type-issue+label%3Ai%3Ajustification">Chinese issues on this topic in W3C specs</a></li>
+<li><a class="variable" target="_blank" href="https://github.com/w3c/i18n-activity/issues?q=+label%3Aclreq+label%3Ai%3Ajustification">Chinese issues on this topic in W3C specs</a></li>
 </ul>
 </dd>
 
-<!--
+
 <dt>Type samples</dt>
 <dd>
 <ul>
-<li><a target="_blank" href="https://github.com/w3c/type-samples/issues?q=is%3Aissue+is%3Aopen+label%3As%3Ahani+label%3Ai%3Ajustification">W3C type samples</a></li>
+<li><a class="variable empty" target="_blank" href="https://github.com/w3c/type-samples/issues?q=is%3Aissue+is%3Aopen+label%3As%3Ahani+label%3Ai%3Ajustification">W3C type samples</a></li>
 
-<li><a target="_blank" href="https://github.com/r12a/typesamples/issues?q=is%3Aopen+label%3As.hani+label%3Ah.justification">r12a type samples</a></li>
+<li><a class="variable empty" target="_blank" href="https://github.com/r12a/typesamples/issues?q=is%3Aopen+label%3As.hani+label%3Ah.justification">r12a type samples</a></li>
 </ul>
 </dd>
--->
 
 <dt>Tests</dt>
 <dd>
 <ul>
-<li><a target="_blank" href="https://www.w3.org/International/i18n-tests/results/int-text-alignment-justification.html#chinese">Exploratory/interactive test results</a></li>
+<li><a class="variable empty" target="_blank" href="https://www.w3.org/International/i18n-tests/results/int-text-alignment-justification.html#chinese">Exploratory/interactive test results</a></li>
 
-<li><a target="_blank" href="https://github.com/w3c/line_paragraph_tests/issues?q=is%3Aissue++label%3Ah2%3AChinese+label%3Adoc%3AText_alignment_justification">Exploratory/interactive test repo</a></li>
+<li><a class="variable empty" target="_blank" href="https://github.com/w3c/line_paragraph_tests/issues?q=is%3Aissue++label%3As%3Ahani+label%3Ai%3Ajustification">Exploratory/interactive test repo</a></li>
 </ul>
-</dd><dt>Gap analysis</dt>
+</dd>
+
+<dt>Gap analysis</dt>
 <dd>
 <ul class="linkList">
 <li><a target="_blank" href="https://www.w3.org/TR/clreq-gap/#justification"> Text alignment &amp; justification</a></li>
@@ -1301,36 +1321,37 @@
 <dt>GitHub discussions</dt>
 <dd>
 <ul>
-<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue++label%3A問題/question+label%3Ai%3Aspacing">Open requests for information</a></li>
+<li><a class="variable" target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue++label%3A問題/question+label%3Ai%3Aspacing">Open requests for information</a></li>
 
-<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue++label%3Ai%3Aspacing">All Chinese issues on this topic in the clreq repo</a></li>
+<li><a class="variable" target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue++label%3Ai%3Aspacing">All Chinese issues on this topic in the clreq repo</a></li>
 
-<li><a target="_blank" href="https://github.com/w3c/i18n-activity/issues?q=+label%3Aclreq+label%3Aspec-type-issue+label%3Ai%3Aspacing">Chinese issues on this topic in W3C specs</a></li>
+<li><a class="variable" target="_blank" href="https://github.com/w3c/i18n-activity/issues?q=+label%3Aclreq+label%3Ai%3Aspacing">Chinese issues on this topic in W3C specs</a></li>
 </ul>
 </dd>
 
-<!--
 <dt>Type samples</dt>
 <dd>
 <ul>
-<li><a target="_blank" href="https://github.com/w3c/type-samples/issues?q=is%3Aissue+is%3Aopen+label%3As%3Ahani+label%3Ai%3Aspacing">W3C type samples</a></li>
+<li><a class="variable empty" target="_blank" href="https://github.com/w3c/type-samples/issues?q=is%3Aissue+is%3Aopen+label%3As%3Ahani+label%3Ai%3Aspacing">W3C type samples</a></li>
 
-<li><a target="_blank" href="https://github.com/r12a/typesamples/issues?q=is%3Aopen+label%3As.hani+label%3Ah.spacing">r12a type samples</a></li>
+<li><a class="variable empty" target="_blank" href="https://github.com/r12a/typesamples/issues?q=is%3Aopen+label%3As.hani+label%3Ah.spacing">r12a type samples</a></li>
 </ul>
 </dd>
--->
+
 
 <dt>Tests</dt>
 <dd>
 <ul>
-<li><a target="_blank" href="https://www.w3.org/International/i18n-tests/results/int-letter-spacing.html#chinese">Exploratory/interactive test results</a></li>
+<li><a class="variable" target="_blank" href="https://www.w3.org/International/i18n-tests/results/int-letter-spacing.html#chinese">Exploratory/interactive test results</a></li>
 
-<li><a target="_blank" href="https://github.com/w3c/line_paragraph_tests/issues?q=is%3Aissue+label%3Ah2%3AChinese+label%3Adoc%3AText_spacing">Exploratory/interactive test repo</a></li>
+<li><a class="variable" target="_blank" href="https://github.com/w3c/line_paragraph_tests/issues?q=is%3Aissue+label%3As%3Ahani+label%3Ai%3Aspacing">Exploratory/interactive test repo</a></li>
 </ul>
-</dd><dt>Gap analysis</dt>
+</dd>
+
+<dt>Gap analysis</dt>
 <dd>
 <ul class="linkList">
-<li><a target="_blank" href="https://www.w3.org/TR/clreq-gap/#spacing">Letter spacing</a></li>
+<li><a target="_blank" href="https://www.w3.org/TR/clreq-gap/#spacing">Text spacing</a></li>
 </ul>
 </dd>
 
@@ -1364,30 +1385,30 @@
 <dd>
 <ul>
 <li><cite> Requirements for Chinese Text Layout</cite>: <a target="_blank" href="https://www.w3.org/TR/clreq/#considerations_in_designing_type_area">Considerations when Designing the Type Area</a></li>
+
+<li><cite>Chinese (Han) Orthography Notes</cite>: <a target="_blank" href="https://r12a.github.io/scripts/hani/zh.html#baselines">Baselines, line height, etc</a></li>
 </ul>
 </dd>
 
 <dt>GitHub discussions</dt>
 <dd>
 <ul>
-<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+is%3Aopen+label%3Ai%3Abaselines+label%3A問題/question+">Open requests for information</a></li>
+<li><a class="variable empty" target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+is%3Aopen+label%3Ai%3Abaselines+label%3A問題/question+">Open requests for information</a></li>
 
-<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+label%3Ai%3Abaselines">All Chinese issues on this topic in the clreq repo</a></li>
+<li><a class="variable empty" target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+label%3Ai%3Abaselines">All Chinese issues on this topic in the clreq repo</a></li>
 
-<li><a target="_blank" href="https://github.com/w3c/i18n-activity/issues?q=+label%3Aclreq+label%3Aspec-type-issue+label%3Ai%3Abaselines">Chinese issues on this topic in W3C specs</a></li>
+<li><a class="variable empty" target="_blank" href="https://github.com/w3c/i18n-activity/issues?q=+label%3Aclreq+label%3Ai%3Abaselines">Chinese issues on this topic in W3C specs</a></li>
 </ul>
 </dd>
 
-<!--
 <dt>Type samples</dt>
 <dd>
 <ul>
-<li><a target="_blank" href="https://github.com/w3c/type-samples/issues?q=is%3Aissue+is%3Aopen+label%3As%3Ahani+label%3Ai%3Abaselines">W3C type samples</a></li>
+<li><a class="variable empty" target="_blank" href="https://github.com/w3c/type-samples/issues?q=is%3Aissue+is%3Aopen+label%3As%3Ahani+label%3Ai%3Abaselines">W3C type samples</a></li>
 
-<li><a target="_blank" href="https://github.com/r12a/typesamples/issues?q=is%3Aopen+label%3As.hani+label%3Ah.baselines">r12a type samples</a></li>
+<li><a class="variable empty" target="_blank" href="https://github.com/r12a/typesamples/issues?q=is%3Aopen+label%3As.hani+label%3Ah.baselines">r12a type samples</a></li>
 </ul>
 </dd>
--->
 
 <dt>Tests</dt>
 <dd>
@@ -1437,31 +1458,29 @@
 <dt>GitHub discussions</dt>
 <dd>
 <ul>
-<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+is%3Aopen+label%3A問題/question+label%3Ai%3Alists">Open requests for information</a></li>
+<li><a class="variable empty" target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+is%3Aopen+label%3A問題/question+label%3Ai%3Alists">Open requests for information</a></li>
 
-<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue++label%3Ai%3Alists">All Chinese issues on this topic in the clreq repo</a></li>
+<li><a class="variable" target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue++label%3Ai%3Alists">All Chinese issues on this topic in the clreq repo</a></li>
 
-<li><a target="_blank" href="https://github.com/w3c/i18n-activity/issues?q=+label%3Aclreq+label%3Aspec-type-issue+label%3Ai%3Alists">Chinese issues on this topic in W3C specs</a></li>
+<li><a class="variable" target="_blank" href="https://github.com/w3c/i18n-activity/issues?q=+label%3Aclreq+label%3Ai%3Alists">Chinese issues on this topic in W3C specs</a></li>
 </ul>
 </dd>
 
-<!--
 <dt>Type samples</dt>
 <dd>
 <ul>
-<li><a target="_blank" href="https://github.com/w3c/type-samples/issues?q=is%3Aissue+is%3Aopen+label%3As%3Ahani+label%3Ai%3Alists">W3C type samples</a></li>
+<li><a class="variable empty" target="_blank" href="https://github.com/w3c/type-samples/issues?q=is%3Aissue+is%3Aopen+label%3As%3Ahani+label%3Ai%3Alists">W3C type samples</a></li>
 
-<li><a target="_blank" href="https://github.com/r12a/typesamples/issues?q=is%3Aopen+label%3As.hani+label%3Ah.lists">r12a type samples</a></li>
+<li><a class="variable empty" target="_blank" href="https://github.com/r12a/typesamples/issues?q=is%3Aopen+label%3As.hani+label%3Ah.lists">r12a type samples</a></li>
 </ul>
 </dd>
--->
 
 <dt>Tests</dt>
 <dd>
 <ul>
-<li><a target="_blank" href="https://www.w3.org/International/i18n-tests/results/int-lists-counters-etc.html#chinese">Exploratory/interactive test results</a></li>
+<li><a class="variable" target="_blank" href="https://www.w3.org/International/i18n-tests/results/int-lists-counters-etc.html#chinese">Exploratory/interactive test results</a></li>
 
-<li><a target="_blank" href="https://github.com/w3c/line_paragraph_tests/issues?q=is%3Aissue++label%3Ah2%3AChinese+label%3Adoc%3ALists_counters_etc">Exploratory/interactive test repo</a></li>
+<li><a class="variable" target="_blank" href="https://github.com/w3c/line_paragraph_tests/issues?q=is%3Aissue++label%3As%3Ahani+label%3Ai%3Alists">Exploratory/interactive test repo</a></li>
 
 <li><a target="_blank" href="https://w3c.github.io/i18n-tests/results/predefined-counter-styles#complexlimited">I18n test suite: CSS3 Counter Styles, predefined styles</a></li>
 
@@ -1509,28 +1528,30 @@
 <dt>GitHub discussions</dt>
 <dd>
 <ul>
-<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+is%3Aopen+label%3A問題/question+label%3Ai%3Ainitials">Open requests for information</a></li>
-<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+label%3Ai%3Ainitials">All Chinese issues on this topic in the clreq repo</a></li><li><a target="_blank" href="https://github.com/w3c/i18n-activity/issues?q=+label%3Aclreq+label%3Aspec-type-issue+label%3Ai%3Ainitials">Chinese issues on this topic in W3C specs</a></li>
+<li><a class="variable empty" target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+is%3Aopen+label%3A問題/question+label%3Ai%3Ainitials">Open requests for information</a></li>
+
+<li><a class="variable empty" target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+label%3Ai%3Ainitials">All Chinese issues on this topic in the clreq repo</a></li>
+
+<li><a class="variable empty" target="_blank" href="https://github.com/w3c/i18n-activity/issues?q=+label%3Aclreq+label%3Ai%3Ainitials">Chinese issues on this topic in W3C specs</a></li>
 </ul>
 </dd>
 
-<!--
 <dt>Type samples</dt>
 <dd>
 <ul>
-<li><a target="_blank" href="https://github.com/w3c/type-samples/issues?q=is%3Aissue+is%3Aopen+label%3As%3Ahani+label%3Ai%3Ainitials">W3C type samples</a></li>
+<li><a class="variable empty" target="_blank" href="https://github.com/w3c/type-samples/issues?q=is%3Aissue+is%3Aopen+label%3As%3Ahani+label%3Ai%3Ainitials">W3C type samples</a></li>
 
-<li><a target="_blank" href="https://github.com/r12a/typesamples/issues?q=is%3Aopen+label%3As.hani+label%3Ah.initials">r12a type samples</a></li>
+<li><a class="variable empty" target="_blank" href="https://github.com/r12a/typesamples/issues?q=is%3Aopen+label%3As.hani+label%3Ah.initials">r12a type samples</a></li>
 </ul>
 </dd>
--->
+
 
 <dt>Tests</dt>
 <dd>
 <ul>
-<li><a target="_blank" href="https://www.w3.org/International/i18n-tests/results/int-styling-initials#hani">Exploratory/interactive test results</a></li>
+<li><a class="variable empty" target="_blank" href="https://www.w3.org/International/i18n-tests/results/int-styling-initials#hani">Exploratory/interactive test results</a></li>
 
-<li><a target="_blank" href="https://github.com/w3c/line_paragraph_tests/issues?q=is%3Aissue+label%3Ah2%3AChinese+label%3Adoc%3AStyling_initials">Exploratory/interactive test repo</a></li>
+<li><a class="variable empty" target="_blank" href="https://github.com/w3c/line_paragraph_tests/issues?q=is%3Aissue+label%3As%3Ahani+label%3Ai%3Ainitials">Exploratory/interactive test repo</a></li>
 </ul>
 
 
@@ -1559,13 +1580,8 @@
 
 
 
-
 <section id="h_page">
 <h2>Page &amp; book layout</h2>
-
-
-
-
 
 
 
@@ -1588,21 +1604,22 @@
 <dt>GitHub discussions</dt>
 <dd>
 <ul>
-<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+is%3Aopen+label%3A問題/question+label%3Ai%3Apage_layout">Open requests for information</a></li>
-<li><a target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+label%3Ai%3Apage_layout">All Chinese issues on this topic in the clreq repo</a></li><li><a target="_blank" href="https://github.com/w3c/i18n-activity/issues?q=+label%3Aclreq+label%3Aspec-type-issue+label%3Ai%3Apage_layout">Chinese issues on this topic in W3C specs</a></li>
+<li><a class="variable empty" target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+is%3Aopen+label%3A問題/question+label%3Ai%3Apage_layout">Open requests for information</a></li>
+
+<li><a class="variable empty" target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+label%3Ai%3Apage_layout">All Chinese issues on this topic in the clreq repo</a></li>
+
+<li><a class="variable empty" target="_blank" href="https://github.com/w3c/i18n-activity/issues?q=+label%3Aclreq+label%3Ai%3Apage_layout">Chinese issues on this topic in W3C specs</a></li>
 </ul>
 </dd>
 
-<!--
 <dt>Type samples</dt>
 <dd>
 <ul>
-<li><a target="_blank" href="https://github.com/w3c/type-samples/issues?q=is%3Aissue+is%3Aopen+label%3As%3Ahani+label%3Ai%3Apage_layout">W3C type samples</a></li>
+<li><a class="variable empty" target="_blank" href="https://github.com/w3c/type-samples/issues?q=is%3Aissue+is%3Aopen+label%3As%3Ahani+label%3Ai%3Apage_layout">W3C type samples</a></li>
 
-<li><a target="_blank" href="https://github.com/r12a/typesamples/issues?q=is%3Aopen+label%3As.hani+label%3Ah.generallayout">r12a type samples</a></li>
+<li><a class="variable empty" target="_blank" href="https://github.com/r12a/typesamples/issues?q=is%3Aopen+label%3As.hani+label%3Ah.generallayout">r12a type samples</a></li>
 </ul>
 </dd>
--->
 
 <dt>Tests</dt>
 <dd>
@@ -1629,7 +1646,279 @@
 </dd>
 </dl>
 </section>
+
+
+
+
+
+
+
+<section id="h_grids_tables">
+<h3>Grids &amp; tables</h3>
+
+<aside class="prompts">Does the script have special requirements for character grids or tables?</aside>
+
+
+
+<dl class="reslinks">
+<dt>Requirements</dt>
+<dd>
+<ul>
+<li>tbd</li>
+</ul>
+</dd>
+
+<dt>GitHub discussions</dt>
+<dd>
+<ul>
+<li><a class="variable empty" target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+label%3As%3Ahani+label%3Aquestion+is%3Aopen+label%3Ai%3Agrids_tables">Open requests for information</a></li>
+<li><a class="variable empty" target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+label%3As%3Ahani+label%3Ai%3Agrids_tables">All Chinese issues on this topic in the clreq repo</a></li><li><a class="variable empty" target="_blank" href="https://github.com/w3c/i18n-activity/issues?q=+label%3Aclreq+label%3Ai%3Agrids_tables">Chinese issues on this topic in W3C specs</a></li>
+</ul>
+</dd>
+
+
+<dt>Type samples</dt>
+<dd>
+<ul>
+<li><a class="variable empty" target="_blank" href="https://github.com/w3c/type-samples/issues?q=is%3Aissue+is%3Aopen+label%3As%3Ahani+label%3Ai%3Agrids_tables">W3C type samples</a></li>
+
+<li><a class="variable empty" target="_blank" href="https://github.com/r12a/typesamples/issues?q=is%3Aopen+label%3As.hani+label%3Ah.grids">r12a type samples</a></li>
+</ul>
+</dd>
+
+
+<dt>Tests</dt>
+<dd>
+<ul>
+<li>Exploratory/interactive test results (tbc)</li>
+
+<li>Exploratory/interactive test repo (tbc)</li>
+</ul>
+
+
+</dd><dt>Gap analysis</dt>
+<dd>
+<ul class="linkList">
+<li><a target="_blank" href="https://www.w3.org/TR/clreq-gap/#grids_tables">Grids &amp; tables</a></li>
+</ul>
+</dd>
+
+
+<dt>LE Index</dt>
+<dd class="le_index">
+<ul class="linkList">
+<li><a target="_blank" href="https://www.w3.org/TR/typography/#grids_tables">Grids &amp; tables</a></li>
+</ul>
+</dd>
+</dl>
 </section>
+
+
+
+
+
+
+
+<section id="h_footnotes_etc">
+<h3>Footnotes, endnotes, etc</h3>
+
+<aside class="prompts">Support for footnotes, endnotes or other necessary annotations of this kind may vary in other cultures. In some cases, a script may use a very idiosyncratic approach to locate the notes or to link to them from the text. (See Inline notes &amp; annotations for purely inline annotations, such as ruby or warichu. This section is about annotation systems that separate the reference marks and the content of the notes.)</aside>
+
+
+
+<dl class="reslinks">
+<dt>Requirements</dt>
+<dd>
+<ul>
+<li>tbd</li>
+</ul>
+</dd>
+
+<dt>GitHub discussions</dt>
+<dd>
+<ul>
+<li><a class="variable empty" target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+label%3As%3Ahani+label%3Aquestion+is%3Aopen+label%3Ai%3Afootnotes_etc">Open requests for information</a></li>
+<li><a class="variable empty" target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+label%3As%3Ahani+label%3Ai%3Afootnotes_etc">All Chinese issues on this topic in the clreq repo</a></li><li><a class="variable empty" target="_blank" href="https://github.com/w3c/i18n-activity/issues?q=+label%3Aclreq+label%3Ai%3Afootnotes_etc">Chinese issues on this topic in W3C specs</a></li>
+</ul>
+</dd>
+
+
+<dt>Type samples</dt>
+<dd>
+<ul>
+<li><a class="variable empty" target="_blank" href="https://github.com/w3c/type-samples/issues?q=is%3Aissue+is%3Aopen+label%3As%3Ahani+label%3Ai%3Afootnotes_etc">W3C type samples</a></li>
+
+<li><a class="variable empty" target="_blank" href="https://github.com/r12a/typesamples/issues?q=is%3Aopen+label%3As.hani+label%3Ah.footnotes_etc">r12a type samples</a></li>
+</ul>
+</dd>
+
+
+<dt>Tests</dt>
+<dd>
+<ul>
+<li>Exploratory/interactive test results (tbc)</li>
+
+<li>Exploratory/interactive test repo (tbc)</li>
+</ul>
+
+
+</dd><dt>Gap analysis</dt>
+<dd>
+<ul class="linkList">
+<li><a target="_blank" href="https://www.w3.org/TR/clreq-gap/#footnotes_etc">Footnotes, endnotes, etc</a></li>
+</ul>
+</dd>
+
+
+<dt>LE Index</dt>
+<dd class="le_index">
+<ul class="linkList">
+<li><a target="_blank" href="https://www.w3.org/TR/typography/#footnotes_etc">Footnotes, endnotes, etc</a></li>
+</ul>
+</dd>
+</dl>
+</section>
+
+
+
+
+
+
+
+
+
+
+<section id="h_headers_footers">
+<h3>Page headers, footers, etc</h3>
+
+<aside class="prompts">Are there special conventions for page numbering, or the way that running headers and the like are handled?</aside>
+
+
+
+<dl class="reslinks">
+<dt>Requirements</dt>
+<dd>
+<ul>
+<li>tbd</li>
+</ul>
+</dd>
+
+<dt>GitHub discussions</dt>
+<dd>
+<ul>
+<li><a class="variable empty" target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+label%3As%3Ahani+label%3Aquestion+is%3Aopen+label%3Ai%3Aheaders_footers">Open requests for information</a></li>
+<li><a class="variable empty" target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+label%3As%3Ahani+label%3Ai%3Aheaders_footers">All Chinese issues on this topic in the clreq repo</a></li><li><a class="variable empty" target="_blank" href="https://github.com/w3c/i18n-activity/issues?q=+label%3Aclreq+label%3Ai%3Aheaders_footers">Chinese issues on this topic in W3C specs</a></li>
+</ul>
+</dd>
+
+
+<dt>Type samples</dt>
+<dd>
+<ul>
+<li><a class="variable empty" target="_blank" href="https://github.com/w3c/type-samples/issues?q=is%3Aissue+is%3Aopen+label%3As%3Ahani+label%3Ai%3Aheaders_footers">W3C type samples</a></li>
+
+<li><a class="variable empty" target="_blank" href="https://github.com/r12a/typesamples/issues?q=is%3Aopen+label%3As.hani+label%3Ah.headers">r12a type samples</a></li>
+</ul>
+</dd>
+
+
+<dt>Tests</dt>
+<dd>
+<ul>
+<li>Exploratory/interactive test results (tbc)</li>
+
+<li>Exploratory/interactive test repo (tbc)</li>
+</ul>
+
+
+</dd><dt>Gap analysis</dt>
+<dd>
+<ul class="linkList">
+<li><a target="_blank" href="https://www.w3.org/TR/clreq-gap/#headers_footers">Page headers, footers, etc</a></li>
+</ul>
+</dd>
+
+
+<dt>LE Index</dt>
+<dd class="le_index">
+<ul class="linkList">
+<li><a target="_blank" href="https://www.w3.org/TR/typography/#headers_footers">Page headers, footers, etc</a></li>
+</ul>
+</dd>
+</dl>
+</section>
+
+
+
+
+
+
+
+<section id="h_interaction">
+<h3>Forms &amp; user interaction</h3>
+
+<aside class="prompts">Are vertical form controls needed? Are scroll bars in an unusual position? Other special requirements for user interaction?</aside>
+
+
+
+<dl class="reslinks">
+<dt>Requirements</dt>
+<dd>
+<ul>
+<li><cite>Chinese Orthography Notes</cite>: <a target="_blank" href="https://r12a.github.io/scripts/hani/zh#interaction">Forms &amp; user interaction</a></li>
+</ul>
+</dd>
+
+<dt>GitHub discussions</dt>
+<dd>
+<ul>
+<li><a class="variable empty" target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+label%3As%3Ahani+label%3Aquestion+is%3Aopen+label%3Ai%3Ainteraction">Open requests for information</a></li>
+
+<li><a class="variable" target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+label%3As%3Ahani+label%3Ai%3Ainteraction">All Chinese issues on this topic in the clreq repo</a></li>
+
+<li><a class="variable empty" target="_blank" href="https://github.com/w3c/i18n-activity/issues?q=is%3Aissue+label%3Al%3Aclreq+label%3Ai%3Ainteraction">Chinese issues on this topic in W3C specs</a></li>
+</ul>
+</dd>
+
+
+<dt>Type samples</dt>
+<dd>
+<ul>
+<li><a class="variable empty" target="_blank" href="https://github.com/w3c/type-samples/issues?q=is%3Aissue+is%3Aopen+label%3As%3Ahani+label%3Ai%3Ainteraction">W3C type samples</a></li>
+
+<li><a class="variable empty" target="_blank" href="https://github.com/r12a/typesamples/issues?q=is%3Aopen+label%3As.hani+label%3Ah.interaction">r12a type samples</a></li>
+</ul>
+</dd>
+
+
+<dt>Tests</dt>
+<dd>
+<ul>
+<li>Exploratory/interactive test results (tbc)</li>
+
+<li>Exploratory/interactive test repo (tbc)</li>
+</ul>
+
+
+</dd><dt>Gap analysis</dt>
+<dd>
+<ul class="linkList">
+<li><a target="_blank" href="https://www.w3.org/TR/clreq-gap/#interaction">Forms &amp; user interaction</a></li>
+</ul>
+</dd>
+
+
+<dt>LE Index</dt>
+<dd class="le_index">
+<ul class="linkList">
+<li><a target="_blank" href="https://www.w3.org/TR/typography/#interaction">Forms &amp; user interaction</a></li>
+</ul>
+</dd>
+</dl>
+</section>
+</section>
+
+
 
 
 
