@@ -25,9 +25,13 @@ Topics for discussion are suggested by [the gap-analysis template](https://www.w
 [GitHub repo](https://github.com/w3c/clreq) • [Discussion threads](https://github.com/w3c/clreq/issues) • [Charter 章程](https://www.w3.org/International/clreq/charter/)
 
 
-### Documents 文档
-- **Chinese Gap Analysis 中文支持差距分析** • [DNOTE 备忘草案](https://www.w3.org/TR/clreq-gap) • [*Editor's draft 编辑草案*](https://www.w3.org/International/clreq/gap-analysis/) • [*Latest commits 更改历史记录*](https://github.com/w3c/clreq/commits/gh-pages/gap-analysis/index.html)
+### Resource & requirement documents
+- **Chinese Script Resources 中文排版需求** • [DNOTE 备忘草案](https://www.w3.org/TR/hani-lreq) • [*Editor's draft 编辑草案*](https://www.w3.org/International/clreq/resources/) • [*Latest commits 更改历史记录*](https://github.com/w3c/clreq/commits/gh-pages/index.html)
 - **Chinese Layout Requirements 中文排版需求** • [DNOTE 备忘草案](https://www.w3.org/TR/clreq) • [*Editor's draft 编辑草案*](https://www.w3.org/International/clreq/) • [*Latest commits 更改历史记录*](https://github.com/w3c/clreq/commits/gh-pages/index.html)
+
+
+### Gap analysis documents 文档
+- **Chinese Gap Analysis 中文支持差距分析** • [DNOTE 备忘草案](https://www.w3.org/TR/clreq-gap) • [*Editor's draft 编辑草案*](https://www.w3.org/International/clreq/gap-analysis/) • [*Latest commits 更改历史记录*](https://github.com/w3c/clreq/commits/gh-pages/gap-analysis/index.html)
 
 
 ### Discussions 讨论
