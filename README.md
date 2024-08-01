@@ -26,7 +26,7 @@ Topics for discussion are suggested by [the gap-analysis template](https://www.w
 
 
 ### Resource & requirement documents
-- **Chinese Script Resources 中文排版需求** • [DNOTE 备忘草案](https://www.w3.org/TR/hani-lreq) • [*Editor's draft 编辑草案*](https://www.w3.org/International/clreq/resources/) • [*Latest commits 更改历史记录*](https://github.com/w3c/clreq/commits/gh-pages/index.html)
+- **Chinese Script Resources 中文排版需求** • [DNOTE 备忘草案](https://www.w3.org/TR/hani-lreq) • [*Editor's draft 编辑草案*](https://www.w3.org/International/clreq/resources/) • [*Latest commits 更改历史记录*](https://github.com/w3c/clreq/commits/gh-pages/resources)
 - **Chinese Layout Requirements 中文排版需求** • [DNOTE 备忘草案](https://www.w3.org/TR/clreq) • [*Editor's draft 编辑草案*](https://www.w3.org/International/clreq/) • [*Latest commits 更改历史记录*](https://github.com/w3c/clreq/commits/gh-pages/index.html)
 
 
