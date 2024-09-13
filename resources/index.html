@@ -253,8 +253,10 @@ and
 <h2>Text direction</h2>
 
 
-<section id="vertical_text">
-<h3>Vertical text</h3>
+<section id="writing_mode">
+<h3>Writing mode</h3>
+
+<aside class="prompts">In what direction does text flow along a line and across a page? (See the Bidirectional text section if the basic direction is right-to-left.) If the script uses vertically oriented text, what are the requirements? What about if you mix vertical text with scripts that are normally only horizontal? Do you need a switch to use different characters in vertical vs. horizontal text? Does the browser support short runs of horizontal text in vertical lines (tate-chu-yoko in Japanese) as expected? Is the orientation of characters and the directional ordering of characters supported as needed?</aside>
 
 
 <dl class="reslinks">
@@ -268,11 +270,11 @@ and
 <dt>GitHub discussions</dt>
 <dd>
 <ul>
-<li><a class="variable" target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aopen+is%3Aissue+label%3A問題/question+label%3Ai%3Avertical_text">Open requests for information</a></li>
+<li><a class="variable" target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aopen+is%3Aissue+label%3A問題/question+label%3Ai%3Awriting_mode">Open requests for information</a></li>
 
-<li><a class="variable" target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+label%3Ai%3Avertical_text">All Chinese issues on this topic in the clreq repo</a></li>
+<li><a class="variable" target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+label%3Ai%3Awriting_mode">All Chinese issues on this topic in the clreq repo</a></li>
 
-<li><a class="variable" target="_blank" href="https://github.com/w3c/i18n-activity/issues?q=+is%3Aissue+label%3Aclreq+label%3Ai%3Avertical_text">Chinese issues in W3C specs</a></li>
+<li><a class="variable" target="_blank" href="https://github.com/w3c/i18n-activity/issues?q=+is%3Aissue+label%3Aclreq+label%3Ai%3Awriting_mode">Chinese issues in W3C specs</a></li>
 </ul>
 </dd>
 
@@ -280,7 +282,7 @@ and
 <dt>Type samples</dt>
 <dd>
 <ul>
-<li><a class="variable" target="_blank" href="https://github.com/w3c/type-samples/issues?q=is%3Aissue+is%3Aopen+label%3As%3Ahani+label%3Ai%3Abidi_text">W3C type samples</a></li>
+<li><a class="variable" target="_blank" href="https://github.com/w3c/type-samples/issues?q=is%3Aissue+is%3Aopen+label%3As%3Ahani+label%3Ai%3Awriting_mode">W3C type samples</a></li>
 
 <li><a class="variable" target="_blank" href="https://github.com/r12a/typesamples/issues?q=is%3Aopen+label%3As.hani+label%3Ah.direction">r12a type samples</a></li>
 </ul>
@@ -292,7 +294,7 @@ and
 <ul>
 <li><a class="variable" target="_blank" href="https://www.w3.org/International/i18n-tests/results/int-vertical-text.html#chinese">Exploratory/interactive test results</a></li>
 
-<li><a class="variable" target="_blank" href="https://github.com/w3c/text_direction_tests/issues?q=is%3Aissue++label%3As%3Ahani+label%3Ai%3Avertical_text">Exploratory/interactive test repo</a></li>
+<li><a class="variable" target="_blank" href="https://github.com/w3c/text_direction_tests/issues?q=is%3Aissue++label%3As%3Ahani+label%3Ai%3Awriting_mode">Exploratory/interactive test repo</a></li>
 </ul>
 </dd>
 
@@ -300,7 +302,7 @@ and
 <dt>Gap analysis</dt>
 <dd>
 <ul class="linkList">
-<li><a target="_blank" href="https://www.w3.org/TR/clreq-gap/#vertical_text">Vertical text</a></li>
+<li><a target="_blank" href="https://www.w3.org/TR/clreq-gap/#writing_mode">Writing mode</a></li>
 </ul>
 </dd>
 
@@ -308,7 +310,75 @@ and
 <dt>LE Index</dt>
 <dd class="le_index">
 <ul class="linkList">
-<li><a target="_blank" href="https://www.w3.org/TR/typography/#vertical_text">Vertical text</a></li>
+<li><a target="_blank" href="https://www.w3.org/TR/typography/#writing_mode">Writing mode</a></li>
+</ul>
+</dd>
+</dl>
+</section>
+
+
+
+
+
+
+<section id="bidi_text">
+<h3>Bidirectional text</h3>
+
+<aside class="prompts">If the general inline direction is right-to-left, are there any issues when handling that? Where the inline direction of text is mixed, is this bidirectional text adequately supported? What about numbers and expressions? Do the Unicode bidi controls and HTML markup provide the support needed? Is isolation of directional runs problematic?</aside>
+
+
+<dl class="reslinks">
+<dt>Requirements</dt>
+<dd>
+<ul>
+<li><!--<cite>Orthography Notes</cite>: <a target="_blank" href="https://r12a.github.io/scripts/XX_ORTH_DIR/PATH#direction">XX_ORTHLANG</a>--></li>
+</ul>
+</dd>
+
+<dt>GitHub discussions</dt>
+<dd>
+<ul>
+<li><a class="variable empty" target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aopen+is%3Aissue+label%3A問題/question+label%3Ai%3Abidi_text">Open requests for information</a></li>
+
+<li><a class="variable empty" target="_blank" href="https://github.com/w3c/clreq/issues?q=is%3Aissue+label%3Ai%3Abidi_text">All Chinese issues on this topic in the clreq repo</a></li>
+
+<li><a class="variable" target="_blank" href="https://github.com/w3c/i18n-activity/issues?q=+is%3Aissue+label%3Aclreq+label%3Ai%3Abidi_text">Chinese issues in W3C specs</a></li>
+</ul>
+</dd>
+
+
+<dt>Type samples</dt>
+<dd>
+<ul>
+<li><a class="variable empty" target="_blank" href="https://github.com/w3c/type-samples/issues?q=is%3Aissue+is%3Aopen+label%3As%3Ahani+label%3Ai%3Abidi_text">W3C type samples</a></li>
+
+<li><a class="variable empty" target="_blank" href="https://github.com/r12a/typesamples/issues?q=is%3Aopen+label%3As.hani+label%3Ah.direction">r12a type samples</a></li>
+</ul>
+</dd>
+
+
+<dt>Tests</dt>
+<dd>
+<ul>
+<li><a class="variable empty" target="_blank" href="https://www.w3.org/International/i18n-tests/results/int-bidi-text.html#XX_TESTFRAGNAME">Exploratory/interactive test results</a></li>
+
+<li><a class="variable empty" target="_blank" href="https://github.com/w3c/text_direction_tests/issues?q=is%3Aissue++label%3As%3Ahani+label%3Ai%3Abidirectional_text">Exploratory/interactive test repo</a></li>
+</ul>
+</dd>
+
+
+<dt>Gap analysis</dt>
+<dd>
+<ul class="linkList">
+<li><a target="_blank" href="https://www.w3.org/TR/clreq-gap/#bidi_text">Bidirectional text</a></li>
+</ul>
+</dd>
+
+
+<dt>LE Index</dt>
+<dd class="le_index">
+<ul class="linkList">
+<li><a target="_blank" href="https://www.w3.org/TR/typography/#bidi_text">Bidirectional text</a></li>
 </ul>
 </dd>
 </dl>
