@@ -5,6 +5,9 @@
   <meta charset="utf-8">
 
   <title>Chinese Script Resources</title>
+
+  <script class="remove" src="../../i18n-activity/templates/gap-analysis/prompts.js"></script>
+  <script class="remove" src="../../typography/index-data/shared_data.js"></script>
   <script src="https://www.w3.org/Tools/respec/respec-w3c" class="remove" defer>
 </script>
   <script class="remove">
@@ -26,8 +29,14 @@
  	  github:	"w3c/clreq",
 
 
+	preProcess: [
+		() => { addPrompts() },
+		() => { addSharedData() },
+		],
+
+
     postProcess: [
-            async function importStyleSheet() { 
+            async function importStyleSheet() {
                 const elems = document.querySelectorAll(`link[rel='stylesheet'][data-import]`)
                 await Promise.all(
                     [...elems].map(async link => {
@@ -101,12 +110,12 @@
 
 <p>This document points to resources for Chinese script layout and text support on the Web and in eBooks. These resources provide information for developers of Web technologies such as CSS, HTML and digital publications, and for application developers, about how to support languages written using the Chinese script. They include requirements, tests, GitHub discussions, type samples, and more,</p>
 
-<p>The document focuses on typographic layout issues.  For a deeper understanding of the Chinese script and how it works see <cite>Chinese (Han) Orthography Notes</cite>, which includes topics such as: 
+<p>The document focuses on typographic layout issues.  For a deeper understanding of the Chinese script and how it works see <cite>Chinese (Han) Orthography Notes</cite>, which includes topics such as:
 <a href="https://r12a.github.io/scripts/hani/zh.html#phonology">Phonology</a>, and
 <a href="https://r12a.github.io/scripts/hani/zh.html#characters">Characters</a>.
-<!--<a href="https://r12a.github.io/scripts/hani/zh.html#consonants">Consonants</a>, 
+<!--<a href="https://r12a.github.io/scripts/hani/zh.html#consonants">Consonants</a>,
 <a href="https://r12a.github.io/scripts/hani/zh.html#encoding">Encoding choices</a>,
-and 
+and
 <a href="https://r12a.github.io/scripts/hani/zh.html#numbers">Numbers</a>-->
 </p>
 </section>
@@ -194,7 +203,7 @@ and
 <h2 id="h_all_topics">All topics</h2>
 
 
-<aside class="prompts">Links reveal all results, regardless of topic, for issues, tests, and samples. </aside>
+<aside class="status_prompt">Links reveal all results, regardless of topic, for issues, tests, and samples. </aside>
 
 
 
@@ -256,7 +265,7 @@ and
 <section id="writing_mode">
 <h3>Writing mode</h3>
 
-<aside class="prompts">In what direction does text flow along a line and across a page? (See the Bidirectional text section if the basic direction is right-to-left.) If the script uses vertically oriented text, what are the requirements? What about if you mix vertical text with scripts that are normally only horizontal? Do you need a switch to use different characters in vertical vs. horizontal text? Does the browser support short runs of horizontal text in vertical lines (tate-chu-yoko in Japanese) as expected? Is the orientation of characters and the directional ordering of characters supported as needed?</aside>
+<p id="prompt-writing_mode" class="status_prompt promptStub"></p>
 
 
 <dl class="reslinks">
@@ -291,7 +300,7 @@ and
 
 <dt>Tests</dt>
 <dd>
-<ul>
+<ul id="tests-writing_mode">
 <li><a class="variable" target="_blank" href="https://www.w3.org/International/i18n-tests/results/int-vertical-text.html#chinese">Exploratory/interactive test results</a></li>
 
 <li><a class="variable" target="_blank" href="https://github.com/w3c/text_direction_tests/issues?q=is%3Aissue++label%3As%3Ahani+label%3Ai%3Awriting_mode">Exploratory/interactive test repo</a></li>
@@ -307,10 +316,9 @@ and
 </dd>
 
 
-<dt>LE Index</dt>
+<dt>Specification links</dt>
 <dd class="le_index">
-<ul class="linkList">
-<li><a target="_blank" href="https://www.w3.org/TR/typography/#writing_mode">Writing mode</a></li>
+<ul class="linkList" id="specs-writing_mode">
 </ul>
 </dd>
 </dl>
@@ -324,7 +332,7 @@ and
 <section id="bidi_text">
 <h3>Bidirectional text</h3>
 
-<aside class="prompts">If the general inline direction is right-to-left, are there any issues when handling that? Where the inline direction of text is mixed, is this bidirectional text adequately supported? What about numbers and expressions? Do the Unicode bidi controls and HTML markup provide the support needed? Is isolation of directional runs problematic?</aside>
+<p id="prompt-bidi_text" class="status_prompt promptStub"></p>
 
 
 <dl class="reslinks">
@@ -359,7 +367,7 @@ and
 
 <dt>Tests</dt>
 <dd>
-<ul>
+<ul id="tests-bidi_text">
 <li><a class="variable empty" target="_blank" href="https://www.w3.org/International/i18n-tests/results/int-bidi-text.html#XX_TESTFRAGNAME">Exploratory/interactive test results</a></li>
 
 <li><a class="variable empty" target="_blank" href="https://github.com/w3c/text_direction_tests/issues?q=is%3Aissue++label%3As%3Ahani+label%3Ai%3Abidirectional_text">Exploratory/interactive test repo</a></li>
@@ -375,10 +383,9 @@ and
 </dd>
 
 
-<dt>LE Index</dt>
+<dt>Specification links</dt>
 <dd class="le_index">
-<ul class="linkList">
-<li><a target="_blank" href="https://www.w3.org/TR/typography/#bidi_text">Bidirectional text</a></li>
+<ul class="linkList" id="specs-bidi_text">
 </ul>
 </dd>
 </dl>
@@ -400,7 +407,7 @@ and
 <section id="fonts">
 <h3>Fonts &amp; font styles</h3>
 
-<aside class="prompts">How are fonts grouped into recognisable writing styles? How is each writing style used? Are OpenType features needed? What other font-related requirements and issue exist?</aside>
+<p id="prompt-fonts" class="status_prompt promptStub"></p>
 
 
 <dl class="reslinks">
@@ -437,7 +444,7 @@ and
 
 <dt>Tests</dt>
 <dd>
-<ul>
+<ul id="tests-fonts">
 <li><a class="variable" target="_blank" href="https://www.w3.org/International/i18n-tests/results/int-fonts.html#chinese">Exploratory/interactive test results</a></li>
 
 <li><a class="variable" target="_blank" href="https://github.com/w3c/glyph_character_tests/issues?q=is%3Aissue+label%3As%3Ahani+label%3Ai%3AFonts">Exploratory/interactive test repo</a></li>
@@ -452,10 +459,9 @@ and
 </ul>
 </dd>
 
-<dt>LE Index</dt>
+<dt>Specification links</dt>
 <dd class="le_index">
-<ul class="linkList">
-<li><a target="_blank" href="https://www.w3.org/TR/typography/#fonts">Fonts &amp; font styles</a></li>
+<ul class="linkList" id="specs-fonts">
 </ul>
 </dd>
 </dl>
@@ -471,7 +477,7 @@ and
 <section id="glyphs">
 <h3>Context-based shaping &amp; positioning</h3>
 
-<aside class="prompts">Are special glyph forms needed, depending on the context in which a character is used? Do glyphs interact in some circumstances? Are there requirements to position diacritics or other items specially, depending on context? Does the script have multiple diacritics competing for the same location relative to the base?</aside>
+<p id="prompt-glyphs" class="status_prompt promptStub"></p>
 
 
 
@@ -505,7 +511,7 @@ and
 
 <dt>Tests</dt>
 <dd>
-<ul>
+<ul id="tests-glyphs">
 <li>Exploratory/interactive test results (tbc)</li>
 
 <li>Exploratory/interactive test repo (tbc)</li>
@@ -520,10 +526,9 @@ and
 </ul>
 </dd>
 
-<dt>LE Index</dt>
+<dt>Specification links</dt>
 <dd class="le_index">
-<ul class="linkList">
-<li><a target="_blank" href="https://www.w3.org/TR/typography/#glyphs">Context-based shaping and positioning</a></li>
+<ul class="linkList" id="specs-glyphs">
 </ul>
 </dd>
 </dl>
@@ -536,10 +541,71 @@ and
 
 
 
-<!--section id="cursive">
-<h3>Cursive text ****NA****</h3>
 
-</section-->
+
+
+<section id="cursive">
+<h3>Cursive text</h3>
+
+<p id="prompt-cursive" class="status_prompt promptStub"></p>
+
+<p>Not applicable.</p>
+
+
+<!--
+<dl class="reslinks">
+<dt>Requirements</dt>
+<dd>
+<ul>
+<li><cite>N’Ko Orthography Notes</cite>: <a target="_blank" href="https://r12a.github.io/scripts/nkoo/nkoo#cursive">Cursive shaping</a></li>
+</ul>
+</dd>
+
+<dt>GitHub discussions</dt>
+<dd>
+<ul>
+<li><a class="variable" target="_blank" href="https://github.com/w3c/afrlreq/issues?q=is%3Aissue+label%3As%3Ankoo+label%3Aquestion+is%3Aopen+label%3Ai%3Acursive">Open requests for information</a></li>
+
+<li><a class="variable" target="_blank" href="https://github.com/w3c/afrlreq/issues?q=is%3Aissue+label%3As%3Ankoo+label%3Ai%3Acursive">All N’Ko issues on this topic in the afrlreq repo</a></li>
+
+<li><a class="variable" target="_blank" href="https://github.com/w3c/i18n-activity/issues?q=+label%3Aafrlreq+label%3Ai%3Acursive">African issues on this topic in W3C specs</a></li>
+</ul>
+</dd>
+
+
+<dt>Type samples</dt>
+<dd>
+<ul>
+<li><a class="variable empty" target="_blank" href="https://github.com/w3c/type-samples/issues?q=is%3Aissue+is%3Aopen+label%3As%3Ankoo+label%3Ai%3Acursive">W3C type samples</a></li>
+
+<li><a class="variable empty" target="_blank" href="https://github.com/r12a/typesamples/issues?q=is%3Aopen+label%3As.nkoo+label%3Ah.cursive">r12a type samples</a></li>
+</ul>
+</dd>
+
+
+<dt>Tests</dt>
+<dd>
+<ul id="tests-cursive">
+<li><a class="variable empty" target="_blank" href="https://www.w3.org/International/i18n-tests/results/int-cursive.html#nko">Exploratory/interactive test results</a></li>
+
+<li><a class="variable empty" target="_blank" href="https://github.com/w3c/glyph_character_tests/issues?q=is%3Aissue+label%3As%3Ankoo+label%3Adoc%3Acursive">Exploratory/interactive test repo</a></li>
+</ul>
+
+</dd><dt>Gap analysis</dt>
+<dd>
+<ul class="linkList">
+<li><a target="_blank" href="https://www.w3.org/TR/nkoo-gap/#cursive">Cursive text</a></li>
+</ul>
+</dd>
+
+<dt>Specification links</dt>
+<dd class="le_index">
+<ul class="linkList" id="specs-cursive">
+</ul>
+</dd>
+</dl>
+-->
+</section>
 
 
 
@@ -551,7 +617,7 @@ and
 <section id="letterforms">
 <h3>Letterform slopes, weights, &amp; italics</h3>
 
-<aside class="prompts">Are italicisation, bolding, oblique, etc relevant? Do italic fonts lean in the right direction? Is synthesised italicisation problematic? Are there other problems relating to bolding or italicisation - perhaps relating to generalised assumptions of applicability?</aside>
+<p id="prompt-letterforms" class="status_prompt promptStub"></p>
 
 <dl class="reslinks">
 <dt>Requirements</dt>
@@ -585,7 +651,7 @@ and
 
 <dt>Tests</dt>
 <dd>
-<ul>
+<ul id="tests-letterforms">
 <li><a class="variable empty" target="_blank" href="https://www.w3.org/International/i18n-tests/results/int-letterforms.html#chinese">Exploratory/interactive test results</a></li>
 
 <li><a class="variable empty" target="_blank" href="https://github.com/w3c/character_phrase_tests/issues?q=is%3Aissue+label%3As%3Ahani+label%3Ai%3Aletterforms">Exploratory/interactive test repo</a></li>
@@ -598,10 +664,9 @@ and
 </ul>
 </dd>
 
-<dt>LE Index</dt>
+<dt>Specification links</dt>
 <dd class="le_index">
-<ul class="linkList">
-<li><a target="_blank" href="https://www.w3.org/TR/typography/#letterforms">Letterform slopes, weights, &amp; italics</a></li>
+<ul class="linkList" id="specs-letterforms">
 </ul>
 </dd>
 </dl>
@@ -614,10 +679,58 @@ and
 
 
 
-<!--section id="transforms">
-<h3>Character transforms ****NA****</h3>
 
-</section-->
+
+
+<section id="transforms">
+<h3>Case &amp; other character transforms</h3>
+
+<p id="prompt-transforms" class="status_prompt promptStub"></p>
+
+<p>Not applicable.</p>
+<!--
+<dl class="reslinks">
+<dt>Requirements</dt>
+<dd>
+<ul>
+<li><cite>N’Ko Orthography Notes</cite>: <a target="_blank" href="https://r12a.github.io/scripts/nkoo/nkoo#transforms">Case &amp; other character transforms</a></li>
+</ul>
+</dd>
+
+<dt>GitHub discussions</dt>
+<dd>
+<ul>
+<li><a class="variable empty" target="_blank" href="https://github.com/w3c/afrlreq/issues?q=is%3Aissue+label%3As%3Ankoo+label%3Aquestion+is%3Aopen+label%3Ai%3Atransforms">Open requests for information</a></li>
+
+<li><a class="variable empty" target="_blank" href="https://github.com/w3c/afrlreq/issues?q=is%3Aissue+label%3As%3Ankoo+label%3Ai%3Atransforms">All N’Ko issues on this topic in the afrlreq repo</a></li>
+
+<li><a class="variable empty" target="_blank" href="https://github.com/w3c/i18n-activity/issues?q=label%3Aafrlreq+label%3Ai%3Atransforms">African issues on this topic in W3C specs</a></li>
+</ul>
+</dd>
+
+<dt>Tests</dt>
+<dd>
+<ul id="tests-transforms">
+<li><a class="variable empty" target="_blank" href="https://www.w3.org/International/i18n-tests/results/int-transforms.html#nko">Exploratory/interactive test results</a></li>
+
+<li><a class="variable empty" target="_blank" href="https://github.com/w3c/character_phrase_tests/issues?q=is%3Aissue+label%3As%3Ankoo+label%3Adoc%3ATransforms">Exploratory/interactive test repo</a></li>
+</ul>
+
+</dd><dt>Gap analysis</dt>
+<dd>
+<ul class="linkList">
+<li><a target="_blank" href="https://www.w3.org/TR/nkoo-gap/#transforms">Font styles, weight, etc</a></li>
+</ul>
+</dd>
+
+<dt>Specification links</dt>
+<dd class="le_index">
+<ul class="linkList" id="specs-transforms">
+</ul>
+</dd>
+</dl>
+-->
+</section>
 </section>
 
 
@@ -640,7 +753,7 @@ and
 <h3>Characters &amp; encoding</h3>
 
 
-<aside class="prompts">Most languages are now supported by Unicode, but there are still occasional issues. In particular, there may be issues related to ordering of characters, or competing encodings (as in Myanmar), or standardisation of variation selectors or the encoding model (as in Mongolian).</aside>
+<p id="prompt-encoding" class="status_prompt promptStub"></p>
 
 
 <dl class="reslinks">
@@ -674,7 +787,7 @@ and
 
 <dt>Tests</dt>
 <dd>
-<ul>
+<ul id="tests-encoding">
 <li>Exploratory/interactive test results (tbc)</li>
 
 <li>Exploratory/interactive test repo (tbc)</li>
@@ -687,10 +800,9 @@ and
 </ul>
 </dd>
 
-<dt>LE Index</dt>
+<dt>Specification links</dt>
 <dd class="le_index">
-<ul class="linkList">
-<li><a target="_blank" href="https://www.w3.org/TR/typography/#encoding">Characters &amp; encoding</a></li>
+<ul class="linkList" id="specs-encoding">
 </ul>
 </dd>
 </dl>
@@ -706,7 +818,7 @@ and
 <section id="segmentation">
 <h3>Grapheme/word segmentation &amp; selection</h3>
 
-<aside class="prompts">Do Unicode grapheme clusters appropriately segment character units for the script? Are there special requirements for the following operations: forwards/backwards deletion, cursor movement &amp; selection, character counts, searching &amp; matching, text insertion, line-breaking, justification, case conversions, sorting? Are words separated by spaces, or other characters? Are there special requirements when double-clicking on the text? Are words hyphenated?</aside>
+<p id="prompt-segmentation" class="status_prompt promptStub"></p>
 
 
 
@@ -743,7 +855,7 @@ and
 
 <dt>Tests</dt>
 <dd>
-<ul>
+<ul id="tests-segmentation">
 <li><a class="variable" target="_blank" href="https://www.w3.org/International/i18n-tests/results/int-grapheme-word-segmentation.html#chinese">Exploratory/interactive test results</a></li>
 
 <li><a class="variable" target="_blank" href="https://github.com/w3c/glyph_character_tests/issues?q=is%3Aissue+label%3As%3Ahani+label%3Ai%3Asegmentation">Exploratory/interactive test repo</a></li>
@@ -756,10 +868,9 @@ and
 </ul>
 </dd>
 
-<dt>LE Index</dt>
+<dt>Specification links</dt>
 <dd class="le_index">
-<ul class="linkList">
-<li><a target="_blank" href="https://www.w3.org/TR/typography/#segmentation">Grapheme/word segmentation &amp; selection</a></li>
+<ul class="linkList" id="specs-segmentation">
 </ul>
 </dd>
 </dl>
@@ -787,7 +898,7 @@ and
 <h3>Phrase &amp; section boundaries</h3>
 
 
-<aside class="prompts">What characters are used to indicate the boundaries of phrases, sentences, and sections? What about other punctuation, such as dashes, connectors, separators, etc?</aside>
+<p id="prompt-punctuation_etc" class="status_prompt promptStub"></p>
 
 
 
@@ -824,7 +935,7 @@ and
 
 <dt>Tests</dt>
 <dd>
-<ul>
+<ul id="tests-punctuation_etc">
 <li>Exploratory/interactive test results (tbc)</li>
 
 <li>Exploratory/interactive test repo (tbc)</li>
@@ -837,10 +948,9 @@ and
 </ul>
 </dd>
 
-<dt>LE Index</dt>
+<dt>Specification links</dt>
 <dd class="le_index">
-<ul class="linkList">
-<li><a target="_blank" href="https://www.w3.org/TR/typography/#punctuation_etc">Phrase &amp; section boundaries</a></li>
+<ul class="linkList" id="specs-punctuation_etc">
 </ul>
 </dd>
 </dl>
@@ -861,7 +971,7 @@ and
 <h3>Quotations &amp; citations</h3>
 
 
-<aside class="prompts">What characters are used to indicate quotations? Do quotations within quotations use different characters? What characters are used to indicate dialogue? Are the same mechanisms used to cite words, or for scare quotes, etc? What about citing book or article names?</aside>
+<p id="prompt-quotations" class="status_prompt promptStub"></p>
 
 
 
@@ -901,7 +1011,7 @@ and
 
 <dt>Tests</dt>
 <dd>
-<ul>
+<ul id="tests-quotations">
 <li><a class="variable" target="_blank" href="https://www.w3.org/International/i18n-tests/results/int-quotations.html#chinese">Exploratory/interactive test results</a>
 
 <li><a class="variable" target="_blank" href="https://github.com/w3c/character_phrase_tests/issues?q=is%3Aissue+label%3As%3Ahani+label%3Ai%3AQuotations">Exploratory/interactive test repo</a></li>
@@ -915,10 +1025,9 @@ and
 </ul>
 </dd>
 
-<dt>LE Index</dt>
+<dt>Specification links</dt>
 <dd class="le_index">
-<ul class="linkList">
-<li><a target="_blank" href="https://www.w3.org/TR/typography/#quotations">Quotations &amp; citations</a></li>
+<ul class="linkList" id="specs-quotations">
 </ul>
 </dd>
 </dl>
@@ -934,7 +1043,7 @@ and
 <h3>Emphasis &amp; highlighting</h3>
 
 
-<aside class="prompts">How are emphasis and highlighting achieved? If lines or marks are drawn alongside, over or through the text, do they need to be a special distance from the text itself? Is it important to skip characters when underlining, etc? How do things change for vertically set text?</aside>
+<p id="prompt-emphasis" class="status_prompt promptStub"></p>
 
 
 
@@ -970,7 +1079,7 @@ and
 
 <dt>Tests</dt>
 <dd>
-<ul>
+<ul id="tests-emphasis">
 <li><a class="variable" target="_blank" href="https://www.w3.org/International/i18n-tests/results/int-emphasis.html#chinese">Exploratory/interactive test results</a></li>
 
 <li><a class="variable" target="_blank" href="https://github.com/w3c/character_phrase_tests/issues?q=is%3Aissue+label%3As%3Ahani+label%3Ai%3Aemphasis">Exploratory/interactive test repo</a></li>
@@ -983,10 +1092,9 @@ and
 </ul>
 </dd>
 
-<dt>LE Index</dt>
+<dt>Specification links</dt>
 <dd class="le_index">
-<ul class="linkList">
-<li><a target="_blank" href="https://www.w3.org/TR/typography/#emphasis">Emphasis &amp; highlighting</a></li>
+<ul class="linkList" id="specs-emphasis">
 </ul>
 </dd>
 </dl>
@@ -1002,7 +1110,7 @@ and
 <h3>Abbreviation, ellipsis &amp; repetition</h3>
 
 
-<aside class="prompts">What characters or other methods are used to indicate abbreviation, ellipsis &amp; repetition?</aside>
+<p id="prompt-abbrev" class="status_prompt promptStub"></p>
 
 
 
@@ -1037,7 +1145,7 @@ and
 
 <dt>Tests</dt>
 <dd>
-<ul>
+<ul id="tests-abbrev">
 <li>Exploratory/interactive test results (tbc)</li>
 
 <li>Exploratory/interactive test repo (tbc)</li>
@@ -1050,10 +1158,9 @@ and
 </ul>
 </dd>
 
-<dt>LE Index</dt>
+<dt>Specification links</dt>
 <dd class="le_index">
-<ul class="linkList">
-<li><a target="_blank" href="https://www.w3.org/TR/typography/#abbrev">Abbreviation, ellipsis &amp; repetition</a></li>
+<ul class="linkList" id="specs-abbrev">
 </ul>
 </dd>
 </dl>
@@ -1069,7 +1176,7 @@ and
 <h3>Inline notes &amp; annotations</h3>
 
 
-<aside class="prompts">What mechanisms, if any, are used to create *inline* notes and annotations? (For referent-type notes such as footnotes, see further down.)</aside>
+<p id="prompt-inline_notes" class="status_prompt promptStub"></p>
 
 
 
@@ -1113,14 +1220,10 @@ and
 
 <dt>Tests</dt>
 <dd>
-<ul>
+<ul id="tests-inline_notes">
 <li><a class="variable" target="_blank" href="https://www.w3.org/International/i18n-tests/results/int-inline-notes-annotations.html#chinese">Exploratory/interactive test results</a></li>
 
 <li><a class="variable" target="_blank" href="https://github.com/w3c/character_phrase_tests/issues?q=is%3Aissue+label%3As%3Ahani+label%3Ai%3AInline_notes">Exploratory/interactive test repo</a></li>
-
-<li><a target="_blank" href="https://w3c.github.io/i18n-tests/results/ruby-html">HTML5: The ruby element and its children</a></li>
-
-<li><a target="_blank" href="https://w3c.github.io/i18n-tests/results/css-ruby">CSS Ruby</a></li>
 </ul>
 
 </dd><dt>Gap analysis</dt>
@@ -1130,10 +1233,9 @@ and
 </ul>
 </dd>
 
-<dt>LE Index</dt>
+<dt>Specification links</dt>
 <dd class="le_index">
-<ul class="linkList">
-<li><a target="_blank" href="https://www.w3.org/TR/typography/#inline_notes">Inline notes &amp; annotations</a></li>
+<ul class="linkList" id="specs-inline_notes">
 </ul>
 </dd>
 </dl>
@@ -1146,10 +1248,10 @@ and
 
 
 <section id="text_decoration">
-<h3>Text decoration &amp; other inline features</h3>
+<h3>Other text decoration &amp; inline features</h3>
 
 
-<aside class="prompts">Any other form of highlighting or marking of text, such as underlining, numeric overbars, etc. What characters or methods (eg. text decoration) are used to convey information about a range of text? If lines are drawn alongside, over or through the text, do they need to be a special distance from the text itself? Is it important to skip characters when underlining, etc? How do things change for vertically set text?  Are there other punctuation marks that were not covered in preceding sections?</aside>
+<p id="prompt-text_decoration" class="status_prompt promptStub"></p>
 
 
 
@@ -1190,12 +1292,10 @@ and
 
 <dt>Tests</dt>
 <dd>
-<ul>
+<ul id="tests-text_decoration">
 <li><a class="variable" target="_blank" href="https://www.w3.org/International/i18n-tests/results/int-text-decoration.html#chinese">Exploratory/interactive test results</a></li>
 
 <li><a class="variable" target="_blank" href="https://github.com/w3c/character_phrase_tests/issues?q=is%3Aissue+is%3Aopen+label%3As%3Ahani+label%3Ai%3AText_decoration">Exploratory/interactive test repo</a></li>
-
-<li><a target="_blank" href="https://w3c.github.io/i18n-tests/results/line-decoration">CSS3 Text decoration, Line decoration</a></li>
 </ul>
 
 </dd><dt>Gap analysis</dt>
@@ -1205,10 +1305,9 @@ and
 </ul>
 </dd>
 
-<dt>LE Index</dt>
+<dt>Specification links</dt>
 <dd class="le_index">
-<ul class="linkList">
-<li><a target="_blank" href="https://www.w3.org/TR/typography/#text_decoration">Text decoration &amp; other inline features</a></li>
+<ul class="linkList" id="specs-text_decoration">
 </ul>
 </dd>
 </dl>
@@ -1236,7 +1335,7 @@ and
 <section id="line_breaking">
 <h3>Line breaking &amp; hyphenation</h3>
 
-<aside class="prompts">Are there special rules about the way text wraps when it hits the end of a line? Does line-breaking wrap whole 'words' at a time, or characters, or something else (such as syllables in Tibetan and Javanese)? What characters should not appear at the end or start of a line, and what should be done to prevent that? Is hyphenation used, or something else? What rules are used? What difficulties exist?</aside>
+<p id="prompt-line_breaking" class="status_prompt promptStub"></p>
 
 
 <dl class="reslinks">
@@ -1273,7 +1372,7 @@ and
 
 <dt>Tests</dt>
 <dd class="tests">
-<ul>
+<ul id="tests-line_breaking">
 <li><a class="variable" target="_blank" href="https://www.w3.org/International/i18n-tests/results/int-line-breaking.html#chinese">Exploratory/interactive test results</a></li>
 
 <li><a class="variable" target="_blank" href="https://github.com/w3c/line_paragraph_tests/issues?q=is%3Aissue++label%3As%3Ahani+label%3Ai%3Aline_breaking">Exploratory/interactive test repo</a></li>
@@ -1285,14 +1384,13 @@ and
 <dt>Gap analysis</dt>
 <dd class="gap_analysis">
 <ul class="linkList">
-<li><a target="_blank" href="https://www.w3.org/TR/clreq-gap/#line_breaking"> Line breaking &amp; hyphenation</a></li>
+<li><a target="_blank" href="https://www.w3.org/TR/clreq-gap/#line_breaking">Line breaking &amp; hyphenation</a></li>
 </ul>
 </dd>
 
-<dt>LE Index</dt>
+<dt>Specification links</dt>
 <dd class="le_index">
-<ul class="linkList">
-<li><a target="_blank" href="https://www.w3.org/TR/typography/#line_breaking">Line breaking</a> • <a target="_blank" href="https://www.w3.org/TR/typography/#hyphenation">Hyphenation</a></li>
+<ul class="linkList" id="specs-line_breaking">
 </ul>
 </dd>
 </dl>
@@ -1306,7 +1404,7 @@ and
 <section id="justification">
 <h3>Text alignment &amp; justification</h3>
 
-<aside class="prompts">Does text in a paragraph needs to have flush lines down both sides? Does the script allow punctuation to hang outside the text box at the start or end of a line? Where adjustments are need to make a line flush, how is that done? Does the script shrink/stretch space between words and/or letters? Are word baselines stretched, as in Arabic? What about paragraph indents?</aside>
+<p id="prompt-justification" class="status_prompt promptStub"></p>
 
 
 <dl class="reslinks">
@@ -1342,7 +1440,7 @@ and
 
 <dt>Tests</dt>
 <dd>
-<ul>
+<ul id="tests-justification">
 <li><a class="variable empty" target="_blank" href="https://www.w3.org/International/i18n-tests/results/int-text-alignment-justification.html#chinese">Exploratory/interactive test results</a></li>
 
 <li><a class="variable empty" target="_blank" href="https://github.com/w3c/line_paragraph_tests/issues?q=is%3Aissue++label%3As%3Ahani+label%3Ai%3Ajustification">Exploratory/interactive test repo</a></li>
@@ -1356,10 +1454,9 @@ and
 </ul>
 </dd>
 
-<dt>LE Index</dt>
+<dt>Specification links</dt>
 <dd class="le_index">
-<ul class="linkList">
-<li><a target="_blank" href="https://www.w3.org/TR/typography/#justification">Text alignment &amp; justification</a></li>
+<ul class="linkList" id="specs-justification">
 </ul>
 </dd>
 </dl>
@@ -1374,7 +1471,7 @@ and
 <section id="spacing">
 <h3>Text spacing</h3>
 
-<aside class="prompts">This section looks at ways in which spacing is applied between characters over and above that which is introduced during justification. For example, does the orthography create emphasis or other effects by spacing out the words, letters or syllables in a word? (For justification related spacing, see Text alignment &amp; justification, above).</aside>
+<p id="prompt-spacing" class="status_prompt promptStub"></p>
 
 <dl class="reslinks">
 <dt>Requirements</dt>
@@ -1407,7 +1504,7 @@ and
 
 <dt>Tests</dt>
 <dd>
-<ul>
+<ul id="tests-spacing">
 <li><a class="variable" target="_blank" href="https://www.w3.org/International/i18n-tests/results/int-letter-spacing.html#chinese">Exploratory/interactive test results</a></li>
 
 <li><a class="variable" target="_blank" href="https://github.com/w3c/line_paragraph_tests/issues?q=is%3Aissue+label%3As%3Ahani+label%3Ai%3Aspacing">Exploratory/interactive test repo</a></li>
@@ -1421,10 +1518,9 @@ and
 </ul>
 </dd>
 
-<dt>LE Index</dt>
+<dt>Specification links</dt>
 <dd class="le_index">
-<ul class="linkList">
-<li><a target="_blank" href="https://www.w3.org/TR/typography/#spacing">Text spacing</a></li>
+<ul class="linkList" id="specs-spacing">
 </ul>
 </dd>
 </dl>
@@ -1441,7 +1537,7 @@ and
 <section id="baselines">
 <h3>Baselines, line height, etc.</h3>
 
-<aside class="prompts">Does the script have special requirements for baseline alignment between mixed scripts and in general? Is line height special for this script? Are there other aspects that affect line spacing, or positioning of items vertically within a line?</aside>
+<p id="prompt-baselines" class="status_prompt promptStub"></p>
 
 
 
@@ -1477,7 +1573,7 @@ and
 
 <dt>Tests</dt>
 <dd>
-<ul>
+<ul id="tests-baselines">
 <li>Exploratory/interactive test results (tbc)</li>
 
 <li>Exploratory/interactive test repo (tbc)</li>
@@ -1489,10 +1585,9 @@ and
 </ul>
 </dd>
 
-<dt>LE Index</dt>
+<dt>Specification links</dt>
 <dd class="le_index">
-<ul class="linkList">
-<li><a target="_blank" href="https://www.w3.org/TR/typography/#baselines">Baselines, line-height, etc</a></li>
+<ul class="linkList" id="specs-baselines">
 </ul>
 </dd>
 </dl>
@@ -1507,7 +1602,7 @@ and
 <section id="lists">
 <h3>Lists, counters, etc.</h3>
 
-<aside class="prompts">Are there list or other counter styles in use? If so, what is the format used? Do counters need to be upright in vertical text? Are there other aspects related to counters and lists that need to be addressed?</aside>
+<p id="prompt-lists" class="status_prompt promptStub"></p>
 
 
 
@@ -1542,14 +1637,10 @@ and
 
 <dt>Tests</dt>
 <dd>
-<ul>
+<ul id="tests-lists">
 <li><a class="variable" target="_blank" href="https://www.w3.org/International/i18n-tests/results/int-lists-counters-etc.html#chinese">Exploratory/interactive test results</a></li>
 
 <li><a class="variable" target="_blank" href="https://github.com/w3c/line_paragraph_tests/issues?q=is%3Aissue++label%3As%3Ahani+label%3Ai%3Alists">Exploratory/interactive test repo</a></li>
-
-<li><a target="_blank" href="https://w3c.github.io/i18n-tests/results/predefined-counter-styles#complexlimited">I18n test suite: CSS3 Counter Styles, predefined styles</a></li>
-
-<li><a target="_blank" href="https://w3c.github.io/i18n-tests/results/custom-counter-styles#chinese">I18n test suite: Custom counter styles</a></li>
 </ul>
 
 
@@ -1560,10 +1651,9 @@ and
 </ul>
 </dd>
 
-<dt>LE Index</dt>
+<dt>Specification links</dt>
 <dd class="le_index">
-<ul class="linkList">
-<li><a target="_blank" href="https://www.w3.org/TR/typography/#lists">Lists, counters, etc</a></li>
+<ul class="linkList" id="specs-lists">
 </ul>
 </dd>
 </dl>
@@ -1578,7 +1668,7 @@ and
 <section id="initials">
 <h3>Styling initials</h3>
 
-<aside class="prompts">Does the script use special styling of the initial letter of a line or paragraph, such as for drop caps or similar? How about the size relationship between the large letter and the lines alongide? where does the large letter anchor relative to the lines alongside? is it normal to include initial quote marks in the large letter? is the large letter really a syllable? Are dropped, sunken, and raised types found? etc.</aside>
+<p id="prompt-initials" class="status_prompt promptStub"></p>
 
 
 
@@ -1613,7 +1703,7 @@ and
 
 <dt>Tests</dt>
 <dd>
-<ul>
+<ul id="tests-initials">
 <li><a class="variable empty" target="_blank" href="https://www.w3.org/International/i18n-tests/results/int-styling-initials#hani">Exploratory/interactive test results</a></li>
 
 <li><a class="variable empty" target="_blank" href="https://github.com/w3c/line_paragraph_tests/issues?q=is%3Aissue+label%3As%3Ahani+label%3Ai%3Ainitials">Exploratory/interactive test repo</a></li>
@@ -1628,10 +1718,9 @@ and
 </dd>
 
 
-<dt>LE Index</dt>
+<dt>Specification links</dt>
 <dd class="le_index">
-<ul class="linkList">
-<li><a target="_blank" href="https://www.w3.org/TR/typography/#initials">Styling initials</a></li>
+<ul class="linkList" id="specs-initials">
 </ul>
 </dd>
 </dl>
@@ -1654,7 +1743,7 @@ and
 <section id="page_layout">
 <h3>General page layout &amp; progression</h3>
 
-<aside class="prompts">How are the main text area and ancilliary areas positioned and defined? Are there any special requirements here, such as dimensions in characters for the Japanese kihon hanmen? The book cover for scripts that are read right-to-left scripts is on the right of the spine, rather than the left. When content can flow vertically and to the left or right, how to specify the location of objects, text, etc. relative to the flow? Do tables and grid layouts work as expected? How do columns work in vertical text? Can you mix block of vertical and horizontal text? Does text scroll in a different direction?</aside>
+<p id="prompt-page_layout" class="status_prompt promptStub"></p>
 
 
 
@@ -1688,7 +1777,7 @@ and
 
 <dt>Tests</dt>
 <dd>
-<ul>
+<ul id="tests-page_layout">
 <li>Exploratory/interactive test results (tbc)</li>
 
 <li>Exploratory/interactive test repo (tbc)</li>
@@ -1703,10 +1792,9 @@ and
 </dd>
 
 
-<dt>LE Index</dt>
+<dt>Specification links</dt>
 <dd class="le_index">
-<ul class="linkList">
-<li><a target="_blank" href="https://www.w3.org/TR/typography/#page_layout">General page layout &amp; progression</a></li>
+<ul class="linkList" id="specs-page_layout">
 </ul>
 </dd>
 </dl>
@@ -1721,7 +1809,7 @@ and
 <section id="grids_tables">
 <h3>Grids &amp; tables</h3>
 
-<aside class="prompts">Does the script have special requirements for character grids or tables?</aside>
+<p id="prompt-grids_tables" class="status_prompt promptStub"></p>
 
 
 
@@ -1754,7 +1842,7 @@ and
 
 <dt>Tests</dt>
 <dd>
-<ul>
+<ul id="tests-grids_tables">
 <li>Exploratory/interactive test results (tbc)</li>
 
 <li>Exploratory/interactive test repo (tbc)</li>
@@ -1769,10 +1857,9 @@ and
 </dd>
 
 
-<dt>LE Index</dt>
+<dt>Specification links</dt>
 <dd class="le_index">
-<ul class="linkList">
-<li><a target="_blank" href="https://www.w3.org/TR/typography/#grids_tables">Grids &amp; tables</a></li>
+<ul class="linkList" id="specs-grids_tables">
 </ul>
 </dd>
 </dl>
@@ -1787,7 +1874,7 @@ and
 <section id="footnotes_etc">
 <h3>Footnotes, endnotes, etc</h3>
 
-<aside class="prompts">Support for footnotes, endnotes or other necessary annotations of this kind may vary in other cultures. In some cases, a script may use a very idiosyncratic approach to locate the notes or to link to them from the text. (See Inline notes &amp; annotations for purely inline annotations, such as ruby or warichu. This section is about annotation systems that separate the reference marks and the content of the notes.)</aside>
+<p id="prompt-footnotes_etc" class="status_prompt promptStub"></p>
 
 
 
@@ -1820,7 +1907,7 @@ and
 
 <dt>Tests</dt>
 <dd>
-<ul>
+<ul id="tests-footnotes_etc">
 <li>Exploratory/interactive test results (tbc)</li>
 
 <li>Exploratory/interactive test repo (tbc)</li>
@@ -1835,10 +1922,9 @@ and
 </dd>
 
 
-<dt>LE Index</dt>
+<dt>Specification links</dt>
 <dd class="le_index">
-<ul class="linkList">
-<li><a target="_blank" href="https://www.w3.org/TR/typography/#footnotes_etc">Footnotes, endnotes, etc</a></li>
+<ul class="linkList" id="specs-footnotes_etc">
 </ul>
 </dd>
 </dl>
@@ -1856,7 +1942,7 @@ and
 <section id="headers_footers">
 <h3>Page headers, footers, etc</h3>
 
-<aside class="prompts">Are there special conventions for page numbering, or the way that running headers and the like are handled?</aside>
+<p id="prompt-headers_footers" class="status_prompt promptStub"></p>
 
 
 
@@ -1889,7 +1975,7 @@ and
 
 <dt>Tests</dt>
 <dd>
-<ul>
+<ul id="tests-headers_footers">
 <li>Exploratory/interactive test results (tbc)</li>
 
 <li>Exploratory/interactive test repo (tbc)</li>
@@ -1904,10 +1990,9 @@ and
 </dd>
 
 
-<dt>LE Index</dt>
+<dt>Specification links</dt>
 <dd class="le_index">
-<ul class="linkList">
-<li><a target="_blank" href="https://www.w3.org/TR/typography/#headers_footers">Page headers, footers, etc</a></li>
+<ul class="linkList" id="specs-headers_footers">
 </ul>
 </dd>
 </dl>
@@ -1922,7 +2007,7 @@ and
 <section id="interaction">
 <h3>Forms &amp; user interaction</h3>
 
-<aside class="prompts">Are vertical form controls needed? Are scroll bars in an unusual position? Other special requirements for user interaction?</aside>
+<p id="prompt-interaction" class="status_prompt promptStub"></p>
 
 
 
@@ -1958,7 +2043,7 @@ and
 
 <dt>Tests</dt>
 <dd>
-<ul>
+<ul id="tests-interation">
 <li>Exploratory/interactive test results (tbc)</li>
 
 <li>Exploratory/interactive test repo (tbc)</li>
@@ -1973,10 +2058,9 @@ and
 </dd>
 
 
-<dt>LE Index</dt>
+<dt>Specification links</dt>
 <dd class="le_index">
-<ul class="linkList">
-<li><a target="_blank" href="https://www.w3.org/TR/typography/#interaction">Forms &amp; user interaction</a></li>
+<ul class="linkList" id="specs-interaction">
 </ul>
 </dd>
 </dl>
