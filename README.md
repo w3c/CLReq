@@ -99,8 +99,8 @@ To get an idea about what's involved, see  [Get involved with Language Enablemen
 - [public-i18n-cjk mail archive](https://lists.w3.org/Archives/Public/public-i18n-cjk/)
 - [Writing i18n tests](https://github.com/w3c/i18n-activity/wiki/Writing-i18n-tests)
 - [Practical tips for task forces](https://www.w3.org/International/i18n-activity/guidelines/process.html) (See also the github and editorial guidelines below)
+- [Meeting info](https://www.w3.org/groups/tf/i18n-clreq/calendar/)
 - Action tracker (tbd)
-- Meeting info (tbd)
 
 
 ### Links to background information 背景信息链接
