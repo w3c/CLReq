@@ -31,7 +31,7 @@ Topics for discussion are suggested by [the gap-analysis template](https://www.w
 
 
 ### Gap analysis documents 差距分析文档
-- **Chinese Gap Analysis 中文支持差距分析** • [DNOTE 备忘草案](https://www.w3.org/TR/clreq-gap) • [*Editor's draft 编辑草案*](https://www.w3.org/International/clreq/gap-analysis/) • [*Latest commits 更改历史记录*](https://github.com/w3c/clreq/commits/gh-pages/gap-analysis/index.html)
+- **Chinese Gap Analysis 中文支持的差距分析** • [DNOTE 备忘草案](https://www.w3.org/TR/clreq-gap) • [*Editor's draft 编辑草案*](https://www.w3.org/International/clreq/gap-analysis/) • [*Latest commits 更改历史记录*](https://github.com/w3c/clreq/commits/gh-pages/gap-analysis/index.html)
 
 
 ### Discussions 讨论
